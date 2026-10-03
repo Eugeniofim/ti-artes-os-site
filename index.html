@@ -2570,6 +2570,7 @@ body.conversa-mkt #dockFab{display:none}
       <div class="tab" data-t="flow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-layers"/></svg>Fluxo de trabalho</div>
       <div class="tab" data-t="rules"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-bell"/></svg>Notificações</div>
       <div class="tab" data-t="ia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-zap"/></svg>Assistente IA</div>
+      <div class="tab" data-t="contas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-wallet"/></svg>Contas a pagar</div>
       <div class="tab" data-t="nuvem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-refresh"/></svg>Nuvem &amp; Sincronia</div>
       <div class="tab" data-t="data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-db"/></svg>Dados &amp; Backup</div>
     </div>
@@ -2692,6 +2693,7 @@ body.conversa-mkt #dockFab{display:none}
     <div class="tabp" id="t-ia"></div>
 
     <div class="tabp" id="t-nuvem"></div>
+    <div class="tabp" id="t-contas"></div>
 
     <div class="tabp" id="t-data">
       <div class="card" style="margin-bottom:14px">
@@ -3086,6 +3088,7 @@ function seedDemo(){
     {id:'r6',nome:'Orçamento sem resposta',desc:'Proposta parada há X dias',                tipo:'orcamento',d:7, on:true,  canais:['email','wa']},
     {id:'r7',nome:'Resumo diário',         desc:'Panorama do dia no horário definido',      tipo:'resumo',   d:0, on:true,  canais:['email','tg']},
     {id:'r8',nome:'Fechamento semanal',    desc:'Toda sexta: entregas, verba e semana que vem',tipo:'semanal',d:0,on:false, canais:['email']},
+    {id:'r9',nome:'Conta a pagar vencendo',desc:'Assinatura ou crédito das IAs vence em X dias',tipo:'conta',d:3,on:true,canais:['email']},
   ];
   const tpls={
     status:{nome:'Status do job (para o cliente)',v:'Oi {cliente}! Passando o status do job *{job}*.\n\nEtapa atual: {etapa}\nEntrega prevista: {prazo}\n\nQualquer dúvida me chama. Abraço!\n— {studio}'},
@@ -3184,6 +3187,9 @@ if(typeof S.cfg.vozGVoz  !=='string')  S.cfg.vozGVoz='Aoede';
 if(typeof S.cfg.vozElKey   !=='string') S.cfg.vozElKey='';
 if(typeof S.cfg.falKey     !=='string') S.cfg.falKey='';
 if(typeof S.cfg.pexKey     !=='string') S.cfg.pexKey='';
+if(!Array.isArray(S.cfg.contas)) S.cfg.contas=[];          /* v126: contas a pagar (IAs e serviços) */
+if(!Array.isArray(S.cfg.contasFora)) S.cfg.contasFora=[];  /* padrões que ele apagou de propósito */
+if(Array.isArray(S.regras) && !S.regras.find(r=>r.tipo==='conta')) S.regras.push({id:'r9',nome:'Conta a pagar vencendo',desc:'Assinatura ou crédito das IAs vence em X dias',tipo:'conta',d:3,on:true,canais:['email']});
 if(S.cfg.mktAuto!=='sozinho') S.cfg.mktAuto='pergunta';   /* v75: 'pergunta' = nada vai ao ar sem tocar; 'sozinho' = no dia marcado */
 if(typeof S.cfg.vozElVoz   !=='string') S.cfg.vozElVoz='';
 if(typeof S.cfg.vozElNome  !=='string') S.cfg.vozElNome='';
@@ -3349,7 +3355,11 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-goto]'); i
 $$('.tab').forEach(t=>t.onclick=()=>{
   $$('.tab').forEach(x=>x.classList.toggle('on',x===t));
   $$('.tabp').forEach(p=>p.classList.toggle('on',p.id==='t-'+t.dataset.t));
+  if(t.dataset.t==='contas' && typeof renderContas==='function') renderContas();   /* v126: os números vivos podem ter chegado com a aba fechada */
 });
+document.addEventListener('click',e=>{ const b=e.target.closest('[data-contapagar]'); if(!b) return;
+  const c=(S.cfg.contas||[]).find(x=>x.id===b.dataset.contapagar); if(!c) return;
+  const u=contaLink(c); if(u) window.open(u,'_blank','noopener'); if(c.id==='anthropic') setTimeout(perguntarSaldo,700); });
 
 /* ============================================================
    TOAST
@@ -5742,6 +5752,22 @@ function alertas(){
     }
   });
 
+  /* v126: contas a pagar (IAs e serviços) — só com o que já está carregado, sem ir na rede */
+  try{
+    const rC=reg('conta');
+    if(rC && typeof contaVence==='function') (S.cfg.contas||[]).forEach(c=>{
+      if(c.soSe==='eleven' && !(S.cfg.vozElKey||'').trim()) return;
+      const valor=(+c.valor>0)?' · '+(c.moeda==='BRL'?BRLc(c.valor):USD(c.valor)):'';
+      const v=contaVence(c);
+      if(v!==null){ const d=dias(v), auto=c.auto!==false;
+        if(d<=rC.d) out.push({id:'ct_'+c.id+'_'+v, conta:c.id, nivel:d<=0?3:2, ico:'i-wallet', cor:d<=0?'#FF5A5A':'#FBBF24',
+          t:d<0?`Conta venceu há ${Math.abs(d)} dia${Math.abs(d)>1?'s':''}`:d===0?(auto?'Cobra no cartão hoje':'Conta vence hoje'):`${auto?'Cobra no cartão':'Conta vence'} em ${d} dia${d>1?'s':''}`,
+          s:c.nome+valor+(c.obs?' · '+c.obs:''), canais:rC.canais, regra:rC.nome}); }
+      const av=typeof contaAviso==='function'?contaAviso(c):null;
+      if(av) out.push({id:'ctv_'+c.id+'_'+iso(HOJE), conta:c.id, nivel:av.nivel, ico:'i-zap', cor:av.nivel>=3?'#FF5A5A':'#FBBF24', t:av.t, s:av.s, canais:rC.canais, regra:rC.nome});
+    });
+  }catch(e){ console.warn('alertas de contas:',e); }
+
   const rS=reg('resumo');
   if(rS) out.unshift({id:'resumo_'+iso(HOJE),nivel:0,ico:'i-inbox',cor:'#2ED9C3',
     t:`Resumo diário — ${S.cfg.hora}`, s:`Panorama de ${fmtDL(iso(HOJE))} pronto para envio`, canais:rS.canais, regra:rS.nome, resumo:true});
@@ -5783,6 +5809,7 @@ function renderNotif(){
         ${a.resumo?`<button class="btn sm" data-nres="1">${svgI('i-eye',12,2)}Ver</button>`
           :a.prosp?`<button class="btn sm" data-goto="prosp">${svgI('i-user',12,2)}Abrir</button>`
           :a.sid?`<button class="btn sm" data-sh="${a.sid}">${svgI('i-mic',12,2)}Abrir show</button>`
+          :a.conta?`<button class="btn sm" data-contapagar="${esc(a.conta)}">${svgI('i-wallet',12,2)}Pagar</button>`
           :a.cobranca?`<button class="btn sm" data-msg="cobranca" data-j="${a.jid}">${svgI('i-wa',12,2)}Cobrar</button>`
           :`<button class="btn sm" data-msg="status" data-j="${a.jid}">${svgI('i-wa',12,2)}Avisar</button>`}
         <button class="icobtn" style="width:30px;height:30px" data-lido="${a.id}" title="${lido?'Marcar não lido':'Marcar como lido'}">${svgI('i-check',14,2.3)}</button>
@@ -6139,7 +6166,7 @@ function renderAdm(){
       <div class="row-t">${esc(r.nome)}</div>
       <div class="row-s">${esc(r.desc)}</div>
       <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;align-items:center">
-        ${['prazo','travado','receber','orcamento'].includes(r.tipo)?
+        ${['prazo','travado','receber','orcamento','conta'].includes(r.tipo)?
           `<input class="inp" type="number" value="${r.d}" data-rd="${r.id}" style="width:64px;height:28px;font-size:12px"><span class="mini">dias</span>`:''}
         ${Object.entries(CANAL).map(([k,v])=>`<button class="chip ${r.canais.includes(k)?'on':''}" data-rc="${r.id}" data-ck="${k}" style="height:26px;font-size:10.6px">${svgI(v[1],11,2.2)}${v[0]}</button>`).join('')}
       </div></div></div>`).join('');
@@ -7623,6 +7650,7 @@ async function elCarregar(forcar){
   }catch(e){ VOZ_ERRO=e.message||String(e); if(!EL_VOZES) EL_VOZES=[]; }
   EL_BUSCANDO=false;
   if(typeof VIEW!=='undefined' && VIEW==='adm' && typeof renderIA==='function') renderIA();
+  if(typeof contasRefrescar==='function') contasRefrescar();
 }
 async function falarEleven(texto,vozId){
   const voz=vozId||S.cfg.vozElVoz, modelo=S.cfg.vozElModelo||'eleven_flash_v2_5';
@@ -10186,7 +10214,7 @@ function perguntarSaldo(){
     S.cfg.iaSaldo = (isFinite(v)&&v>0) ? v : 0;
     /* informar o saldo de agora = a contagem de gasto recomeça daqui */
     S.cfg.iaGasto=0; S.cfg.iaTurnos=0;
-    save(); closeM(); renderIA();
+    save(); closeM(); renderIA(); if(typeof contasRefrescar==='function') contasRefrescar();
     toast('Saldo anotado', S.cfg.iaSaldo>0?('vou descontar de '+USD(S.cfg.iaSaldo)):'medidor desligado','ok');
   };
 }
@@ -13196,6 +13224,7 @@ async function adsCarregar(forcar){
   try{ ADS_ESTADO=await igChama('ads-estado',{marca:marcaAtual()||nomeEstudio()},20000); }catch(e){ ADS_ESTADO={erro:String(e.message||e)}; }
   ADS_PEDIDO=false;
   try{ if(typeof VIEW!=='undefined'&&VIEW==='adm'&&$('#igBox')){ $('#igBox').innerHTML=igAdmHtml(); igAdmBotoes(); } }catch(e){}
+  if(typeof contasRefrescar==='function') contasRefrescar();
   return ADS_ESTADO;
 }
 function adsAdmHtml(marcas){
@@ -14559,6 +14588,199 @@ async function gerarFundoLote(lote,cena,n){
   const k=(p.marcaId&&marcas().find(q=>q.id===p.marcaId))||kitDe(p.cliente)||{};
   return igChama('fundo',{cena,paleta:k.c1?'tons de '+nomeDaCor(k.c1):'',formato:formatoDoLote(lote),n:n||2,marca:p.cliente||'',fal_key:(S.cfg.falKey||'').trim()},150000);
 }
+/* ============================================================
+   v126: CONTAS A PAGAR — as IAs e os serviços que o estúdio paga.
+   Um painel só: quanto, quando vence, e um botão que leva direto pra
+   página de pagamento de cada um. Checkout por dentro do app não existe
+   nessas contas (Anthropic, fal, Supabase, Meta, GoDaddy não abrem isso
+   por API) — então o app leva no lugar certo em 1 toque e anota aqui.
+   O que dá pra ler sozinho entra vivo: saldo do Claude (medidor do app),
+   gasto do mês na fal.ai, fatura da Meta (cofre ads-fatura), cota da
+   ElevenLabs. O resto é o dia que ele anota uma vez.
+   ============================================================ */
+const CONTAS_PADRAO=[
+  {id:'anthropic', nome:'Claude API (Anthropic)', faz:'assistente do chat, legendas e o cérebro do marketing', periodo:'credito', moeda:'USD', valor:0, link:'https://platform.claude.com/settings/billing'},
+  {id:'fal',       nome:'fal.ai',                 faz:'fundos e capas com foto, transcrição dos vídeos',         periodo:'credito', moeda:'USD', valor:0, link:'https://fal.ai/dashboard/billing'},
+  {id:'meta',      nome:'Meta Ads',               faz:'tráfego pago dos posts (Instagram)',                      periodo:'mes', dia:0, moeda:'BRL', valor:0, auto:true, link:'https://business.facebook.com/billing_hub/payment_activity'},
+  {id:'supabase',  nome:'Supabase Pro',           faz:'banco, login, fotos e vídeos do app (a nuvem)',           periodo:'mes', dia:0, moeda:'USD', valor:25, auto:true, link:'https://supabase.com/dashboard/org/fvbylpscfcrczfmwaeod/billing'},
+  {id:'claude',    nome:'Claude (plano)',         faz:'o app do Claude e o Claude Code',                         periodo:'mes', dia:0, moeda:'USD', valor:0, auto:true, link:'https://claude.ai/settings/billing'},
+  {id:'dominio',   nome:'Domínio eugeniofim.com', faz:'GoDaddy · o endereço do app e dos demos',                 periodo:'ano', vence:'2027-07-29', moeda:'BRL', valor:0, auto:true, link:'https://account.godaddy.com/products'},
+  {id:'eleven',    nome:'ElevenLabs',             faz:'voz do assistente',                                       periodo:'mes', dia:0, moeda:'USD', valor:0, auto:true, link:'https://elevenlabs.io/app/subscription', soSe:'eleven'},
+  {id:'artlist',   nome:'Artlist',                faz:'imagem, vídeo, trilha e voz do estúdio (plano próprio)',  periodo:'ano', vence:'', moeda:'USD', valor:0, auto:true, link:'https://artlist.io/'},
+];
+let ADS_FATURA=null, ADS_FATURA_PEDIDO=false;
+function contasMesclar(){
+  S.cfg.contas=S.cfg.contas||[]; const fora=new Set(S.cfg.contasFora||[]); const tem=new Set(S.cfg.contas.map(c=>c.id)); let mudou=false;
+  CONTAS_PADRAO.forEach(p=>{ if(tem.has(p.id)||fora.has(p.id)) return; S.cfg.contas.push({...p, fixo:true, pagoAte:'', obs:''}); mudou=true; });
+  if(mudou) save();
+}
+/* próxima data de vencimento (ISO) ou null (crédito pré-pago / sem dia anotado).
+   auto = cobra sozinho no cartão: passou a data, pula pro ciclo seguinte.
+   Paga na mão: fica "venceu há Xd" até ele tocar em "Paguei". */
+function contaVence(c){
+  if(!c||c.periodo==='credito') return null;
+  if(c.id==='meta' && !(+c.dia) && ADS_FATURA && ADS_FATURA.proxima_cobranca){ const v=String(ADS_FATURA.proxima_cobranca).slice(0,10); return v>=iso(HOJE)?v:null; }
+  const pago=c.pagoAte||'', hoje=iso(HOJE), auto=c.auto!==false;
+  const passou=v=>v<=pago || (auto && v<hoje);
+  if(c.periodo==='ano'){
+    if(!c.vence) return null; const d=D(c.vence); if(isNaN(d)) return null;
+    let n=0; while(passou(iso(d)) && n++<60) d.setFullYear(d.getFullYear()+1);
+    return iso(d);
+  }
+  const dia=+c.dia||0; if(!dia) return null;
+  const fim=(y,m)=>new Date(y,m+1,0).getDate();
+  let y=HOJE.getFullYear(), m=HOJE.getMonth(), v=new Date(y,m,Math.min(dia,fim(y,m))), n=0;
+  while(passou(iso(v)) && n++<60){ m++; if(m>11){ m=0; y++; } v=new Date(y,m,Math.min(dia,fim(y,m))); }
+  return iso(v);
+}
+const contaMoeda=(c,v)=>(c.moeda==='BRL'?BRLc(v):USD(v));
+/* aviso sem ir na rede (serve pra alertas()): crédito acabando / fatura pendente */
+function contaAviso(c){
+  try{
+    if(c.id==='anthropic'){ const s=sobraIA(); if(s===null) return null;
+      if(s<1) return {nivel:3, t:'Crédito do Claude '+(s<=0?'acabou':'no fim'), s:'sobra '+USD(s)+' — recarregue antes de travar no meio de um job'};
+      if((S.cfg.iaSaldo||0)>0 && s/S.cfg.iaSaldo<0.15) return {nivel:2, t:'Crédito do Claude acabando', s:'sobra '+USD(s)+' de '+USD(S.cfg.iaSaldo)}; return null; }
+    if(c.id==='fal'){ return (IA_USO&&IA_USO.sem_credito)?{nivel:3, t:'Acabou o crédito na fal.ai', s:'fundos com foto e transcrição de vídeo pararam'}:null; }
+    if(c.id==='meta'){ const f=ADS_FATURA; return (f&&f.ok&&f.a_pagar>0&&f.status!==1)?{nivel:3, t:'Meta Ads com pagamento pendente', s:'a pagar '+contaMoeda({moeda:f.moeda},f.a_pagar)+' — os anúncios param até acertar'}:null; }
+    if(c.id==='eleven'){ const q=EL_CONTA; return (q&&q.limite&&q.usados/q.limite>0.9)?{nivel:2, t:'Cota da ElevenLabs no fim', s:q.usados.toLocaleString('pt-BR')+' de '+q.limite.toLocaleString('pt-BR')+' caracteres'}:null; }
+  }catch(e){}
+  return null;
+}
+/* o que o app lê sozinho sobre a conta (pode disparar o carregador, que redesenha quando chega) */
+function contaViva(c){
+  const pode=(typeof igPodeFalar==='function')&&igPodeFalar();
+  if(c.id==='anthropic'){ const s=sobraIA();
+    if(s!==null){ const pct=(S.cfg.iaSaldo||0)>0?s/S.cfg.iaSaldo:1; return {txt:'sobra '+USD(s)+' de '+USD(S.cfg.iaSaldo)+' · gastou '+USD(S.cfg.iaGasto||0)+' em '+(S.cfg.iaTurnos||0)+' conversas', nivel:s<1?3:pct<0.15?2:0}; }
+    return {txt:(S.cfg.iaGasto||0)>0?'gastou '+USD(S.cfg.iaGasto)+' desde a última recarga · saldo não informado':'saldo não informado — toque em "Quanto pus"', nivel:0}; }
+  if(c.id==='fal'){ const u=IA_USO;
+    if(!u){ if(pode) iaUsoCarregar(); return {txt:pode?'conferindo o gasto do mês…':'entre na nuvem (ADM → Nuvem) pra ler o gasto', nivel:0}; }
+    if(u.erro) return {txt:'não consegui ler o gasto do mês', nivel:0};
+    if(u.sem_credito) return {txt:'ACABOU o crédito — fundos com foto e transcrição pararam', nivel:3};
+    const usd=v=>'US$ '+Number(v||0).toFixed(2).replace('.',',');
+    return {txt:u.ligado?('este mês: '+usd(u.custo_usd)+' · '+(u.imagens||0)+' imagen'+((u.imagens||0)===1?'':'s')+(u.chave_do_dono?' · na sua conta':' · conta do estúdio')):'não ligado', nivel:0}; }
+  if(c.id==='meta'){ const e=ADS_ESTADO, f=ADS_FATURA;
+    if(!pode) return {txt:'entre na nuvem (ADM → Nuvem) pra ler a fatura', nivel:0};
+    if(!e){ adsCarregar(); return {txt:'conferindo a conta de anúncios…', nivel:0}; }
+    if(!e.ligado) return {txt:'anúncios não ligados (ADM → Nuvem → Anúncios)', nivel:0};
+    if(!f){ adsFaturaCarregar(); return {txt:'lendo a fatura na Meta…', nivel:0}; }
+    if(f.erro) return {txt:'fatura: '+f.erro, nivel:1};
+    const m=v=>contaMoeda({moeda:f.moeda},v), partes=[f.a_pagar>0?'a pagar '+m(f.a_pagar):'nada em aberto'];
+    if(f.proxima_cobranca) partes.push('cobra '+fmtD(String(f.proxima_cobranca).slice(0,10)));
+    if(f.pagamento_texto) partes.push(f.pagamento_texto);
+    if(f.gasto_total>0) partes.push('já gastou '+m(f.gasto_total)+' no total');
+    return {txt:partes.join(' · '), nivel:f.a_pagar>0?(f.status!==1?3:1):0}; }
+  if(c.id==='eleven'){ const q=EL_CONTA;
+    if(q&&q.limite) return {txt:q.usados.toLocaleString('pt-BR')+' de '+q.limite.toLocaleString('pt-BR')+' caracteres'+(q.plano?' · plano '+q.plano:''), nivel:q.usados/q.limite>0.9?2:0};
+    if(typeof elCarregar==='function') elCarregar(); return {txt:'conferindo a cota…', nivel:0}; }
+  return null;
+}
+async function adsFaturaCarregar(forcar){
+  if(typeof adsPode!=='function'||!adsPode()||(ADS_FATURA_PEDIDO&&!forcar)) return; ADS_FATURA_PEDIDO=true;
+  try{ const e=ADS_STATE_OU(); const esc_=e&&e.escolha; const conta=(esc_&&esc_.conta)||(((e&&e.contas)||[]).find(x=>x.ativa)||{}).id||'';
+    ADS_FATURA=await igChama('ads-fatura',{conta,fresco:!!forcar},20000); }
+  catch(e){ ADS_FATURA={erro:String(e.message||e)}; }
+  ADS_FATURA_PEDIDO=false; contasRefrescar();
+}
+function ADS_STATE_OU(){ return ADS_ESTADO; }
+function contaLink(c){
+  if(c.id==='meta' && !c.linkMeu && ADS_FATURA && ADS_FATURA.conta) return 'https://business.facebook.com/billing_hub/payment_activity?asset_id='+encodeURIComponent(ADS_FATURA.conta);
+  return c.link||'';
+}
+function contasRefrescar(){ try{ if(typeof VIEW!=='undefined'&&VIEW==='adm'){ const p=$('#t-contas'); if(p&&p.classList.contains('on')) renderContas(); } }catch(e){} }
+function renderContas(){
+  const box=$('#t-contas'); if(!box) return;
+  contasMesclar();
+  const lista=(S.cfg.contas||[]).filter(c=>!(c.soSe==='eleven'&&!(S.cfg.vozElKey||'').trim()));
+  const linhas=lista.map(c=>{ const v=contaVence(c), d=v!==null?dias(v):null, viva=contaViva(c);
+      const nivel=Math.max(d===null?0:d<=0?3:d<=3?2:d<=7?1:0, viva?viva.nivel:0); return {c,v,d,viva,nivel}; })
+    .sort((a,b)=>(b.nivel-a.nivel)||((a.d===null?999:a.d)-(b.d===null?999:b.d)));
+  const prox7=linhas.filter(l=>l.d!==null&&l.d>=0&&l.d<=7).length, atras=linhas.filter(l=>l.d!==null&&l.d<0).length, urg=linhas.filter(l=>l.nivel>=3).length;
+  const tot={}; lista.forEach(c=>{ const v=+c.valor||0; if(!v) return; const m=c.periodo==='ano'?v/12:c.periodo==='mes'?v:0; if(m) tot[c.moeda||'USD']=(tot[c.moeda||'USD']||0)+m; });
+  const totTxt=Object.entries(tot).map(([m,v])=>m==='BRL'?BRLc(v):USD(v)).join(' + ');
+  const COR={0:'var(--txt-3)',1:'#FBBF24',2:'#FBBF24',3:'#FF5A5A'};
+  box.innerHTML=`<div class="card">
+    <div class="card-h"><div><div class="card-t">Contas a pagar</div>
+      <div class="card-d">As IAs e os serviços que o estúdio paga: quando vence, quanto, e o botão que leva direto no pagamento</div></div>
+      <div class="spacer"></div><button class="btn sm" id="ctNova" type="button">${svgI('i-plus',13,2.4)}Conta</button></div>
+    <div class="card-b">
+      <div class="mkt-nums" style="margin:0 0 14px">
+        <span><b style="color:${urg?'#FF5A5A':'var(--txt)'}">${urg}</b>pra resolver agora</span>
+        <span><b>${prox7}</b>${prox7===1?'vence':'vencem'} em 7 dias</span>
+        ${atras?`<span><b style="color:#FF5A5A">${atras}</b>atrasada${atras>1?'s':''}</span>`:''}
+        ${totTxt?`<span><b>${totTxt}</b>por mês (só o que tem valor anotado)</span>`:''}
+      </div>
+      <div class="stack-v">${linhas.map(({c,v,d,viva,nivel})=>{
+        const auto=c.auto!==false;
+        const quando = c.periodo==='credito' ? 'crédito pré-pago · recarrega quando acaba'
+          : v===null ? (c.periodo==='ano'?'sem data anotada — toque em Editar e ponha o dia':'sem dia anotado — toque em Editar e ponha o dia')
+          : (auto?'cobra no cartão ':'vence ')+(d<0?'há '+Math.abs(d)+' dia'+(Math.abs(d)>1?'s':'')+' ('+fmtD(v)+')':d===0?'HOJE':d===1?'amanhã ('+fmtD(v)+')':'em '+d+' dias ('+(d>60?fmtDL(v):fmtD(v))+')');
+        const valor=(+c.valor>0)?(contaMoeda(c,c.valor)+(c.periodo==='ano'?'/ano':c.periodo==='mes'?'/mês':'')):'';
+        return `<div class="row" style="align-items:flex-start;border-left:3px solid ${COR[nivel]}">
+          <div class="row-ico" style="background:${COR[nivel]}22;color:${COR[nivel]};border-color:${COR[nivel]}44">${svgI(c.periodo==='credito'?'i-zap':'i-wallet',15,2)}</div>
+          <div style="flex:1;min-width:0">
+            <div class="row-t">${esc(c.nome)}${valor?` <span class="mini" style="opacity:.75">· ${esc(valor)}</span>`:''}</div>
+            <div class="row-s" style="white-space:normal;${nivel>=2&&d!==null?'color:'+COR[nivel]+';font-weight:600':''}">${esc(quando)}</div>
+            ${viva?`<div class="row-s" style="white-space:normal;margin-top:3px;${viva.nivel>=2?'color:'+COR[viva.nivel]+';font-weight:600':''}">${esc(viva.txt)}</div>`:''}
+            ${c.faz||c.obs?`<div class="mini" style="opacity:.6;margin-top:3px">${esc([c.faz,c.obs].filter(Boolean).join(' · '))}</div>`:''}
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
+              <button class="btn sm ${nivel>=2?'pri':''}" type="button" data-ctpagar="${esc(c.id)}">${svgI('i-share',12,2)}${c.periodo==='credito'?'Pôr crédito':'Pagar'}</button>
+              ${c.periodo!=='credito'&&v!==null&&!auto?`<button class="btn sm gh" type="button" data-ctpago="${esc(c.id)}">${svgI('i-checkc',12,2)}Paguei</button>`:''}
+              ${c.id==='anthropic'?`<button class="btn sm gh" type="button" data-ctsaldo="1">Quanto pus</button>`:''}
+              ${c.id==='fal'||c.id==='meta'?`<button class="btn sm gh" type="button" data-ctatualiza="${esc(c.id)}">${svgI('i-refresh',12,2)}Atualizar</button>`:''}
+              <button class="btn sm gh" type="button" data-ctedit="${esc(c.id)}">${svgI('i-edit',12,2)}Editar</button>
+            </div>
+          </div></div>`; }).join('')}</div>
+      <div class="hint" style="margin-top:12px">O pagamento em si é na página de cada serviço — nenhum deles deixa fechar o checkout por fora. O botão já abre no lugar certo. Nas contas que você paga na mão (desmarque "cobra sozinho" em Editar), toque em "Paguei" e o app passa pro próximo vencimento. Os avisos entram em Notificações pela regra "Conta a pagar vencendo".</div>
+    </div></div>`;
+  contasBotoes(box);
+}
+function contasBotoes(box){
+  const by=id=>(S.cfg.contas||[]).find(c=>c.id===id);
+  if($('#ctNova')) $('#ctNova').onclick=()=>editarConta(null);
+  box.querySelectorAll('[data-ctpagar]').forEach(b=>b.onclick=()=>{ const c=by(b.dataset.ctpagar); if(!c) return; const u=contaLink(c);
+    if(!u){ toast('Sem link','Toque em Editar e cole o link da página de pagamento','warn'); return; }
+    window.open(u,'_blank','noopener'); if(c.id==='anthropic') setTimeout(perguntarSaldo,700); });
+  box.querySelectorAll('[data-ctpago]').forEach(b=>b.onclick=()=>{ const c=by(b.dataset.ctpago); const v=c&&contaVence(c); if(!v) return;
+    c.pagoAte=v; save(); renderContas(); const px=contaVence(c); toast('Anotado','pago o vencimento de '+fmtD(v)+(px?' · próximo: '+fmtD(px):''),'ok'); });
+  box.querySelectorAll('[data-ctsaldo]').forEach(b=>b.onclick=perguntarSaldo);
+  box.querySelectorAll('[data-ctatualiza]').forEach(b=>b.onclick=()=>{ if(b.dataset.ctatualiza==='fal'){ IA_USO=null; iaUsoCarregar(true); } else { ADS_FATURA=null; adsFaturaCarregar(true); } renderContas(); });
+  box.querySelectorAll('[data-ctedit]').forEach(b=>b.onclick=()=>editarConta(by(b.dataset.ctedit)));
+}
+function editarConta(c){
+  const novo=!c; c=c||{id:'c'+Date.now().toString(36),nome:'',faz:'',moeda:'BRL',valor:0,periodo:'mes',dia:0,vence:'',link:'',auto:true,obs:'',fixo:false,pagoAte:''};
+  modal({t:novo?'Nova conta':'Editar conta', d:'Valor e vencimento ficam aqui só pra avisar. Quem cobra é o serviço.', body:`
+    <div class="fgrid">
+      <div class="fld full"><label>Nome</label><input class="inp" id="ctNome" value="${esc(c.nome)}" placeholder="Ex.: Google Workspace"></div>
+      <div class="fld full"><label>Pra que serve</label><input class="inp" id="ctFaz" value="${esc(c.faz||'')}" placeholder="Ex.: e-mail do estúdio"></div>
+      <div class="fld"><label>Cobrança</label><select class="inp" id="ctPer">
+        <option value="mes" ${c.periodo==='mes'?'selected':''}>Mensal</option>
+        <option value="ano" ${c.periodo==='ano'?'selected':''}>Anual</option>
+        <option value="credito" ${c.periodo==='credito'?'selected':''}>Crédito pré-pago (sem data)</option></select></div>
+      <div class="fld"><label>Valor</label><div style="display:flex;gap:6px">
+        <select class="inp" id="ctMoeda" style="width:84px;flex:none"><option value="BRL" ${c.moeda==='BRL'?'selected':''}>R$</option><option value="USD" ${c.moeda!=='BRL'?'selected':''}>US$</option></select>
+        <input class="inp" id="ctValor" type="number" step="0.01" min="0" value="${c.valor||''}" placeholder="0,00"></div></div>
+      <div class="fld" id="ctDiaBox"><label>Dia do mês que vence</label><input class="inp" id="ctDia" type="number" min="1" max="31" value="${c.dia||''}" placeholder="ex.: 5"></div>
+      <div class="fld" id="ctVenceBox"><label>Data que vence</label><input class="inp" id="ctVence" type="date" value="${esc(c.vence||'')}"></div>
+      <div class="fld full"><label>Link da página de pagamento</label><input class="inp" id="ctLink" type="url" value="${esc(c.link||'')}" placeholder="https://…"></div>
+      <label class="row full" style="cursor:pointer"><input type="checkbox" id="ctAuto" ${c.auto!==false?'checked':''} style="width:18px;height:18px;accent-color:#2ED9C3">
+        <div style="flex:1;min-width:0"><div class="row-t">Cobra sozinho no cartão</div><div class="row-s">Desmarque se você paga na mão (boleto, Pix): aí aparece o botão "Paguei".</div></div></label>
+      <div class="fld full"><label>Observação</label><input class="inp" id="ctObs" value="${esc(c.obs||'')}" placeholder="ex.: cartão final 6605"></div>
+    </div>`,
+    foot:`${!novo?`<button class="btn dg" id="ctApagar">Apagar</button>`:''}<div class="spacer"></div><button class="btn" onclick="closeM()">Cancelar</button><button class="btn pri" id="ctOk">Salvar</button>`});
+  const per=$('#ctPer'), mostra=()=>{ const p=per.value; $('#ctDiaBox').style.display=p==='mes'?'':'none'; $('#ctVenceBox').style.display=p==='ano'?'':'none'; }; per.onchange=mostra; mostra();
+  if($('#ctApagar')) $('#ctApagar').onclick=()=>{ S.cfg.contas=(S.cfg.contas||[]).filter(x=>x.id!==c.id); if(c.fixo){ S.cfg.contasFora=S.cfg.contasFora||[]; if(!S.cfg.contasFora.includes(c.id)) S.cfg.contasFora.push(c.id); }
+    save(); closeM(); renderContas(); toast('Conta apagada',c.nome,'info'); };
+  $('#ctOk').onclick=()=>{
+    const nome=$('#ctNome').value.trim(); if(!nome){ toast('Falta o nome','','warn'); return; }
+    const linkNovo=$('#ctLink').value.trim(), padrao=CONTAS_PADRAO.find(p=>p.id===c.id);
+    Object.assign(c,{nome, faz:$('#ctFaz').value.trim(), periodo:per.value, moeda:$('#ctMoeda').value, valor:parseFloat(String($('#ctValor').value).replace(',','.'))||0,
+      dia:Math.max(0,Math.min(31,parseInt($('#ctDia').value,10)||0)), vence:$('#ctVence').value||'', link:linkNovo, auto:$('#ctAuto').checked, obs:$('#ctObs').value.trim()});
+    c.linkMeu=!!(padrao && linkNovo && linkNovo!==padrao.link);
+    if(novo) (S.cfg.contas=S.cfg.contas||[]).push(c);
+    save(); closeM(); renderContas(); toast('Conta salva',nome,'ok');
+  };
+}
+
 /* ---- quanto já gerou, e pôr crédito ----
    A fal.ai não deixa recarregar por API: quem põe crédito é ele, no painel
    dela, com o cartão. O app mostra o gasto do mês e leva direto pra recarga. */
@@ -14570,6 +14792,7 @@ async function iaUsoCarregar(forcar){
   try{ IA_USO=await igChama('fundo-uso',{fal_key:(S.cfg.falKey||'').trim()}); IA_USO_EM=Date.now(); }catch(e){ IA_USO={erro:String(e.message||e)}; IA_USO_EM=Date.now(); }
   IA_USO_BUSCANDO=false;
   if(typeof VIEW!=='undefined' && VIEW==='adm' && $('#iaImgBox')){ $('#iaImgBox').innerHTML=iaImgHtml(); iaImgBotoes(); }
+  if(typeof contasRefrescar==='function') contasRefrescar();
 }
 function abrirRecarga(){ window.open(RECARGA_FAL,'_blank','noopener'); }
 function iaImgHtml(){
@@ -17056,6 +17279,7 @@ function render(){
   if(VIEW==='fin')    renderFin();
   if(VIEW==='adm'){ renderAdm();
     if(typeof renderIA==='function') renderIA();
+    if(typeof renderContas==='function') renderContas();
     if(typeof renderNuvem==='function') renderNuvem(); }
   renderNotif();
   if(typeof rotularTabelas==='function') rotularTabelas();
@@ -17669,7 +17893,20 @@ function ocupadoAgora(){
    confusao: eu pergunto "que numero aparece?" e acabou a discussao.
    Subir junto com o CACHE do sw.js, sempre.
    ============================================================ */
-const APP_VER = 'v125';
+/* v126: o app mudou de endereço — quem ainda abre pelo surge vê o aviso (1x por dia) e vai pro novo */
+(function(){ try{
+  if(location.hostname!=='studio-ti-artes.surge.sh') return;
+  const NOVO='https://os.eugeniofim.com/', k='avisoDominio', hoje=new Date().toISOString().slice(0,10);
+  if(localStorage.getItem(k)===hoje) return;
+  setTimeout(()=>{ try{ modal({t:'O app tem endereço novo', d:'os.eugeniofim.com — domínio seu, no GitHub Pages, com HTTPS.',
+    body:`<div class="row-s" style="white-space:normal;line-height:1.6">Este endereço (surge) continua por enquanto, mas as novidades passam a sair só no novo.<br><br><b>No novo endereço:</b> entre na nuvem com o seu e-mail (os dados voltam sozinhos), cole de novo a chave do assistente em ADM → Assistente IA (ela nunca sai do aparelho) e instale o app de novo na tela inicial.</div>`,
+    foot:`<button class="btn" id="avDepois">Depois</button><div class="spacer"></div><button class="btn pri" id="avIr">Abrir o endereço novo</button>`});
+    const d=$('#avDepois'), i=$('#avIr');
+    if(d) d.onclick=()=>{ localStorage.setItem(k,hoje); closeM(); };
+    if(i) i.onclick=()=>{ localStorage.setItem(k,hoje); window.open(NOVO,'_blank','noopener'); closeM(); };
+  }catch(e){} },1500);
+}catch(e){} })();
+const APP_VER = 'v126';
 
 function pintarSelo(){
   const e=$('#verSelo'); if(!e) return;

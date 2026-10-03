@@ -11,7 +11,7 @@
    2. Nada de skipWaiting automático. O worker novo espera de lado até
       a página mandar {tipo:'assumir'}, e só então troca e recarrega.
       Assim ninguém perde o que estava digitando no meio de um job. */
-const CACHE = 'tiartes-os-v125';
+const CACHE = 'tiartes-os-v126';
 const ESSENCIAL = [
   './', './index.html', './manifest.webmanifest',
   './icon-192.png', './icon-512.png', './icon-maskable-512.png', './apple-touch-icon.png'
