@@ -11368,7 +11368,7 @@ function renderNuvem(){
     const em=$('#nvEmail').value.trim();
     if(!em) return msg('Escreva seu e-mail aí em cima primeiro.','#FBBF24');
     msg('Mandando…','#60A5FA');
-    try{ await nuvEsqueci(em); msg('<b>Olha seu e-mail.</b> Chegou um link pra criar uma senha nova. Depois volte aqui e entre.','#2ED9C3'); }
+    try{ await nuvEsqueci(em); msg('<b>Olha seu e-mail</b> (e a caixa de spam). Vai chegar um link do Supabase Auth: ao clicar, o app abre pedindo a senha nova. O link vale 1 hora.','#2ED9C3'); }
     catch(e){ msg('<b>Não deu.</b> '+esc(e.message),'#FF5A5A'); }
   };
   if($('#nvCriar')) $('#nvCriar').onclick=async()=>{
@@ -17683,6 +17683,63 @@ render=function(){ _render();
   if(h && PG[h]) setTimeout(()=>go(h),50);
 })();
 
+/* v127: volta do link do e-mail ("esqueci a senha" / confirmação). O Supabase
+   manda #access_token=…&refresh_token=…&type=recovery (ou #error=…). O app
+   guarda a sessão e, se for recuperação, pede a senha nova aqui mesmo — antes
+   não existia essa tela: o link abria o app e nada acontecia. */
+(function(){
+  const h=(location.hash||'').replace(/^#\/?/,'');
+  if(!/(^|&)(access_token|error)=/.test(h)) return;
+  let q; try{ q=new URLSearchParams(h); }catch(e){ return; }
+  try{ history.replaceState(null,'',location.pathname); }catch(e){}
+  if(q.get('error')){
+    const cod=q.get('error_code')||'', d=(q.get('error_description')||q.get('error')||'').replace(/\+/g,' ');
+    setTimeout(()=>toast('O link não valeu', /expired/i.test(cod+' '+d)?'Ele venceu (vale 1 hora). Peça outro em "Esqueci a senha".':d,'err'),900);
+    return;
+  }
+  const at=q.get('access_token'); if(!at) return;
+  const exp=+q.get('expires_in')||3600;
+  SESS.gravar({access_token:at, refresh_token:q.get('refresh_token')||'', token_type:q.get('token_type')||'bearer', expires_in:exp, expires_at:+q.get('expires_at')||Math.floor(Date.now()/1000)+exp});
+  const tipo=q.get('type')||'';
+  setTimeout(async()=>{
+    let email=''; try{ const r=await fetchComPrazo(NUV.url()+'/auth/v1/user',{headers:nuvHeaders(true)}); const u=await r.json().catch(()=>null); email=(u&&u.email)||''; }catch(e){}
+    if(email){ S.cfg.supaEmail=email; try{ save(); }catch(e){} }
+    if(tipo==='recovery'){ pedirSenhaNova(email); return; }
+    try{ await sincronizarAoAbrir(); }catch(e){}
+    try{ render(); fecharEntrada(); }catch(e){}
+    toast('Conectado',email||'pelo link do e-mail','ok');
+  },400);
+})();
+function pedirSenhaNova(email){
+  try{ fecharEntrada(); }catch(e){}
+  const old=$('#senhaOv'); if(old) old.remove();
+  document.body.insertAdjacentHTML('beforeend',`<div class="entrada-ov on" id="senhaOv"><div class="entrada">
+    <div class="entrada-t">Crie a senha nova</div>
+    <div class="entrada-d">${email?esc(email)+' · ':''}Você entrou pelo link do e-mail. Escolha a senha que vai usar daqui pra frente, em todos os aparelhos.</div>
+    <div class="fgrid" style="margin-top:18px;text-align:left">
+      <div class="fld full"><label>Senha nova</label><input class="inp" type="password" id="snNova" autocomplete="new-password" placeholder="mínimo 6 caracteres"></div>
+      <div class="fld full"><label>Repete a senha</label><input class="inp" type="password" id="snRep" autocomplete="new-password"></div>
+    </div>
+    <div id="snMsg" style="margin-top:12px;text-align:left"></div>
+    <button class="btn pri" id="snOk" type="button" style="width:100%;margin-top:14px;height:44px">Salvar e entrar</button>
+    <button class="btn gh" id="snDepois" type="button" style="width:100%;margin-top:8px">Entrar sem trocar agora</button>
+  </div></div>`);
+  const m=(html,cor)=>{ const el=$('#snMsg'); if(el) el.innerHTML=`<div class="alert" style="background:${cor}12;border-color:${cor}55;margin:0"><div class="alert-d" style="color:var(--txt)">${html}</div></div>`; };
+  const entrar=async()=>{ try{ await sincronizarAoAbrir(); }catch(e){} try{ render(); }catch(e){} const o=$('#senhaOv'); if(o) o.remove(); try{ fecharEntrada(); }catch(e){} };
+  $('#snOk').onclick=async()=>{
+    const a=$('#snNova').value, b=$('#snRep').value;
+    if(a.length<6) return m('A senha precisa de pelo menos 6 caracteres.','#FBBF24');
+    if(a!==b) return m('As duas senhas não batem.','#FBBF24');
+    $('#snOk').disabled=true; m('Salvando…','#60A5FA');
+    try{ const r=await fetchComPrazo(NUV.url()+'/auth/v1/user',{method:'PUT',headers:nuvHeaders(true),body:JSON.stringify({password:a})});
+      if(!r.ok) throw new Error(await nuvErro(r));
+      await entrar(); toast('Senha nova salva','Você já está dentro. Use essa senha nos outros aparelhos.','ok'); }
+    catch(e){ $('#snOk').disabled=false; m('<b>Não deu.</b> '+esc(e.message),'#FF5A5A'); }
+  };
+  $('#snDepois').onclick=async()=>{ await entrar(); toast('Conectado','A senha continua a antiga — pra trocar: ADM → Nuvem → Esqueci a senha.','info'); };
+  setTimeout(()=>{ const f=$('#snNova'); if(f) f.focus(); },300);
+}
+
 /* v116: volta do login do Facebook (anúncios): ?ads=ok|erro|cancelou */
 (function(){
   let q; try{ q=new URLSearchParams(location.search); }catch(e){ return; }
@@ -17907,7 +17964,7 @@ function ocupadoAgora(){
     if(i) i.onclick=()=>{ localStorage.setItem(k,hoje); window.open(NOVO,'_blank','noopener'); closeM(); };
   }catch(e){} },1500);
 }catch(e){} })();
-const APP_VER = 'v126';
+const APP_VER = 'v127';
 
 function pintarSelo(){
   const e=$('#verSelo'); if(!e) return;
@@ -18416,7 +18473,7 @@ async function entradaEsqueci(){
   const em=($('#enEmail').value||'').trim();
   if(!em) return enMsg('Escreva seu e-mail primeiro.','#FBBF24');
   enMsg('Mandando…','#60A5FA');
-  try{ await nuvEsqueci(em); enMsg('<b>Olha seu e-mail.</b> Chegou um link pra criar senha nova. Depois volte aqui e entre.','#2ED9C3'); }
+  try{ await nuvEsqueci(em); enMsg('<b>Olha seu e-mail</b> (e a caixa de spam). Vai chegar um link do Supabase Auth: ao clicar, o app abre pedindo a senha nova. O link vale 1 hora.','#2ED9C3'); }
   catch(e){ enMsg('<b>Não deu.</b> '+esc(e.message),'#FF5A5A'); }
 }
 
