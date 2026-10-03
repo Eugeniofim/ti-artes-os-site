@@ -1,0 +1,1159 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>studio Ti Artes · Agentes autônomos para empresa pequena</title>
+<meta name="description" content="Quatro agentes de IA — chat assistente, atendimento no WhatsApp e Instagram, marketing e tráfego pago — ligado ao sistema onde a sua operação de verdade mora. Tech Provider certificado da Meta. A partir de R$ 2.300, sem mensalidade de serviço.">
+<meta name="theme-color" content="#0B1416">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="studio Ti Artes">
+<meta property="og:url" content="https://studio-ti-artes.surge.sh/agentes/">
+<meta property="og:title" content="4 agentes de IA ligados na central da sua marca">
+<meta property="og:description" content="Chat assistente, atendimento no WhatsApp e Instagram, marketing e tráfego pago — tudo ligado num sistema de gestão só. Tech Provider certificado da Meta. studio Ti Artes · Curitiba.">
+<meta property="og:image" content="https://studio-ti-artes.surge.sh/agentes/og.jpg">
+<meta property="og:image:secure_url" content="https://studio-ti-artes.surge.sh/agentes/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="4 agentes de IA — assistente, atendimento WhatsApp e Instagram, marketing e tráfego pago — ligados no sistema de gestão da marca">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://studio-ti-artes.surge.sh/agentes/og.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caladea:ital,wght@0,400;0,700;1,400;1,700&family=Carlito:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ===================================================================
+   studio Ti Artes — landing dos agentes autonomos
+   -------------------------------------------------------------------
+   Direcao: quem vende isso e um estudio de som. Entao a pagina usa o
+   vocabulario do estudio onde ele significa algo de verdade — a parte
+   modular e um console de canais, porque modular EM AUDIO e isso: voce
+   traz o canal que precisa e o resto fica em silencio. Nada de botao
+   giratorio desenhado: a metafora vive no rotulo e na barra de nivel
+   (que carrega informacao — o peso de cada peca no total), nunca em
+   enfeite.
+   Tipos: Caladea e Carlito sao os mesmos do folder e do PDF impresso.
+   Isso e proposital: o Tiago entrega o papel na mao e o cliente abre
+   esta pagina — tem que ser obviamente a mesma coisa. O mono (Plex)
+   e a unica voz nova, e existe pra rotulo de equipamento e numero.
+   =================================================================== */
+
+:root{
+  --breu:#0B1416;        /* o estudio com a luz baixa */
+  --breu-2:#122023;
+  --teal:#0B8C7D;        /* a marca, igual ao impresso */
+  --teal-fundo:#E7F5F2;
+  --teal-linha:#B6DFD7;
+  --sinal:#35E0BF;       /* LED de canal ligado. usar pouco */
+  --papel:#F1F4F2;       /* branco frio. NAO creme */
+  --papel-2:#FFFFFF;
+  --tinta:#0B1416;
+  --grafite:#33474A;
+  --cinza:#6B8085;
+  --ambar:#B07C0B;       /* o "chama um humano". aparece duas vezes */
+  --ambar-fundo:#FBF3E2;
+
+  --serif:'Caladea','Bitstream Charter',Georgia,serif;
+  --sans:'Carlito','Segoe UI',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'DejaVu Sans Mono',monospace;
+
+  --gut:clamp(20px,5vw,64px);
+  --raio:14px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--papel);color:var(--grafite);
+  font-family:var(--sans);font-size:17px;line-height:1.62;
+  overflow-x:hidden;
+}
+img,svg{max-width:100%}
+a{color:var(--teal)}
+
+h1,h2,h3,.serif{font-family:var(--serif);color:var(--tinta);letter-spacing:-.015em}
+h1{font-size:clamp(34px,6.4vw,64px);line-height:1.06;font-weight:700;margin:0}
+h2{font-size:clamp(27px,4vw,42px);line-height:1.12;font-weight:700;margin:0 0 14px}
+h3{font-size:19px;line-height:1.3;font-weight:700;margin:0 0 7px}
+p{margin:0 0 16px}
+p:last-child{margin-bottom:0}
+
+.rot{
+  font-family:var(--mono);font-size:11.5px;font-weight:600;
+  letter-spacing:.17em;text-transform:uppercase;color:var(--teal);
+  margin:0 0 14px;
+}
+.env{max-width:1180px;margin:0 auto;padding:0 var(--gut)}
+.secao{padding:clamp(56px,8vw,104px) 0}
+
+/* ---------- foco visivel de verdade ---------- */
+a:focus-visible,button:focus-visible,input:focus-visible,label:focus-visible{
+  outline:3px solid var(--sinal);outline-offset:3px;border-radius:4px;
+}
+
+/* ================= barra de cima ================= */
+.topo{
+  background:var(--breu);color:#fff;
+  padding:15px 0;border-bottom:1px solid rgba(255,255,255,.09);
+}
+.topo .env{display:flex;align-items:center;gap:16px;justify-content:space-between}
+.marca{display:flex;align-items:center;gap:11px;min-width:0}
+.marca .ic{
+  width:34px;height:34px;border-radius:9px;background:var(--teal);
+  display:grid;place-items:center;flex:0 0 auto;
+}
+.marca .ic svg{width:17px;height:17px;display:block}
+.marca b{font-family:var(--serif);font-size:16.5px;color:#fff;display:block;line-height:1.15}
+.marca span{font-size:12.5px;color:#8FA8AB;font-style:italic;display:block}
+.topo .onde{
+  font-family:var(--mono);font-size:11px;letter-spacing:.15em;
+  text-transform:uppercase;color:#7FD9CA;text-align:right;line-height:1.5;
+}
+
+/* ================= heroi ================= */
+.heroi{background:var(--breu);color:#C3D3D5;padding:clamp(44px,7vw,84px) 0 clamp(52px,8vw,96px)}
+.heroi .env{display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(30px,5vw,68px);align-items:center}
+.heroi .rot{color:var(--sinal)}
+.heroi h1{color:#fff;max-width:15em}
+.heroi h1 em{font-style:italic;color:var(--sinal)}
+.heroi .chamada{font-size:clamp(17px,2vw,19.5px);line-height:1.6;margin:22px 0 0;max-width:34em}
+.heroi .chamada b{color:#fff}
+
+.botoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.bt{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 24px;border-radius:999px;text-decoration:none;
+  font-weight:700;font-size:16.5px;border:2px solid transparent;
+  transition:transform .14s ease,background .14s ease,border-color .14s ease;
+  min-height:52px;
+}
+.bt svg{width:19px;height:19px;flex:0 0 auto}
+.bt-zap{background:var(--sinal);color:#06231E}
+.bt-zap:hover{background:#5BEBCD;transform:translateY(-2px)}
+.bt-linha{border-color:#3A5254;color:#fff}
+.bt-linha:hover{border-color:var(--sinal);color:var(--sinal)}
+.bt-esc{background:var(--teal);color:#fff}
+.bt-esc:hover{background:#0A7A6C;transform:translateY(-2px)}
+.bt-esc-linha{border-color:var(--teal-linha);color:var(--teal)}
+.bt-esc-linha:hover{border-color:var(--teal);background:var(--teal-fundo)}
+
+/* ---- o celular: a assinatura da pagina ----
+   Aqui e onde eu gastei a ousadia. O produto se mostrando, no material
+   dele mesmo: uma conversa que acontece sozinha, terminando num audio
+   com forma de onda — que e literalmente o que o agente manda, na voz
+   da marca, feito por um estudio de som. */
+.fone{
+  background:#0A1F1C;border:1px solid #21403C;border-radius:26px;
+  padding:14px 12px 16px;box-shadow:0 26px 60px rgba(0,0,0,.42);
+  max-width:400px;margin-left:auto;width:100%;
+}
+.fone .barra{
+  display:flex;align-items:center;gap:9px;padding:4px 8px 13px;
+  border-bottom:1px solid #21403C;margin-bottom:14px;
+}
+.fone .av{
+  width:31px;height:31px;border-radius:50%;background:var(--teal);
+  display:grid;place-items:center;flex:0 0 auto;
+  font-family:var(--serif);font-weight:700;color:#fff;font-size:13px;
+}
+.fone .qm{min-width:0;flex:1}
+.fone .qm b{display:block;color:#fff;font-size:14px;line-height:1.25;font-family:var(--sans)}
+.fone .qm i{
+  display:flex;align-items:center;gap:5px;font-style:normal;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--sinal);
+}
+.fone .qm i::before{
+  content:'';width:6px;height:6px;border-radius:50%;background:var(--sinal);
+  animation:pisca 2.1s ease-in-out infinite;
+}
+@keyframes pisca{0%,100%{opacity:1}50%{opacity:.25}}
+
+.linhas{display:flex;flex-direction:column;gap:9px;min-height:328px}
+.bl{
+  max-width:81%;padding:10px 13px;border-radius:14px;font-size:14.5px;
+  line-height:1.45;opacity:0;transform:translateY(9px);
+  animation:sobe .34s ease forwards;
+}
+@keyframes sobe{to{opacity:1;transform:none}}
+.bl.cli{align-self:flex-start;background:#17302D;color:#DCEAE8;border-bottom-left-radius:5px}
+.bl.ag{align-self:flex-end;background:var(--teal);color:#fff;border-bottom-right-radius:5px}
+.bl.ag b{color:#fff}
+.bl .marc{
+  display:block;margin-top:6px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase;color:#9FEEDD;
+}
+/* digitando */
+.bl.dig{align-self:flex-end;background:var(--teal);padding:13px 15px;display:flex;gap:4px}
+.bl.dig span{width:6px;height:6px;border-radius:50%;background:#A8EFE2;animation:pula 1.1s ease-in-out infinite}
+.bl.dig span:nth-child(2){animation-delay:.16s}
+.bl.dig span:nth-child(3){animation-delay:.32s}
+@keyframes pula{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(-5px);opacity:1}}
+
+/* anexo de PDF */
+.anx{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.14);
+  border-radius:9px;padding:9px 11px;margin-top:2px}
+.anx .fl{width:26px;height:32px;flex:0 0 auto}
+.anx .nm{min-width:0}
+.anx .nm b{display:block;font-size:13px;line-height:1.25;word-break:break-word}
+.anx .nm span{font-family:var(--mono);font-size:10.5px;color:#BDF0E7}
+
+/* audio na voz da marca */
+.aud{display:flex;align-items:center;gap:11px;min-width:min(236px,100%)}
+.aud .pl{
+  width:31px;height:31px;border-radius:50%;background:#fff;flex:0 0 auto;
+  display:grid;place-items:center;
+}
+.aud .pl svg{width:12px;height:12px;display:block}
+.aud .on{display:flex;align-items:flex-end;gap:2.5px;height:24px;flex:1}
+.aud .on i{
+  display:block;width:2.5px;border-radius:2px;background:#BDF0E7;height:22%;
+}
+.aud.toca .on i{animation:onda .85s ease-in-out infinite}
+.aud .tm{font-family:var(--mono);font-size:11px;color:#DCF7F1;flex:0 0 auto}
+@keyframes onda{0%,100%{height:22%}50%{height:100%}}
+
+/* ================= o que e ================= */
+.oque{background:var(--papel)}
+.grade4{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:34px}
+.cart{
+  background:var(--papel-2);border:1px solid #DDE6E3;border-radius:var(--raio);
+  padding:26px 24px;
+}
+.cart .ic{
+  width:40px;height:40px;border-radius:11px;background:var(--teal-fundo);
+  display:grid;place-items:center;margin-bottom:15px;
+}
+.cart .ic svg{width:20px;height:20px;display:block;stroke:var(--teal)}
+.cart p{font-size:15.5px;line-height:1.56;margin:0}
+.cart p b{color:var(--tinta)}
+
+/* ================= console / modular ================= */
+.console{background:var(--breu);color:#B8CACC}
+.console h2{color:#fff}
+.console .rot{color:var(--sinal)}
+.console .intro{max-width:46em;font-size:17.5px}
+.console .intro b{color:#fff}
+
+.inclui{
+  display:flex;gap:13px;align-items:flex-start;
+  background:var(--breu-2);border:1px solid #23383B;border-radius:12px;
+  padding:16px 18px;margin:26px 0 30px;
+}
+.inclui .sl{width:21px;height:21px;flex:0 0 auto;margin-top:2px}
+.inclui p{font-size:15px;line-height:1.55;margin:0}
+.inclui b{color:var(--sinal)}
+
+.mesa{display:grid;grid-template-columns:1.32fr .68fr;gap:clamp(20px,3vw,34px);align-items:start}
+
+.canais{display:flex;flex-direction:column;gap:9px}
+.cn{
+  display:grid;grid-template-columns:26px 1fr auto;gap:14px;align-items:center;
+  background:var(--breu-2);border:1px solid #23383B;border-radius:12px;
+  padding:15px 17px;cursor:pointer;transition:border-color .14s ease,background .14s ease;
+  position:relative;
+}
+.cn:hover{border-color:#39595C}
+.cn input{position:absolute;opacity:0;width:0;height:0}
+.cn .cx{
+  width:24px;height:24px;border-radius:7px;border:2px solid #3E5D60;
+  display:grid;place-items:center;flex:0 0 auto;
+  /* NAO usar transition:all aqui. "all" pega o outline tambem, e o anel de
+     foco do teclado passa a ENTRAR ANIMADO — quem navega por Tab precisa
+     ver onde esta na hora, nao em 140ms. So cor e fundo transicionam. */
+  transition:background .14s ease,border-color .14s ease;
+}
+.cn .cx svg{width:13px;height:13px;opacity:0;transform:scale(.6);transition:all .14s ease}
+.cn .tx b{
+  display:block;color:#fff;font-size:16px;line-height:1.3;font-family:var(--sans);
+  font-weight:700;margin-bottom:2px;
+}
+.cn .tx span{display:block;font-size:13.5px;line-height:1.45;color:#8CA3A6}
+.cn .vl{
+  font-family:var(--mono);font-size:15px;font-weight:600;color:#C7DBDC;
+  text-align:right;white-space:nowrap;
+}
+/* O input fica em 0x0 pra eu poder desenhar a caixinha. Isso deixa quem
+   navega por teclado FOCANDO UM ELEMENTO INVISIVEL — o anel de foco sai
+   num ponto de 0 pixel e a pessoa nao sabe onde esta. Entao o foco do
+   input pinta a caixinha visivel, que e o que a pessoa ve. */
+.cn input:focus-visible ~ .cx{outline:3px solid var(--sinal);outline-offset:3px}
+.cn input:checked ~ .cx{background:var(--sinal);border-color:var(--sinal)}
+.cn input:checked ~ .cx svg{opacity:1;transform:none}
+.cn:has(input:checked){border-color:#3F6E6B;background:#152B2A}
+.cn:has(input:checked) .vl{color:#fff}
+
+/* master */
+.master{
+  background:var(--papel-2);color:var(--grafite);border-radius:var(--raio);
+  padding:26px 24px;position:sticky;top:20px;
+}
+.master .tt{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--cinza);margin:0 0 14px;
+}
+.master .pecas{
+  list-style:none;margin:0 0 16px;padding:0;
+  font-size:14px;border-bottom:1px solid #E1E9E6;padding-bottom:14px;
+}
+.master .pecas li{display:flex;justify-content:space-between;gap:12px;padding:3px 0}
+.master .pecas li span:last-child{font-family:var(--mono);color:var(--tinta);white-space:nowrap}
+.master .pecas .vazio{color:var(--cinza);font-style:italic;display:block}
+
+.master .selo{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--teal-fundo);color:var(--teal);
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  letter-spacing:.11em;text-transform:uppercase;
+  padding:6px 11px;border-radius:999px;margin-bottom:12px;
+}
+.master .antes{
+  font-family:var(--mono);font-size:14px;color:var(--cinza);
+  text-decoration:line-through;display:block;
+}
+.master .tot{
+  font-family:var(--serif);font-size:clamp(32px,4.4vw,42px);font-weight:700;
+  color:var(--tinta);line-height:1;letter-spacing:-.02em;display:block;margin:2px 0 4px;
+}
+.master .parc{font-size:14px;color:var(--cinza);margin:0 0 4px}
+.master .econ{
+  font-size:14.5px;color:var(--teal);font-weight:700;margin:6px 0 0;
+}
+/* "economiza R$ / 1.000", quebrado entre o R$ e o numero, fica pobre */
+.master .econ b{white-space:nowrap}
+.master .bt{width:100%;justify-content:center;margin-top:18px}
+.master .comopaga{font-size:13px;line-height:1.5;color:var(--cinza);margin:14px 0 0}
+
+/* ---- o ideal completo ----
+   Ele pediu modular E o ideal completo. Modular sozinho deixa o cliente
+   escolhendo peca por peca sem nunca ver pra onde isso cresce — e quem
+   nao ve o destino compra so a porta de entrada. Entao o destino fica
+   visivel sem precisar marcar nada, com um botao que monta ele sozinho
+   (que de brinde ensina que a lista de cima e clicavel). */
+.ideal{
+  display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(22px,3.4vw,40px);
+  align-items:center;margin-top:34px;padding:clamp(26px,3.4vw,38px);
+  background:linear-gradient(135deg,#12292B,#16383A);
+  border:1px solid #3B6F6B;border-radius:18px;
+}
+.ideal .rt{
+  font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--sinal);margin:0 0 10px;
+}
+.ideal h3{
+  font-family:var(--serif);color:#fff;font-size:clamp(23px,2.9vw,31px);
+  line-height:1.14;margin:0 0 14px;letter-spacing:-.018em;
+}
+.ideal .dentro{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ideal .dentro li{
+  position:relative;padding-left:26px;font-size:15.5px;line-height:1.45;color:#B8CACC;
+}
+.ideal .dentro li b{color:#fff}
+.ideal .dentro li::before{
+  content:'';position:absolute;left:0;top:7px;width:14px;height:8px;
+  border-left:2.4px solid var(--sinal);border-bottom:2.4px solid var(--sinal);
+  transform:rotate(-45deg);border-radius:1px;
+}
+.ideal .preco{
+  background:rgba(255,255,255,.055);border:1px solid #3B6F6B;border-radius:14px;
+  padding:24px 22px;text-align:center;
+}
+.ideal .preco .de{
+  font-family:var(--mono);font-size:14px;color:#8CA3A6;text-decoration:line-through;display:block;
+}
+.ideal .preco .por{
+  font-family:var(--serif);font-size:clamp(34px,4.6vw,46px);font-weight:700;color:#fff;
+  line-height:1;display:block;margin:3px 0 5px;letter-spacing:-.02em;
+}
+.ideal .preco .pc{font-size:14.5px;color:#9FB6B9;margin:0 0 16px}
+.ideal .preco .bt{width:100%;justify-content:center;margin-bottom:9px}
+.ideal .preco .obs{font-size:12.5px;line-height:1.45;color:#7F979A;margin:9px 0 0}
+.bt-sinal-linha{border-color:var(--sinal);color:var(--sinal);background:transparent}
+.bt-sinal-linha:hover{background:rgba(53,224,191,.12)}
+
+/* ================= provas ================= */
+.provas{background:var(--papel-2);border-top:1px solid #DDE6E3}
+.grade-pr{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,2.6vw,32px);margin-top:8px}
+.pr{border-top:3px solid var(--teal);padding-top:16px}
+.pr .rt{
+  font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--teal);margin:0 0 8px;
+}
+.pr .nm{
+  font-family:var(--serif);font-size:clamp(24px,2.8vw,31px);font-weight:700;
+  color:var(--tinta);line-height:1;margin:0 0 9px;letter-spacing:-.018em;
+}
+.pr p{font-size:14.5px;line-height:1.5;margin:0}
+.pr p b{color:var(--tinta)}
+
+/* ================= passos ================= */
+.passos{background:var(--papel)}
+.grade-ps{display-flow:row;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,38px);margin-top:34px}
+.ps{position:relative;padding-top:22px;border-top:1px solid #CFDBD8}
+.ps .nu{
+  position:absolute;top:-15px;left:0;
+  width:30px;height:30px;border-radius:50%;background:var(--teal);color:#fff;
+  display:grid;place-items:center;font-family:var(--mono);font-size:13px;font-weight:600;
+}
+.ps h3{margin-top:14px}
+.ps p{font-size:15.5px;line-height:1.55;margin:0}
+
+/* ================= chamada final ================= */
+.fim{background:var(--breu);color:#B8CACC}
+.fim h2{color:#fff;max-width:20em}
+.fim .rot{color:var(--sinal)}
+.fim .env{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(28px,5vw,60px);align-items:center}
+.fim p{font-size:17.5px;max-width:34em}
+.fim p b{color:#fff}
+.cx-fim{
+  background:var(--breu-2);border:1px solid #23383B;border-radius:var(--raio);
+  padding:26px 24px;
+}
+.cx-fim .tt{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--sinal);margin:0 0 15px;
+}
+.cx-fim .bt{width:100%;justify-content:center;margin-bottom:10px}
+.cx-fim .ct{font-size:14.5px;line-height:1.75;margin:16px 0 0;border-top:1px solid #23383B;padding-top:16px}
+.cx-fim .ct b{color:#fff;display:block;margin-bottom:3px}
+.cx-fim .ct a{color:var(--sinal);text-decoration:none;font-weight:700}
+.cx-fim .ct a:hover{text-decoration:underline}
+
+.pe{
+  background:var(--breu);color:#6E8689;border-top:1px solid rgba(255,255,255,.08);
+  padding:22px 0;font-size:13.5px;
+}
+.pe .env{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
+.pe b{color:#98AFB2}
+
+/* ================= botao fixo do celular ================= */
+.fixo{
+  position:fixed;left:14px;right:14px;bottom:14px;z-index:60;display:none;
+}
+.fixo .bt{width:100%;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.34)}
+
+/* ================= responsivo ================= */
+@media (max-width:980px){
+  .heroi .env,.mesa,.fim .env,.ideal{grid-template-columns:1fr}
+  .fone{margin:8px auto 0;max-width:380px}
+  .master{position:static}
+  .grade-pr{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:700px){
+  body{font-size:16.5px}
+  .grade4,.grade-ps{grid-template-columns:1fr}
+  .topo .onde{display:none}
+  .heroi .botoes .bt-zap{display:none}
+  .heroi .botoes .bt-linha{width:100%;justify-content:center}
+  .fixo{display:block}
+  .fim .cx-fim .bt{margin-bottom:10px}
+  .heroi{padding-bottom:36px}
+  .pe{padding-bottom:86px}
+  /* no celular a peca empilha, e a caixinha alinha com o TITULO em vez de
+     flutuar no meio de tres linhas de descricao */
+  .cn{grid-template-columns:24px 1fr;row-gap:4px;align-items:start}
+  .cn .cx{margin-top:1px}
+  .cn .vl{grid-column:2;text-align:left}
+}
+@media (max-width:420px){
+  .grade-pr{grid-template-columns:1fr}
+  .bt{width:100%;justify-content:center}
+}
+
+/* quem pediu menos movimento recebe a pagina parada, inteira */
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001s!important;animation-iteration-count:1!important;
+    transition-duration:.001s!important}
+  html{scroll-behavior:auto}
+  .bl{opacity:1;transform:none}
+}
+.credencial{display:inline-flex;align-items:center;gap:10px;margin:0 0 22px;padding:9px 16px 9px 10px;border-radius:999px;
+  background:rgba(53,224,191,.10);border:1px solid rgba(53,224,191,.35);font-size:14px;line-height:1.35;color:rgba(255,255,255,.82)}
+.credencial b{color:#fff}
+.credencial .selo-ic{width:24px;height:24px;flex:0 0 auto;color:#35E0BF}
+.credencial .selo-ic path+path{stroke:#0B1416}
+@media(max-width:560px){.credencial{border-radius:14px;font-size:13px}}
+
+/* ===== WhatsApp sempre a um toque =====
+   Ele pediu: a pessoa tem que achar o WhatsApp dele sem procurar. No topo,
+   o numero escrito; no computador, um botao que acompanha a rolagem (aparece
+   depois do primeiro scroll, pra nao dobrar com o botao do heroi); no
+   celular, o botao fixo embaixo, agora com o numero. */
+.zap-topo{display:inline-flex;align-items:center;gap:8px;margin-left:18px;padding:8px 14px;border-radius:999px;
+  background:#25D366;color:#06231E;font-weight:800;font-size:14px;text-decoration:none;white-space:nowrap}
+.zap-topo:hover{filter:brightness(1.06)}
+.zap-flutua{position:fixed;right:22px;bottom:22px;z-index:70;display:flex;align-items:center;gap:10px;
+  padding:12px 18px 12px 14px;border-radius:999px;background:#25D366;color:#06231E;text-decoration:none;font-weight:800;font-size:15px;
+  box-shadow:0 14px 34px rgba(0,0,0,.4);opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .3s,transform .3s}
+.zap-flutua small{display:block;font-weight:600;font-size:12px;opacity:.8}
+.zap-flutua svg{width:26px!important;height:26px!important}
+.zap-flutua.on{opacity:1;transform:none;pointer-events:auto}
+@media (max-width:700px){ .zap-flutua{display:none} .zap-topo span{display:none} .zap-topo{padding:9px;margin-left:auto} }
+
+.camadas-lp{margin-top:34px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px}
+.camadas-lp svg{display:block;width:100%;min-width:760px;height:auto}
+@media (max-width:700px){ .camadas-lp::after{content:'arraste pro lado pra ver tudo →';display:block;font-size:12.5px;color:#6D8286;margin-top:8px} }
+
+.garantias-lp{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px;max-width:980px}
+.garantias-lp div{background:#101C1E;border-radius:14px;padding:14px 18px}
+.garantias-lp b{display:block;font-family:Caladea,Georgia,serif;font-size:20px;color:#fff;line-height:1.15}
+.garantias-lp span{display:block;font-size:14px;color:#9FC9C2;margin-top:4px}
+@media (max-width:700px){ .garantias-lp{grid-template-columns:1fr} }
+
+.ideal.essencial{background:linear-gradient(135deg,#0F1F21,#132628);border-color:#2A4E4B}
+.ideal.essencial + .ideal{margin-top:18px}
+</style>
+</head>
+<body>
+
+<!-- ===================== topo ===================== -->
+<header class="topo">
+  <div class="env">
+    <div class="marca">
+      <span class="ic" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z" fill="#fff"/></svg>
+      </span>
+      <span>
+        <b>studio Ti Artes</b>
+        <span>Som feito à mão</span>
+      </span>
+    </div>
+    <div class="onde">Tech Provider certificado Meta<br>Agentes de IA · Curitiba</div>
+    <a class="zap-topo" data-zap href="#"><svg viewBox="0 0 24 24" aria-hidden="true" style="width:20px;height:20px;flex:0 0 auto"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.85 9.85 0 0 0 12.04 2zm5.8 14.03c-.24.68-1.42 1.3-1.95 1.36-.5.06-1.13.09-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.01-2.41.27-.29.58-.36.78-.36h.56c.18 0 .42-.07.66.5.24.58.82 2 .89 2.14.07.15.12.32.02.51-.09.2-.14.32-.29.49-.14.17-.3.38-.43.51-.14.14-.29.3-.13.59.17.29.74 1.22 1.59 1.97 1.09.97 2.01 1.27 2.3 1.42.29.14.46.12.63-.07.17-.2.72-.85.92-1.14.19-.29.38-.24.65-.14.26.09 1.68.79 1.97.94.29.14.48.21.55.33.08.12.08.69-.16 1.37z"/></svg><span>Falar com o atendente</span></a>
+  </div>
+</header>
+
+<!-- ===================== heroi ===================== -->
+<section class="heroi">
+  <div class="env">
+    <div>
+      <p class="credencial"><svg viewBox="0 0 24 24" aria-hidden="true" class="selo-ic"><path d="M12 2.2 14.6 4l3.1-.4 1.2 2.9 2.7 1.6-.7 3 .7 3-2.7 1.6-1.2 2.9-3.1-.4L12 21.8 9.4 20l-3.1.4-1.2-2.9L2.4 15.9l.7-3-.7-3L5.1 7.3l1.2-2.9L9.4 4z" fill="currentColor"/><path d="m8.3 12.2 2.5 2.5 4.9-4.9" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Tech Provider certificado da Meta</b> · seu WhatsApp na API oficial, onde os agentes trabalham</span></p>
+      <p class="rot">Atendimento autônomo</p>
+      <h1>Você responde WhatsApp à&nbsp;<span style="white-space:nowrap">meia-noite</span>. E <em>ainda</em> perde venda.</h1>
+      <p class="chamada">
+        Dá pra ter quem responda por você. Não um robô de menuzinho, que irrita e
+        devolve o cliente pra sua mão: <b>um atendente que sabe o seu estoque, o
+        seu preço e a sua agenda</b> — porque está ligado no mesmo lugar onde a sua
+        operação de verdade mora.
+      </p>
+      <div class="botoes">
+        <a class="bt bt-zap" data-zap href="#">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.97L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.25.7-1.44 1.33-1.98 1.38-.54.06-1.05.08-1.62-.1-.33-.1-.76-.24-1.31-.48-2.3-1-3.8-3.31-3.92-3.46-.11-.15-.93-1.24-.93-2.36 0-1.12.59-1.67.8-1.9.2-.23.45-.29.6-.29l.43.01c.14 0 .32-.05.5.38.19.46.64 1.58.7 1.69.06.12.1.25.02.4-.08.15-.12.24-.24.38l-.36.42c-.12.11-.24.24-.1.47.13.23.59.97 1.26 1.57.87.77 1.6 1.01 1.83 1.13.23.11.36.1.5-.06.13-.15.57-.66.72-.89.15-.23.3-.19.5-.11.21.07 1.31.62 1.54.73.23.12.38.17.44.27.05.1.05.58-.2 1.28Z"/></svg>
+          Falar com o atendente
+        </a>
+        <a class="bt bt-linha" href="#montar">Ver os valores</a>
+      </div>
+    </div>
+
+    <!-- ASSINATURA: a conversa acontecendo sozinha -->
+    <div class="fone" role="img" aria-label="Exemplo de conversa: o cliente pergunta se o produto está disponível e o agente responde consultando o estoque, envia um orçamento em PDF e confirma um horário com um áudio na voz da marca.">
+      <div class="barra">
+        <span class="av" aria-hidden="true">TA</span>
+        <span class="qm">
+          <b>Atendimento · sua marca</b>
+          <i>online agora</i>
+        </span>
+      </div>
+      <div class="linhas" id="conversa"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== o que e ===================== -->
+<section class="secao oque">
+  <div class="env">
+    <p class="rot">Como é montado</p>
+    <h2>Quatro agentes de IA separados.<br>Um sistema de gestão pra ligar todos.</h2>
+    <p style="max-width:46em;font-size:17.5px">
+      <b style="color:var(--tinta)">Chat assistente multifuncional</b>, <b style="color:var(--tinta)">atendimento
+      Meta</b> (WhatsApp e Instagram num agente só, na API oficial), <b style="color:var(--tinta)">marketing</b>
+      com sub-agentes e <b style="color:var(--tinta)">tráfego pago</b> na Meta e no Google Ads. Cada um funciona
+      sozinho. Plugados no sistema de gestão (ERP) que a gente sugere, todos sabem o que está acontecendo.
+    </p>
+    <div class="garantias-lp">
+      <div><b>Valor único</b><span>paga uma vez — sem mensalidade depois</span></div>
+      <div><b>Treinamento incluso</b><span>cada agente treinado no DNA da sua marca</span></div>
+      <div><b>3 meses de suporte grátis</b><span>ajustes e afinação depois da entrega</span></div>
+    </div>
+    <div class="camadas-lp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 668" role="img" aria-label="Quatro agentes separados — chat assistente, atendimento Meta, marketing e tráfego pago — plugados no sistema de gestão (ERP) sugerido">
+<defs>
+<linearGradient id="g-insta-papel-lp" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#F58529"/><stop offset=".5" stop-color="#DD2A7B"/><stop offset="1" stop-color="#8134AF"/></linearGradient>
+</defs>
+<rect x="0.0" y="8" width="229" height="340" rx="16" fill="#FFFFFF" stroke="#B9E0D9" stroke-width="1.6"/>
+<rect x="16.0" y="8" width="197" height="4" rx="2" fill="#0B8C7D"/>
+<rect x="16.0" y="28" width="46" height="46" rx="13" fill="#0B8C7D"/>
+<g transform="translate(25.0,37) scale(1.17)"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v9a1.5 1.5 0 0 1-1.5 1.5H10l-4.5 3.5V17.5H4A1.5 1.5 0 0 1 2.5 16V7A1.5 1.5 0 0 1 4 5.5z" fill="#fff"/><path d="M12 8.2l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z" fill="#0B8C7D"/></g>
+<text x="78.0" y="46" font-family="Carlito, 'Segoe UI', sans-serif" font-size="13" fill="#6D8286">Chat multifuncional</text>
+<text x="78.0" y="70" font-family="Caladea, Georgia, serif" font-weight="700" font-size="22" fill="#101C1E">Assistente</text>
+<rect x="16.0" y="104" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="30.0" cy="119.0" r="3.2" fill="#0B8C7D"/>
+<text x="42.0" y="124.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Fala por voz ou texto</text>
+<rect x="16.0" y="142" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="30.0" cy="157.0" r="3.2" fill="#0B8C7D"/>
+<text x="42.0" y="162.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Mexe em todas as abas</text>
+<rect x="16.0" y="180" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="30.0" cy="195.0" r="3.2" fill="#0B8C7D"/>
+<text x="42.0" y="200.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Cria tarefas e jobs</text>
+<rect x="16.0" y="218" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="30.0" cy="233.0" r="3.2" fill="#0B8C7D"/>
+<text x="42.0" y="238.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Agenda e lembra</text>
+<rect x="16.0" y="256" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="30.0" cy="271.0" r="3.2" fill="#0B8C7D"/>
+<text x="42.0" y="276.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Cobra e confere o caixa</text>
+<rect x="16.0" y="294" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="30.0" cy="309.0" r="3.2" fill="#0B8C7D"/>
+<text x="42.0" y="314.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Responde sobre o negócio</text>
+<text x="213.0" y="92" text-anchor="end" font-family="Carlito, 'Segoe UI', sans-serif" font-size="11" font-weight="700" letter-spacing="1.4" fill="#6D8286">VOZ E TEXTO</text>
+<path d="M114.5 354 C114.5 398, 114.5 388, 114.5 434" fill="none" stroke="#0B8C7D" stroke-width="3.4" stroke-linecap="round"/>
+<circle cx="114.5" cy="348" r="8" fill="#FFFFFF" stroke="#0B8C7D" stroke-width="3"/>
+<rect x="257.0" y="8" width="229" height="340" rx="16" fill="#FFFFFF" stroke="#B9E0D9" stroke-width="1.6"/>
+<rect x="273.0" y="8" width="197" height="4" rx="2" fill="#25D366"/>
+<rect x="273.0" y="28" width="46" height="46" rx="13" fill="#25D366"/>
+<g transform="translate(282.0,37) scale(1.17)"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.85 9.85 0 0 0 12.04 2zm5.8 14.03c-.24.68-1.42 1.3-1.95 1.36-.5.06-1.13.09-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.01-2.41.27-.29.58-.36.78-.36h.56c.18 0 .42-.07.66.5.24.58.82 2 .89 2.14.07.15.12.32.02.51-.09.2-.14.32-.29.49-.14.17-.3.38-.43.51-.14.14-.29.3-.13.59.17.29.74 1.22 1.59 1.97 1.09.97 2.01 1.27 2.3 1.42.29.14.46.12.63-.07.17-.2.72-.85.92-1.14.19-.29.38-.24.65-.14.26.09 1.68.79 1.97.94.29.14.48.21.55.33.08.12.08.69-.16 1.37z" fill="#fff"/></g>
+<rect x="301.0" y="56" width="26" height="26" rx="8" fill="url(#g-insta-papel-lp)" stroke="#FFFFFF" stroke-width="2.5"/>
+<g transform="translate(305.0,60) scale(0.75)"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5.2" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="4.1" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.25" fill="#fff"/></g>
+<text x="335.0" y="46" font-family="Carlito, 'Segoe UI', sans-serif" font-size="13" fill="#6D8286">WhatsApp + Instagram</text>
+<text x="335.0" y="70" font-family="Caladea, Georgia, serif" font-weight="700" font-size="20" fill="#101C1E">Atendimento</text>
+<rect x="273.0" y="104" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="287.0" cy="119.0" r="3.2" fill="#25D366"/>
+<text x="299.0" y="124.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Um agente, dois canais</text>
+<rect x="273.0" y="142" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="287.0" cy="157.0" r="3.2" fill="#25D366"/>
+<text x="299.0" y="162.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Responde e qualifica</text>
+<rect x="273.0" y="180" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="287.0" cy="195.0" r="3.2" fill="#25D366"/>
+<text x="299.0" y="200.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Orçamento em PDF</text>
+<rect x="273.0" y="218" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="287.0" cy="233.0" r="3.2" fill="#25D366"/>
+<text x="299.0" y="238.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Áudio na voz da marca</text>
+<rect x="273.0" y="256" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="287.0" cy="271.0" r="3.2" fill="#25D366"/>
+<text x="299.0" y="276.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Marca na agenda real</text>
+<rect x="273.0" y="294" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="287.0" cy="309.0" r="3.2" fill="#25D366"/>
+<text x="299.0" y="314.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">API oficial da Meta</text>
+<text x="470.0" y="92" text-anchor="end" font-family="Carlito, 'Segoe UI', sans-serif" font-size="11" font-weight="700" letter-spacing="1.4" fill="#6D8286">CERTIFICADO META</text>
+<path d="M371.5 354 C371.5 398, 371.5 388, 371.5 434" fill="none" stroke="#0B8C7D" stroke-width="3.4" stroke-linecap="round"/>
+<circle cx="371.5" cy="348" r="8" fill="#FFFFFF" stroke="#0B8C7D" stroke-width="3"/>
+<rect x="514.0" y="8" width="229" height="340" rx="16" fill="#FFFFFF" stroke="#B9E0D9" stroke-width="1.6"/>
+<rect x="530.0" y="8" width="197" height="4" rx="2" fill="#7C3AED"/>
+<rect x="530.0" y="28" width="46" height="46" rx="13" fill="#7C3AED"/>
+<g transform="translate(539.0,37) scale(1.17)"><path d="M3.5 10.5v3a1 1 0 0 0 1 1h2l5 4V5.5l-5 4h-2a1 1 0 0 0-1 1z" fill="#fff"/><path d="M15 8.5a4.5 4.5 0 0 1 0 7M17.6 6a8 8 0 0 1 0 12" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/></g>
+<text x="592.0" y="46" font-family="Carlito, 'Segoe UI', sans-serif" font-size="13" fill="#6D8286">com sub-agentes</text>
+<text x="592.0" y="70" font-family="Caladea, Georgia, serif" font-weight="700" font-size="22" fill="#101C1E">Marketing</text>
+<rect x="530.0" y="104" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="544.0" cy="119.0" r="3.2" fill="#7C3AED"/>
+<text x="556.0" y="124.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Criativos</text>
+<rect x="530.0" y="142" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="544.0" cy="157.0" r="3.2" fill="#7C3AED"/>
+<text x="556.0" y="162.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Kit de marca e logo</text>
+<rect x="530.0" y="180" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="544.0" cy="195.0" r="3.2" fill="#7C3AED"/>
+<text x="556.0" y="200.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Posts programados</text>
+<rect x="530.0" y="218" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="544.0" cy="233.0" r="3.2" fill="#7C3AED"/>
+<text x="556.0" y="238.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Legendas e copy</text>
+<rect x="530.0" y="256" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="544.0" cy="271.0" r="3.2" fill="#7C3AED"/>
+<text x="556.0" y="276.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Roteiros de vídeo</text>
+<rect x="530.0" y="294" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="544.0" cy="309.0" r="3.2" fill="#7C3AED"/>
+<text x="556.0" y="314.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Propostas pra clientes</text>
+<text x="727.0" y="92" text-anchor="end" font-family="Carlito, 'Segoe UI', sans-serif" font-size="11" font-weight="700" letter-spacing="1.4" fill="#6D8286">SUB-AGENTES</text>
+<path d="M628.5 354 C628.5 398, 628.5 388, 628.5 434" fill="none" stroke="#0B8C7D" stroke-width="3.4" stroke-linecap="round"/>
+<circle cx="628.5" cy="348" r="8" fill="#FFFFFF" stroke="#0B8C7D" stroke-width="3"/>
+<rect x="771.0" y="8" width="229" height="340" rx="16" fill="#FFFFFF" stroke="#B9E0D9" stroke-width="1.6"/>
+<rect x="787.0" y="8" width="197" height="4" rx="2" fill="#F59E0B"/>
+<rect x="787.0" y="28" width="46" height="46" rx="13" fill="#F59E0B"/>
+<g transform="translate(796.0,37) scale(1.17)"><circle cx="12" cy="12" r="8.6" fill="none" stroke="#fff" stroke-width="1.9"/><circle cx="12" cy="12" r="4.6" fill="none" stroke="#fff" stroke-width="1.9"/><circle cx="12" cy="12" r="1.5" fill="#fff"/><path d="M15.5 8.5 20 4M17.2 4H20v2.8" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="849.0" y="46" font-family="Carlito, 'Segoe UI', sans-serif" font-size="13" fill="#6D8286">Meta e Google Ads</text>
+<text x="849.0" y="70" font-family="Caladea, Georgia, serif" font-weight="700" font-size="20" fill="#101C1E">Tráfego pago</text>
+<rect x="787.0" y="104" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="801.0" cy="119.0" r="3.2" fill="#F59E0B"/>
+<text x="813.0" y="124.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Impulsiona na Meta</text>
+<rect x="787.0" y="142" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="801.0" cy="157.0" r="3.2" fill="#F59E0B"/>
+<text x="813.0" y="162.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Campanhas no Google Ads</text>
+<rect x="787.0" y="180" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="801.0" cy="195.0" r="3.2" fill="#F59E0B"/>
+<text x="813.0" y="200.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Verba × venda fechada</text>
+<rect x="787.0" y="218" width="197" height="30" rx="8" fill="#F2F8F7" stroke="#D5ECE8" stroke-width="1"/>
+<circle cx="801.0" cy="233.0" r="3.2" fill="#F59E0B"/>
+<text x="813.0" y="238.0" font-family="Carlito, 'Segoe UI', sans-serif" font-size="14.5" fill="#36494C">Corta o que não rende</text>
+<rect x="787.0" y="256" width="197" height="30" rx="8" fill="none" stroke="#D5ECE8" stroke-width="1.4" stroke-dasharray="4 4"/>
+<text x="885.5" y="276.0" text-anchor="middle" font-family="Carlito, 'Segoe UI', sans-serif" font-size="13.5" fill="#6D8286">+ sob medida pra sua marca</text>
+<path d="M885.5 354 C885.5 398, 885.5 388, 885.5 434" fill="none" stroke="#0B8C7D" stroke-width="3.4" stroke-linecap="round"/>
+<circle cx="885.5" cy="348" r="8" fill="#FFFFFF" stroke="#0B8C7D" stroke-width="3"/>
+<rect x="150.0" y="377" width="700" height="26" rx="13" fill="#F1F4F2" stroke="#B9E0D9" stroke-width="1.2"/>
+<text x="500.0" y="395" text-anchor="middle" font-family="Carlito, 'Segoe UI', sans-serif" font-size="13" font-weight="700" letter-spacing="1.6" fill="#6D8286">CADA AGENTE FUNCIONA SOZINHO — E PLUGA NA BASE QUANDO VOCÊ QUISER</text>
+<rect x="0.0" y="440" width="1000" height="170" rx="18" fill="#101C1E" stroke="#2E4649" stroke-width="1.5"/>
+<circle cx="18.0" cy="458" r="4.5" fill="none" stroke="#2E4649" stroke-width="2"/><path d="M15.4 458h5.2" stroke="#2E4649" stroke-width="1.6"/>
+<circle cx="18.0" cy="592" r="4.5" fill="none" stroke="#2E4649" stroke-width="2"/><path d="M15.4 592h5.2" stroke="#2E4649" stroke-width="1.6"/>
+<circle cx="982.0" cy="458" r="4.5" fill="none" stroke="#2E4649" stroke-width="2"/><path d="M979.4 458h5.2" stroke="#2E4649" stroke-width="1.6"/>
+<circle cx="982.0" cy="592" r="4.5" fill="none" stroke="#2E4649" stroke-width="2"/><path d="M979.4 592h5.2" stroke="#2E4649" stroke-width="1.6"/>
+<circle cx="114.5" cy="440" r="9" fill="#101C1E" stroke="#0B8C7D" stroke-width="3"/><circle cx="114.5" cy="440" r="3" fill="#0B8C7D"/>
+<circle cx="371.5" cy="440" r="9" fill="#101C1E" stroke="#0B8C7D" stroke-width="3"/><circle cx="371.5" cy="440" r="3" fill="#0B8C7D"/>
+<circle cx="628.5" cy="440" r="9" fill="#101C1E" stroke="#0B8C7D" stroke-width="3"/><circle cx="628.5" cy="440" r="3" fill="#0B8C7D"/>
+<circle cx="885.5" cy="440" r="9" fill="#101C1E" stroke="#0B8C7D" stroke-width="3"/><circle cx="885.5" cy="440" r="3" fill="#0B8C7D"/>
+<text x="44.0" y="490" font-family="Carlito, 'Segoe UI', sans-serif" font-size="12.5" font-weight="700" letter-spacing="2" fill="#9FC9C2">SUGESTÃO DE BASE · CONECTA OS 4 AGENTES</text>
+<text x="44.0" y="526" font-family="Caladea, Georgia, serif" font-weight="700" font-size="29" fill="#FFFFFF">Sistema de gestão (ERP) com IA</text>
+<text x="44.0" y="550" font-family="Carlito, 'Segoe UI', sans-serif" font-size="15" fill="#9FC9C2">feito sob medida pra sua marca — os agentes leem e escrevem no mesmo lugar</text>
+<rect x="44.0" y="568" width="77.2" height="26" rx="13" fill="#1D2E31" stroke="#2E4649" stroke-width="1"/>
+<text x="82.6" y="585.5" text-anchor="middle" font-family="Carlito, 'Segoe UI', sans-serif" font-size="13" fill="#E6F2F0">Clientes</text>
+<rect x="129.2" y="568" width="143.8" height="26" rx="13" fill="#1D2E31" stroke="#2E4649" stroke-width="1"/>
+<text x="201.1" y="585.5" text-anchor="middle" font-family="Carlito, 'Segoe UI', sans-serif" font-size="13" fill="#E6F2F0">Pipeline e vendas</text>
+<rect x="281.0" y="568" width="62.400000000000006" height="26" rx="13" fill="#1D2E31" stroke="#2E4649" stroke-width="1"/>
+<text x="312.2" y="585.5" text-anchor="middle" font-family="Carlito, 'Segoe UI', sans-serif" font-size="13" fill="#E6F2F0">Agenda</text>
+<rect x="351.4" y="568" width="92.0" height="26" rx="13" fill="#1D2E31" stroke="#2E4649" stroke-width="1"/>
+<text x="397.4" y="585.5" text-anchor="middle" font-family="Carlito, 'Segoe UI', sans-serif" font-size="13" fill="#E6F2F0">Financeiro</text>
+<rect x="451.4" y="568" width="151.20000000000002" height="26" rx="13" fill="#1D2E31" stroke="#2E4649" stroke-width="1"/>
+<text x="527.0" y="585.5" text-anchor="middle" font-family="Carlito, 'Segoe UI', sans-serif" font-size="13" fill="#E6F2F0">Estoque e serviços</text>
+<rect x="610.6" y="568" width="92.0" height="26" rx="13" fill="#1D2E31" stroke="#2E4649" stroke-width="1"/>
+<text x="656.6" y="585.5" text-anchor="middle" font-family="Carlito, 'Segoe UI', sans-serif" font-size="13" fill="#E6F2F0">Relatórios</text>
+<path d="M8.0 639 h26" stroke="#0B8C7D" stroke-width="3" stroke-dasharray="5 5" stroke-linecap="round"/>
+<text x="44.0" y="644" font-family="Carlito, 'Segoe UI', sans-serif" font-size="15" fill="#36494C"><tspan font-weight="700">Já usa Bling, Omie, Totvs ou HubSpot?</tspan> Os agentes plugam no sistema que você já tem, em vez da nossa base.</text>
+</svg></div>
+  </div>
+</section>
+
+<!-- ===================== console / modular ===================== -->
+<section class="secao console" id="montar">
+  <div class="env">
+    <p class="rot">Monte o seu</p>
+    <h2>Escolha as peças. O valor aparece na hora.</h2>
+    <p class="intro">
+      Não precisa comprar tudo de uma vez. <b>Cada peça funciona sozinha e já nasce
+      pensando na próxima</b> — você entra por onde couber no bolso e cresce de
+      dentro pra fora. Marque abaixo e veja o total.
+    </p>
+
+    <div class="inclui">
+      <svg class="sl" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2.2 14.6 4l3.1-.4 1.2 2.9 2.7 1.6-.7 3 .7 3-2.7 1.6-1.2 2.9-3.1-.4L12 21.8 9.4 20l-3.1.4-1.2-2.9L2.4 15.9l.7-3-.7-3L5.1 7.3l1.2-2.9L9.4 4z" fill="#35E0BF"/>
+        <path d="m8.3 12.2 2.5 2.5 4.9-4.9" stroke="#0B1416" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <p>
+        <b>Valor único, sem mensalidade depois. Em qualquer combinação já vem incluso:</b> treinamento do agente no
+        branding e no DNA da sua empresa, criação e afinação das habilidades dele
+        — o que ele fala, o que nunca promete e quando chama uma pessoa —,
+        <b>a conta oficial do WhatsApp aberta no nome da sua marca</b> (somos Tech
+        Provider da Meta) e <b>três meses de suporte grátis</b> depois da entrega.
+      </p>
+    </div>
+
+    <div class="mesa">
+      <div class="canais" id="canais"></div>
+
+      <aside class="master" aria-live="polite">
+        <p class="tt">Seu sistema</p>
+        <ul class="pecas" id="lista"></ul>
+        <div id="resumo"></div>
+        <a class="bt bt-esc" data-zap href="#">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.97L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.25.7-1.44 1.33-1.98 1.38-.54.06-1.05.08-1.62-.1-.33-.1-.76-.24-1.31-.48-2.3-1-3.8-3.31-3.92-3.46-.11-.15-.93-1.24-.93-2.36 0-1.12.59-1.67.8-1.9.2-.23.45-.29.6-.29l.43.01c.14 0 .32-.05.5.38.19.46.64 1.58.7 1.69.06.12.1.25.02.4-.08.15-.12.24-.24.38l-.36.42c-.12.11-.24.24-.1.47.13.23.59.97 1.26 1.57.87.77 1.6 1.01 1.83 1.13.23.11.36.1.5-.06.13-.15.57-.66.72-.89.15-.23.3-.19.5-.11.21.07 1.31.62 1.54.73.23.12.38.17.44.27.05.1.05.58-.2 1.28Z"/></svg>
+          Falar sobre essa combinação
+        </a>
+        <p class="comopaga">
+          Peça avulsa: metade na aprovação, metade na entrega. Pacote: até 3× sem
+          juros. Para empresa pequena a parcela pesa mais que o total — então é ela
+          que a gente ajusta.
+        </p>
+      </aside>
+    </div>
+
+    <div class="ideal essencial">
+      <div>
+        <p class="rt">Pra começar</p>
+        <h3>Essencial: o dono com um assistente e a porta da frente atendida.</h3>
+        <ul class="dentro">
+          <li><b>Sistema de gestão (ERP)</b> — a base sugerida.</li>
+          <li><b>Agente chat assistente multifuncional</b> — você fala, ele faz.</li>
+          <li><b>Agente de atendimento Meta</b> — WhatsApp e Instagram num agente só, na API oficial.</li>
+          <li><b>Treinamento incluso</b>, <b>3 meses de suporte grátis</b>. <b>Valor único, sem mensalidade.</b></li>
+        </ul>
+      </div>
+      <div class="preco">
+        <span class="de">R$ 9.600</span>
+        <span class="por">R$ 6.300</span>
+        <p class="pc">ou 3× de R$ 2.100 sem juros</p>
+        <button class="bt bt-sinal-linha" id="montaEssencial" type="button">Montar esse aqui</button>
+        <a class="bt bt-zap" data-zap-essencial href="#">Falar sobre o Essencial</a>
+      </div>
+    </div>
+
+    <div class="ideal">
+      <div>
+        <p class="rt">O ideal completo</p>
+        <h3>Ecossistema: a operação inteira conversando entre si.</h3>
+        <ul class="dentro">
+          <li><b>Sistema de gestão (ERP)</b> — a base sugerida, onde os quatro agentes se encontram.</li>
+          <li><b>Os quatro agentes:</b> chat assistente, atendimento Meta (WhatsApp e Instagram), marketing e tráfego
+          pago, todos sabendo o que se passa lá dentro.</li>
+          <li><b>Treinamento de cada agente incluso</b>, <b>3 meses de suporte grátis</b> e o código no seu nome. <b>Valor único, sem mensalidade.</b></li>
+        </ul>
+      </div>
+      <div class="preco">
+        <span class="de">R$ 14.200</span>
+        <span class="por">R$ 12.300</span>
+        <p class="pc">ou 3× de R$ 4.100 sem juros</p>
+        <button class="bt bt-sinal-linha" id="montaIdeal" type="button">Montar esse aqui</button>
+        <a class="bt bt-zap" data-zap-ideal href="#">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.97L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.25.7-1.44 1.33-1.98 1.38-.54.06-1.05.08-1.62-.1-.33-.1-.76-.24-1.31-.48-2.3-1-3.8-3.31-3.92-3.46-.11-.15-.93-1.24-.93-2.36 0-1.12.59-1.67.8-1.9.2-.23.45-.29.6-.29l.43.01c.14 0 .32-.05.5.38.19.46.64 1.58.7 1.69.06.12.1.25.02.4-.08.15-.12.24-.24.38l-.36.42c-.12.11-.24.24-.1.47.13.23.59.97 1.26 1.57.87.77 1.6 1.01 1.83 1.13.23.11.36.1.5-.06.13-.15.57-.66.72-.89.15-.23.3-.19.5-.11.21.07 1.31.62 1.54.73.23.12.38.17.44.27.05.1.05.58-.2 1.28Z"/></svg>
+          Falar sobre o Ecossistema
+        </a>
+        <p class="obs">Se você já usa Bling, Omie ou Totvs, a integração entra por
+        mais R$ 3.100 e os agentes passam a responder com o dado do seu sistema.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== provas ===================== -->
+<section class="secao provas">
+  <div class="env">
+    <p class="rot">Por que confiar</p>
+    <h2 style="margin-bottom:34px">O que sustenta isso.</h2>
+    <div class="grade-pr">
+      <div class="pr">
+        <p class="rt">Credencial</p>
+        <p class="nm">Tech Provider</p>
+        <p>studio Ti Artes é <b>Tech Provider certificado da Meta</b>. O seu número
+        entra direto na API oficial do WhatsApp Business, <b>sem plataforma de
+        terceiro no meio cobrando por conversa.</b></p>
+      </div>
+      <div class="pr">
+        <p class="rt">Testes</p>
+        <p class="nm">~800</p>
+        <p>Verificações automáticas rodam antes de cada entrega.
+        <b>Nada vai ao ar sem passar.</b></p>
+      </div>
+      <div class="pr">
+        <p class="rt">Propriedade</p>
+        <p class="nm">100%</p>
+        <p>Do código e do banco de dados, entregues no seu nome.
+        <b>Nenhuma plataforma prende você.</b></p>
+      </div>
+      <div class="pr">
+        <p class="rt">Depois</p>
+        <p class="nm">3 meses</p>
+        <p>De suporte e ajuste inclusos, contados da entrega.
+        <b>Sem mensalidade de serviço.</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== passos ===================== -->
+<section class="secao passos">
+  <div class="env">
+    <p class="rot">Como começa</p>
+    <h2>Do primeiro papo ao agente atendendo sozinho.</h2>
+    <div class="grade-ps">
+      <div class="ps">
+        <span class="nu" aria-hidden="true">1</span>
+        <h3>Uma conversa de uma hora, sem custo</h3>
+        <p>Pra entender como a sua marca trabalha hoje: onde a informação se perde,
+        o que você faz à mão toda semana, o que trava. Dessa conversa sai o escopo
+        real.</p>
+      </div>
+      <div class="ps">
+        <span class="nu" aria-hidden="true">2</span>
+        <h3>Proposta fechada, com escopo escrito</h3>
+        <p>Valor e prazo definidos, sem “a combinar”. Você aprova sabendo
+        exatamente o que vem, o que não vem e quando.</p>
+      </div>
+      <div class="ps">
+        <span class="nu" aria-hidden="true">3</span>
+        <h3>No ar em semanas, não em meses</h3>
+        <p>Entrega por partes, começando pelo que te devolve tempo primeiro. Você
+        usa desde a primeira semana e vai afinando com a gente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== chamada final ===================== -->
+<section class="secao fim">
+  <div class="env">
+    <div>
+      <p class="rot">Vamos conversar</p>
+      <h2>Me conta o que trava na sua semana.</h2>
+      <p>A primeira conversa é de graça e serve pra isso: <b>descobrir se vale a
+      pena</b>. Se eu achar que o seu caso não precisa disso agora, eu digo — sai
+      mais barato pra nós dois.</p>
+    </div>
+    <div class="cx-fim">
+      <p class="tt">Fala direto comigo</p>
+      <a class="bt bt-zap" data-zap href="#">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.97L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.25.7-1.44 1.33-1.98 1.38-.54.06-1.05.08-1.62-.1-.33-.1-.76-.24-1.31-.48-2.3-1-3.8-3.31-3.92-3.46-.11-.15-.93-1.24-.93-2.36 0-1.12.59-1.67.8-1.9.2-.23.45-.29.6-.29l.43.01c.14 0 .32-.05.5.38.19.46.64 1.58.7 1.69.06.12.1.25.02.4-.08.15-.12.24-.24.38l-.36.42c-.12.11-.24.24-.1.47.13.23.59.97 1.26 1.57.87.77 1.6 1.01 1.83 1.13.23.11.36.1.5-.06.13-.15.57-.66.72-.89.15-.23.3-.19.5-.11.21.07 1.31.62 1.54.73.23.12.38.17.44.27.05.1.05.58-.2 1.28Z"/></svg>
+        Testar o atendente no WhatsApp
+      </a>
+      <p class="ct" style="margin:-4px 0 14px">Quem responde é o agente de IA, ao vivo. Prefere falar comigo?
+        <a href="https://wa.me/5541991566444" style="font-weight:700">41 99156-6444</a></p>
+      <a class="bt bt-linha" data-pdf href="#" style="width:100%;justify-content:center">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+        Ver a proposta detalhada
+      </a>
+      <p class="ct">
+        <b>Eugênio Fim · studio Ti Artes</b>
+        <a href="mailto:eugeniofim@gmail.com">eugeniofim@gmail.com</a><br>
+        <a href="https://eugeniofim.com">eugeniofim.com</a> · Curitiba, PR
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="pe">
+  <div class="env">
+    <span><b>studio Ti Artes</b> · sistemas autônomos e agentes de IA</span>
+    <span>Tech Provider certificado da Meta · Curitiba, PR · <a href="https://wa.me/5541991566444" style="color:inherit;font-weight:700">Eugênio: WhatsApp 41 99156-6444</a></span>
+  </div>
+</footer>
+
+<a class="zap-flutua" data-zap href="#" aria-label="Falar com o Eugênio no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true" style="width:20px;height:20px;flex:0 0 auto"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.85 9.85 0 0 0 12.04 2zm5.8 14.03c-.24.68-1.42 1.3-1.95 1.36-.5.06-1.13.09-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.01-2.41.27-.29.58-.36.78-.36h.56c.18 0 .42-.07.66.5.24.58.82 2 .89 2.14.07.15.12.32.02.51-.09.2-.14.32-.29.49-.14.17-.3.38-.43.51-.14.14-.29.3-.13.59.17.29.74 1.22 1.59 1.97 1.09.97 2.01 1.27 2.3 1.42.29.14.46.12.63-.07.17-.2.72-.85.92-1.14.19-.29.38-.24.65-.14.26.09 1.68.79 1.97.94.29.14.48.21.55.33.08.12.08.69-.16 1.37z"/></svg><span>Falar com o atendente<small>é o agente de IA — responde na hora</small></span></a>
+<div class="fixo">
+  <a class="bt bt-zap" data-zap href="#">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.97L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.25.7-1.44 1.33-1.98 1.38-.54.06-1.05.08-1.62-.1-.33-.1-.76-.24-1.31-.48-2.3-1-3.8-3.31-3.92-3.46-.11-.15-.93-1.24-.93-2.36 0-1.12.59-1.67.8-1.9.2-.23.45-.29.6-.29l.43.01c.14 0 .32-.05.5.38.19.46.64 1.58.7 1.69.06.12.1.25.02.4-.08.15-.12.24-.24.38l-.36.42c-.12.11-.24.24-.1.47.13.23.59.97 1.26 1.57.87.77 1.6 1.01 1.83 1.13.23.11.36.1.5-.06.13-.15.57-.66.72-.89.15-.23.3-.19.5-.11.21.07 1.31.62 1.54.73.23.12.38.17.44.27.05.1.05.58-.2 1.28Z"/></svg>
+    Falar com o atendente agora
+  </a>
+</div>
+
+<script>
+/* ===================================================================
+   Um lugar so pra mudar. Se o numero, a mensagem ou o nome do PDF
+   mudarem, e aqui — nao espalhado em dez links pela pagina.
+   =================================================================== */
+const ZAP_NUM  = '15551558996';   /* o atendente (robo) no WhatsApp oficial da Meta — a demonstracao e o proprio argumento */
+const ZAP_EUGENIO = '5541991566444';
+const ZAP_MSG  = 'Oi! Vi a página dos agentes autônomos e quero ver como você atende.';
+const PDF_ARQ  = 'proposta/';   /* o surge nao entrega .pdf: a proposta e uma pagina (com Salvar em PDF) */
+
+const zapLink = (extra) => 'https://wa.me/' + ZAP_NUM + '?text=' +
+  encodeURIComponent(extra ? ZAP_MSG + '\n\n' + extra : ZAP_MSG);
+
+document.querySelectorAll('[data-zap]').forEach(a=>{ a.href = zapLink(); });
+document.querySelectorAll('[data-pdf]').forEach(a=>{
+  a.href = PDF_ARQ; a.setAttribute('target','_blank'); a.setAttribute('rel','noopener');
+});
+
+/* ================= a conversa do heroi =================
+   Os tres dialogos sao os mesmos do folder impresso, de proposito: o
+   cliente recebe o papel do Tiago e abre esta pagina — tem que
+   reconhecer. O ultimo e um audio porque e o que o agente manda de
+   verdade, na voz da marca, e porque quem esta vendendo isso e um
+   estudio de som. */
+const FALAS = [
+  {de:'cli', t:'O produto X está disponível?'},
+  {de:'dig'},
+  {de:'ag',  t:'Tenho 4 em estoque agora. Quer que eu já separe um pra você?',
+             marc:'consultou o estoque'},
+  {de:'cli', t:'Me manda um orçamento?'},
+  {de:'dig'},
+  {de:'ag',  pdf:{nome:'orçamento-2026-041.pdf', meta:'PDF · 2 páginas · timbrado'}},
+  {de:'cli', t:'Consigo quinta às 15h?'},
+  {de:'dig'},
+  {de:'ag',  audio:'0:08', marc:'agenda atualizada · Eugênio avisado'}
+];
+
+const alvo = document.getElementById('conversa');
+const parado = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function onda(){
+  let s = '';
+  for(let i=0;i<19;i++){
+    /* alturas fixas, feitas pra parecer fala e nao ruido: sobe, vale, sobe */
+    const h = [34,52,71,88,64,45,78,96,73,50,38,62,85,70,48,66,42,30,24][i];
+    s += '<i style="height:'+h+'%;animation-delay:'+(i*0.045).toFixed(3)+'s"></i>';
+  }
+  return s;
+}
+
+function monta(f){
+  const d = document.createElement('div');
+  if(f.de === 'dig'){
+    d.className = 'bl dig';
+    d.innerHTML = '<span></span><span></span><span></span>';
+    d.setAttribute('aria-hidden','true');
+    return d;
+  }
+  d.className = 'bl ' + (f.de === 'cli' ? 'cli' : 'ag');
+  let h = '';
+  if(f.t) h += f.t;
+  if(f.pdf){
+    h += '<div class="anx">'
+      +  '<svg class="fl" viewBox="0 0 26 32" fill="none" aria-hidden="true">'
+      +  '<path d="M1 3a2 2 0 0 1 2-2h12l10 10v19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3Z" fill="#fff" fill-opacity=".92"/>'
+      +  '<path d="M15 1v10h10" fill="#0A7A6C" fill-opacity=".35"/>'
+      +  '<text x="13" y="25" font-family="monospace" font-size="8" font-weight="700" fill="#0A7A6C" text-anchor="middle">PDF</text>'
+      +  '</svg>'
+      +  '<span class="nm"><b>'+f.pdf.nome+'</b><span>'+f.pdf.meta+'</span></span></div>';
+  }
+  if(f.audio){
+    h += '<div class="aud'+(parado?'':' toca')+'">'
+      +  '<span class="pl" aria-hidden="true"><svg viewBox="0 0 12 12" fill="#0B8C7D"><path d="M2 1l8 5-8 5z"/></svg></span>'
+      +  '<span class="on" aria-hidden="true">'+onda()+'</span>'
+      +  '<span class="tm">'+f.audio+'</span></div>';
+  }
+  if(f.marc) h += '<span class="marc">'+f.marc+'</span>';
+  d.innerHTML = h;
+  return d;
+}
+
+if(parado){
+  /* sem movimento: a conversa inteira aparece de uma vez, sem os "digitando" */
+  FALAS.filter(f=>f.de!=='dig').forEach(f=>{
+    const d = monta(f); d.style.animation='none'; d.style.opacity='1'; d.style.transform='none';
+    alvo.appendChild(d);
+  });
+}else{
+  let t = 260, atual = null;
+  FALAS.forEach(f=>{
+    const espera = f.de==='dig' ? 620 : (f.audio ? 900 : 780);
+    setTimeout(()=>{
+      if(atual && atual.classList.contains('dig')) atual.remove();
+      atual = monta(f);
+      alvo.appendChild(atual);
+      /* a onda toca uns segundos e para, como audio de verdade */
+      if(f.audio) setTimeout(()=>{
+        const a = atual && atual.querySelector('.aud');
+        if(a) a.classList.remove('toca');
+      }, 3400);
+    }, t);
+    t += espera;
+  });
+}
+
+/* ================= o console de pecas =================
+   Os valores sao EXATAMENTE os do PDF impresso. Se divergirem, ele fica
+   com duas tabelas diferentes na frente do mesmo cliente — entao a conta
+   dos pacotes tambem e a do PDF: Essencial = app + chat + meta (9.600 -> 6.300)
+   e Ecossistema = app + os quatro agentes (14.200 -> 12.300). 4 agentes a R$ 2.300 em 28/09/2026. */
+const PECAS = [
+  {id:'chat',  nome:'Agente · Chat assistente multifuncional', preco:2300,
+   nota:'Você fala (voz ou texto) e ele faz: cria tarefa, agenda, cobra, confere o caixa e responde sobre o negócio.'},
+  {id:'meta',  nome:'Agente · Atendimento Meta (WhatsApp + Instagram)', preco:2300,
+   nota:'Um agente, dois canais, na API oficial. Responde, qualifica, orça em PDF, manda áudio e marca na agenda.'},
+  {id:'mkt',   nome:'Agente · Marketing (com sub-agentes)', preco:2300,
+   nota:'Criativos, kit de marca e logo, posts programados, legendas e copy, roteiros e propostas pra clientes.'},
+  {id:'traf',  nome:'Agente · Tráfego pago (Meta e Google Ads)', preco:2300,
+   nota:'Impulsionamento na Meta e campanhas no Google Ads, otimizando pra venda fechada, não pra clique.'},
+  {id:'app',   nome:'Sistema de gestão (ERP) — a base sugerida', preco:5000,
+   nota:'Feito sob medida pra sua marca: clientes, vendas, agenda, caixa. É onde os quatro agentes se encontram.'},
+  {id:'erp',   nome:'Ou ligar no sistema que você já usa', preco:3100,
+   nota:'Bling, Omie, Totvs, HubSpot e afins. Pra quem já tem sistema e não quer trocar.'}
+];
+const AGENTES = ['chat','meta','mkt','traf'];
+const rs = n => 'R$ ' + n.toLocaleString('pt-BR');
+
+const elCanais = document.getElementById('canais');
+const elLista  = document.getElementById('lista');
+const elResumo = document.getElementById('resumo');
+
+elCanais.innerHTML = PECAS.map(p=>`
+  <label class="cn">
+    <input type="checkbox" value="${p.id}" ${p.id==='app'||p.id==='meta'||p.id==='chat'?'checked':''}>
+    <span class="cx" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#06231E" stroke-width="3.4"
+        stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>
+    </span>
+    <span class="tx"><b>${p.nome}</b><span>${p.nota}</span></span>
+    <span class="vl">${rs(p.preco)}</span>
+  </label>`).join('');
+
+function conta(){
+  const sel = [...elCanais.querySelectorAll('input:checked')].map(i=>i.value);
+  const pecas = PECAS.filter(p=>sel.includes(p.id));
+  const soma = pecas.reduce((s,p)=>s+p.preco,0);
+
+  elLista.innerHTML = pecas.length
+    ? pecas.map(p=>`<li><span>${p.nome}</span><span>${rs(p.preco)}</span></li>`).join('')
+    : '<li><span class="vazio">Marque ao menos uma peça pra ver o valor.</span></li>';
+
+  const temApp   = sel.includes('app');
+  const temErp   = sel.includes('erp');
+  const todosAg  = AGENTES.every(a=>sel.includes(a));
+  const essencial = sel.includes('meta') && sel.includes('chat') && !sel.includes('mkt') && !sel.includes('traf');
+
+  let pacote = null;
+  if(temApp && todosAg){
+    pacote = {nome:'Pacote Ecossistema', cheio:14200 + (temErp?3100:0), valor:12300 + (temErp?3100:0)};
+  }else if(temApp && essencial && !temErp){
+    pacote = {nome:'Pacote Essencial', cheio:9600, valor:6300};
+  }
+
+  if(!pecas.length){
+    elResumo.innerHTML = '<span class="tot">—</span>';
+    return;
+  }
+
+  if(pacote){
+    const econ = pacote.cheio - pacote.valor;
+    const parc = Math.ceil(pacote.valor/3);
+    elResumo.innerHTML = `
+      <span class="selo">${pacote.nome}</span>
+      <span class="antes">${rs(soma)}</span>
+      <span class="tot">${rs(pacote.valor)}</span>
+      <p class="parc">ou 3× de ${rs(parc)} sem juros</p>
+      <p class="econ">Essa combinação virou pacote: economiza <b>${rs(econ)}</b></p>`;
+  }else{
+    elResumo.innerHTML = `
+      <span class="tot">${rs(soma)}</span>
+      <p class="parc">${pecas.length===1?'Peça avulsa':pecas.length+' peças'} · metade na aprovação, metade na entrega</p>`;
+  }
+}
+
+/* o botao do master leva a combinacao escolhida pra dentro da conversa,
+   pra ele nao precisar perguntar "o que voce marcou?" */
+function atualizaZapDoMaster(){
+  const sel = [...elCanais.querySelectorAll('input:checked')].map(i=>i.value);
+  const nomes = PECAS.filter(p=>sel.includes(p.id)).map(p=>'· '+p.nome).join('\n');
+  const bt = document.querySelector('.master [data-zap]');
+  if(bt) bt.href = zapLink(nomes ? 'Montei assim na página:\n' + nomes : '');
+}
+
+/* "Montar esse aqui": marca as pecas do Ecossistema e leva o olho pro
+   resultado. Nao mexe no ERP de proposito — ele e opcional e depende do
+   cliente ja ter sistema. */
+document.getElementById('montaIdeal').addEventListener('click', ()=>{
+  elCanais.querySelectorAll('input').forEach(i=>{
+    i.checked = ['app', ...AGENTES].includes(i.value);
+  });
+  conta(); atualizaZapDoMaster();
+  document.querySelector('.master').scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+document.getElementById('montaEssencial').addEventListener('click', ()=>{
+  elCanais.querySelectorAll('input').forEach(i=>{ i.checked = ['app','chat','meta'].includes(i.value); });
+  conta(); atualizaZapDoMaster();
+  document.querySelector('.master').scrollIntoView({behavior:'smooth', block:'center'});
+});
+document.querySelectorAll('[data-zap-essencial]').forEach(a=>{
+  a.href = zapLink('Quero falar sobre o Pacote Essencial (R$ 6.300):\n'
+    + '· Sistema de gestão (ERP)\n· Agente chat assistente\n· Agente atendimento Meta (WhatsApp + Instagram)');
+});
+document.querySelectorAll('[data-zap-ideal]').forEach(a=>{
+  a.href = zapLink('Quero falar sobre o Ecossistema completo (R$ 12.300):\n'
+    + '· Sistema de gestão (ERP)\n· Agente chat assistente\n· Agente atendimento Meta (WhatsApp + Instagram)\n'
+    + '· Agente de marketing\n· Agente de tráfego pago');
+});
+
+elCanais.addEventListener('change', ()=>{ conta(); atualizaZapDoMaster(); });
+conta(); atualizaZapDoMaster();
+</script>
+
+<script>
+/* botao flutuante do WhatsApp: aparece depois que a pessoa passa do heroi */
+(function(){ var b=document.querySelector('.zap-flutua'); if(!b) return;
+  /* na mesa de montar o pacote o painel ja tem o proprio botao de WhatsApp,
+     e o flutuante cobria o total */
+  var mesa=document.querySelector('.mesa'), naMesa=false;
+  if(mesa && 'IntersectionObserver' in window) new IntersectionObserver(function(e){ naMesa=e[0].isIntersecting; v(); },{rootMargin:'-20% 0px -20% 0px'}).observe(mesa);
+  function v(){ b.classList.toggle('on', window.scrollY>520 && !naMesa); }
+  window.addEventListener('scroll',v,{passive:true}); v(); })();
+</script>
+</body>
+</html>

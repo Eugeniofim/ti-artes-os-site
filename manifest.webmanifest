@@ -1,0 +1,24 @@
+{
+  "name": "studio Ti Artes — Studio OS",
+  "short_name": "Ti Artes OS",
+  "description": "Gestão de jobs, prazos, shows e verba do studio Ti Artes. Som feito à mão.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#080809",
+  "theme_color": "#080809",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "categories": ["productivity", "business"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Chat de comandos", "short_name": "Chat", "url": "./index.html#chat", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] },
+    { "name": "Pipeline", "short_name": "Pipeline", "url": "./index.html#pipe", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] },
+    { "name": "Shows", "short_name": "Shows", "url": "./index.html#shows", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] }
+  ]
+}
