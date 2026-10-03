@@ -3355,6 +3355,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-goto]'); i
 $$('.tab').forEach(t=>t.onclick=()=>{
   $$('.tab').forEach(x=>x.classList.toggle('on',x===t));
   $$('.tabp').forEach(p=>p.classList.toggle('on',p.id==='t-'+t.dataset.t));
+  try{ t.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'}); }catch(e){}   /* v126: no celular a barra rola — a aba escolhida fica à vista */
   if(t.dataset.t==='contas' && typeof renderContas==='function') renderContas();   /* v126: os números vivos podem ter chegado com a aba fechada */
 });
 document.addEventListener('click',e=>{ const b=e.target.closest('[data-contapagar]'); if(!b) return;
