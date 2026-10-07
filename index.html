@@ -1127,6 +1127,33 @@ body.dock-fechado .dock-fab svg{width:18px;height:18px}
 .ads-diag.aviso{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.35)}.ads-diag.ruim{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.3)}
 .ads-diag .t{font-weight:700;margin-bottom:3px}.ads-diag .a{margin-top:6px;font-size:13px}
 .ads-chips{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 10px}.ads-chips .chip.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+/* v128: formulário limpo (Editar job) — seções, rótulos legíveis, chips grandes, dobras */
+.fx .fld label{text-transform:none;letter-spacing:0;font-size:12.2px;font-weight:650;color:var(--txt-2);margin-bottom:6px}
+.fx .inp,.fx select.inp{height:42px;font-size:14px}
+.fx textarea.inp{min-height:84px;padding:10px 12px;height:auto}
+.fx-sec{display:flex;align-items:center;gap:10px;margin:10px 0 2px}
+.fx-sec b{font-size:10.8px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-3);font-weight:800;white-space:nowrap}
+.fx-sec i{flex:1;height:1px;background:var(--line)}
+.fx-chips{display:flex;gap:8px;flex-wrap:wrap}
+.fx .fx-chips .chip{height:38px;padding:0 14px;font-size:12.6px}
+.fx .fx-chips .chip .dot{width:8px;height:8px;border-radius:50%;flex:none}
+.fx-money{position:relative}
+.fx-money .inp{padding-left:40px}
+.fx-money b{position:absolute;left:13px;top:0;height:42px;display:flex;align-items:center;font-size:12.5px;color:var(--txt-3);font-weight:700;pointer-events:none}
+.fx-resumo{margin-top:10px;padding:11px 13px;border-radius:12px;background:rgba(46,217,195,.08);border:1px solid rgba(46,217,195,.22);font-size:13px;line-height:1.55;color:var(--txt)}
+.fx-resumo b{color:var(--acc-txt);font-size:14px}
+.fx-dobra{display:flex;align-items:center;gap:9px;width:100%;min-height:44px;padding:9px 13px;border-radius:12px;border:1px dashed var(--line);background:none;color:var(--txt-2);font:inherit;font-size:12.8px;font-weight:650;cursor:pointer;text-align:left}
+.fx-dobra:hover{border-color:rgba(46,217,195,.5);color:var(--txt)}
+.fx-dobra .spacer{flex:1}
+.fx-dobra .mini{opacity:.75;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:55%}
+.fx-dobra .seta{display:inline-flex;transition:.25s var(--ease)}
+.fx-dobra[aria-expanded="true"]{border-style:solid;color:var(--txt)}
+.fx-dobra[aria-expanded="true"] .seta{transform:rotate(180deg)}
+.fx-corpo{display:none;margin-top:10px}
+.fx-corpo.on{display:block;animation:vin .3s var(--ease)}
+.fx-falar{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+/* no celular o formulário fica numa coluna só (a regra geral de 820px é vencida pela base do .fgrid, que vem depois no CSS) */
+@media(max-width:560px){.fgrid.fx,.fx .fgrid{grid-template-columns:1fr}.fx .fx-chips .chip{height:40px}}
 /* v122: reel */
 .reel-wrap{position:relative;background:#000;display:flex;justify-content:center}
 .reel-wrap video{width:100%;max-height:560px;aspect-ratio:9/16;object-fit:contain;display:block;background:#000}
@@ -4256,7 +4283,7 @@ function editJob(j,stageId){
     t: novo?'Novo job':'Editar job',
     d: novo?'Entrada de trabalho no pipeline':`${c.nome} · ${srv(d.srvId)?.nome||''}`,
     wide:true,
-    body:`<div class="fgrid">
+    body:`<div class="fgrid fx">
       <div class="fld full"><label>Título do job</label><input class="inp" id="f_t" value="${esc(d.titulo)}" placeholder="Ex: Trilha do curta &quot;Maré Alta&quot;"></div>
       <div class="fld"><label>Cliente</label>
         <select class="inp" id="f_c" ${semCli?'style="display:none"':''}>
@@ -4266,53 +4293,53 @@ function editJob(j,stageId){
         <div class="hint" id="f_chint" ${semCli?'':'style="display:none"'}>Crio o cadastro junto com o job. O contato você completa depois.</div>
       </div>
       <div class="fld"><label>Serviço</label><select class="inp" id="f_s">${S.servicos.map(x=>`<option value="${x.id}" ${x.id===d.srvId?'selected':''}>${esc(x.nome)}</option>`).join('')}</select></div>
-      <div class="fld"><label>Etapa</label><select class="inp" id="f_st">${S.stages.map(x=>`<option value="${x.id}" ${x.id===d.stageId?'selected':''}>${esc(x.nome)}</option>`).join('')}</select></div>
-      <div class="fld"><label>Prioridade</label><select class="inp" id="f_p">
-        <option value="1" ${d.prio==1?'selected':''}>Baixa</option>
-        <option value="2" ${d.prio==2?'selected':''}>Média</option>
-        <option value="3" ${d.prio==3?'selected':''}>Alta / urgente</option></select></div>
-      <div class="fld"><label>Valor fechado (R$)</label><input class="inp" type="number" id="f_v" value="${d.valor}"></div>
-      <div class="fld"><label>Já recebido (R$)</label><input class="inp" type="number" id="f_r" value="${d.recebido}"></div>
+      <div class="fld full"><label>Etapa</label>
+        <div class="fx-chips">${S.stages.map(x=>`<button type="button" class="chip ${x.id===d.stageId?'on':''}" data-stc="${x.id}"><span class="dot" style="background:${x.cor}"></span>${esc(x.nome)}</button>`).join('')}</div>
+        <input type="hidden" id="f_st" value="${esc(d.stageId)}"></div>
+      <div class="fld full"><label>Prioridade</label>
+        <div class="fx-chips">${[[1,'Baixa'],[2,'Média'],[3,'Alta / urgente']].map(([v,n])=>`<button type="button" class="chip ${+d.prio===v?'on':''}" data-prc="${v}">${n}</button>`).join('')}</div>
+        <input type="hidden" id="f_p" value="${+d.prio||2}"></div>
+
+      <div class="fx-sec full"><b>Dinheiro e prazo</b><i></i></div>
+      <div class="fld"><label>Valor fechado</label><div class="fx-money"><b>R$</b><input class="inp" type="number" id="f_v" value="${d.valor}" inputmode="decimal"></div></div>
+      <div class="fld"><label>Já recebido</label><div class="fx-money"><b>R$</b><input class="inp" type="number" id="f_r" value="${d.recebido}" inputmode="decimal"></div></div>
       <div class="fld"><label>Entrada do job</label><input class="inp" type="date" id="f_ab" value="${d.abertura}"></div>
       <div class="fld"><label>Prazo de entrega</label><input class="inp" type="date" id="f_pz" value="${d.prazo}"></div>
-
       <div class="fld full"><label>Como vai ser pago</label>
-        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:9px">
+        <div class="fx-chips">
           ${[['avista','À vista'],['2x','2x'],['3x','3x'],['4x','4x'],['meio','50% + 50%'],['ent3','Entrada + 3x']]
-            .map(([k,n])=>`<button class="chip" data-pgatalho="${k}">${n}</button>`).join('')}
+            .map(([k,n])=>`<button type="button" class="chip" data-pgatalho="${k}">${n}</button>`).join('')}
         </div>
-        <div class="fgrid" style="gap:9px">
-          <div class="fld"><label style="font-size:10px">Entrada (R$)</label>
-            <input class="inp" type="number" id="f_pe" min="0" value="${+d.pgEntrada||0}"></div>
-          <div class="fld"><label style="font-size:10px">Em quantas vezes o resto</label>
-            <input class="inp" type="number" id="f_pv" min="1" max="24" value="${Math.max(1,+d.pgVezes||1)}"></div>
-          <div class="fld"><label style="font-size:10px">1ª parcela cai em</label>
-            <input class="inp" type="date" id="f_pd" value="${d.pgDia1||d.prazo}"></div>
-        </div>
-        <div class="hint" id="f_pgprev" style="margin-top:2px"></div>
+        <div class="fx-resumo" id="f_pgprev"></div>
+        <button type="button" class="fx-dobra" data-dobra="pg" aria-expanded="false" style="margin-top:10px">${svgI('i-sliders',14,2)}Ajustar entrada, parcelas e data<span class="spacer"></span><span class="seta">${svgI('i-down',14,2.2)}</span></button>
+        <div class="fx-corpo" id="dobra_pg"><div class="fgrid" style="gap:9px">
+          <div class="fld"><label>Entrada</label><div class="fx-money"><b>R$</b><input class="inp" type="number" id="f_pe" min="0" value="${+d.pgEntrada||0}" inputmode="decimal"></div></div>
+          <div class="fld"><label>Em quantas vezes o resto</label><input class="inp" type="number" id="f_pv" min="1" max="24" value="${Math.max(1,+d.pgVezes||1)}" inputmode="numeric"></div>
+          <div class="fld"><label>1ª parcela cai em</label><input class="inp" type="date" id="f_pd" value="${d.pgDia1||d.prazo}"></div>
+        </div></div>
       </div>
-      <div class="fld full"><label>Progresso — ${d.prog}%</label>
-        <input type="range" min="0" max="100" step="5" id="f_pr" value="${d.prog}" style="width:100%;accent-color:#2ED9C3"></div>
-      <div class="fld full"><label>Observações</label><textarea class="inp" id="f_o" placeholder="Referências, formato de entrega, combinados…">${esc(d.obs)}</textarea></div>
 
-      <div class="fld full"><div class="hr" style="margin:4px 0 12px"></div>
-        <label>Contato de quem contratou <span style="opacity:.6;font-weight:600">— salva na ficha do cliente</span></label>
-        <div class="fgrid" style="gap:9px">
-          <div class="fld"><label style="font-size:10px">WhatsApp</label>
-            <input class="inp mono" id="f_wa" placeholder="5541999998888" value="${esc(c.wa||'')}"></div>
-          <div class="fld"><label style="font-size:10px">E-mail</label>
-            <input class="inp" type="email" id="f_em" placeholder="nome@empresa.com" value="${esc(c.email||'')}"></div>
-          <div class="fld"><label style="font-size:10px">Instagram</label>
-            <input class="inp" id="f_ig" placeholder="@perfil" value="${esc(c.insta||'')}"></div>
-          <div class="fld"><label style="font-size:10px">Pessoa de contato</label>
-            <input class="inp" id="f_ct" placeholder="Com quem você fala" value="${esc(c.contato||'')}"></div>
-        </div>
-        <div class="hint">Preencheu aqui, entrou na ficha do cliente — não precisa ir no cadastro depois.</div>
+      ${novo?`<input type="hidden" id="f_pr" value="0">`:`<div class="fx-sec full"><b>Andamento</b><i></i></div>
+      <div class="fld full"><label>Progresso — ${d.prog}%</label>
+        <input type="range" min="0" max="100" step="5" id="f_pr" value="${d.prog}" style="width:100%;accent-color:#2ED9C3"></div>`}
+
+      <div class="fld full">
+        <button type="button" class="fx-dobra" data-dobra="obs" aria-expanded="${d.obs?'true':'false'}">${svgI('i-edit',14,2)}Observações<span class="mini">${d.obs?esc(d.obs.slice(0,48))+(d.obs.length>48?'…':''):'referências, formato de entrega, combinados'}</span><span class="spacer"></span><span class="seta">${svgI('i-down',14,2.2)}</span></button>
+        <div class="fx-corpo ${d.obs?'on':''}" id="dobra_obs"><textarea class="inp" id="f_o" placeholder="Referências, formato de entrega, combinados…">${esc(d.obs)}</textarea></div>
+      </div>
+
+      <div class="fld full">
+        <button type="button" class="fx-dobra" data-dobra="ct" aria-expanded="false">${svgI('i-user',14,2)}Contato de quem contratou<span class="mini" id="f_ctres">${esc([c.wa?'WhatsApp':'',c.email?'e-mail':'',c.insta?'@'+c.insta:''].filter(Boolean).join(' · ')||(novo?'preencha e eu salvo na ficha':'sem contato ainda'))}</span><span class="spacer"></span><span class="seta">${svgI('i-down',14,2.2)}</span></button>
+        <div class="fx-corpo" id="dobra_ct"><div class="fgrid" style="gap:9px">
+          <div class="fld"><label>WhatsApp</label><input class="inp mono" id="f_wa" placeholder="5541999998888" value="${esc(c.wa||'')}" inputmode="tel"></div>
+          <div class="fld"><label>E-mail</label><input class="inp" type="email" id="f_em" placeholder="nome@empresa.com" value="${esc(c.email||'')}"></div>
+          <div class="fld"><label>Instagram</label><input class="inp" id="f_ig" placeholder="@perfil" value="${esc(c.insta||'')}"></div>
+          <div class="fld"><label>Pessoa de contato</label><input class="inp" id="f_ct" placeholder="Com quem você fala" value="${esc(c.contato||'')}"></div>
+        </div><div class="hint">Preencheu aqui, entrou na ficha do cliente — não precisa ir no cadastro depois.</div></div>
       </div>
     </div>
-    ${!novo?`<div class="hr"></div>
-      <div class="card-t" style="font-size:12.5px;margin-bottom:9px">Falar com ${esc(c.nome)}</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
+    ${!novo?`<div class="fx-sec" style="margin-top:16px"><b>Falar com ${esc(c.nome)}</b><i></i></div>
+      <div class="fx-falar">
         <button class="btn sm" data-msg="status" data-j="${d.id}">${svgI('i-wa',13,2)}Status do job</button>
         <button class="btn sm" data-msg="entrega" data-j="${d.id}">${svgI('i-send',13,2)}Avisar entrega</button>
         <button class="btn sm" data-msg="cobranca" data-j="${d.id}">${svgI('i-wallet',13,2)}Cobrar saldo</button>
@@ -4334,10 +4361,17 @@ function editJob(j,stageId){
     const criar = $('#f_c').value==='__novo__';
     $('#f_cnovo').style.display = criar?'':'none';
     $('#f_chint').style.display = criar?'':'none';
-    if(criar){ $('#f_cnovo').focus(); ['f_wa','f_em','f_ig','f_ct'].forEach(i=>{ const e=$('#'+i); if(e) e.value=''; }); }
+    if(criar){ abrirDobra('ct',true); $('#f_cnovo').focus(); ['f_wa','f_em','f_ig','f_ct'].forEach(i=>{ const e=$('#'+i); if(e) e.value=''; }); const r=$('#f_ctres'); if(r) r.textContent='preencha e eu salvo na ficha'; }
     else if(typeof recarregarContato==='function') recarregarContato();
   };
-  $('#f_pr').oninput=e=>{ e.target.closest('.fld').querySelector('label').textContent='Progresso — '+e.target.value+'%'; };
+  if($('#f_pr')&&$('#f_pr').type==='range') $('#f_pr').oninput=e=>{ e.target.closest('.fld').querySelector('label').textContent='Progresso — '+e.target.value+'%'; };
+  /* v128: etapa e prioridade em chips (os inputs escondidos mantêm os ids que o salvar lê) */
+  document.querySelectorAll('[data-stc]').forEach(b=>b.onclick=()=>{ $('#f_st').value=b.dataset.stc; document.querySelectorAll('[data-stc]').forEach(x=>x.classList.toggle('on',x===b)); });
+  document.querySelectorAll('[data-prc]').forEach(b=>b.onclick=()=>{ $('#f_p').value=b.dataset.prc; document.querySelectorAll('[data-prc]').forEach(x=>x.classList.toggle('on',x===b)); });
+  const abrirDobra=(k,on)=>{ const c=$('#dobra_'+k), b=document.querySelector('[data-dobra="'+k+'"]'); if(!c||!b) return; const v=on===undefined?!c.classList.contains('on'):!!on; c.classList.toggle('on',v); b.setAttribute('aria-expanded',v?'true':'false'); };
+  document.querySelectorAll('[data-dobra]').forEach(b=>b.onclick=()=>abrirDobra(b.dataset.dobra));
+  if(semCli) abrirDobra('ct',true);
+  /* escolheu um atalho de pagamento que tem entrada ou parcela: mostra os campos pra ele conferir */
 
   /* ---- o combinado de pagamento, mostrado enquanto ele digita ----
      Sem isso ele põe "4" em parcelas e não vê quanto dá cada uma —
@@ -4367,6 +4401,7 @@ function editJob(j,stageId){
     if(k==='meio') põe(v/2,1);
     if(k==='ent3') põe(v*0.4,3);
     document.querySelectorAll('[data-pgatalho]').forEach(x=>x.classList.toggle('on',x===b));
+    if(k==='meio'||k==='ent3') abrirDobra('pg',true);
     pgPrev();
   });
   pgPrev();
@@ -17964,7 +17999,7 @@ function ocupadoAgora(){
     if(i) i.onclick=()=>{ localStorage.setItem(k,hoje); window.open(NOVO,'_blank','noopener'); closeM(); };
   }catch(e){} },1500);
 }catch(e){} })();
-const APP_VER = 'v127';
+const APP_VER = 'v128';
 
 function pintarSelo(){
   const e=$('#verSelo'); if(!e) return;
