@@ -1127,6 +1127,15 @@ body.dock-fechado .dock-fab svg{width:18px;height:18px}
 .ads-diag.aviso{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.35)}.ads-diag.ruim{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.3)}
 .ads-diag .t{font-weight:700;margin-bottom:3px}.ads-diag .a{margin-top:6px;font-size:13px}
 .ads-chips{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 10px}.ads-chips .chip.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+/* v129: reunião no Pipeline */
+.col-reu{background:linear-gradient(180deg,rgba(46,217,195,.07),rgba(46,217,195,.015));border-color:rgba(46,217,195,.28)}
+.reu-card{cursor:pointer}
+.reu-card.feita{opacity:.55}
+.reu-contato{display:flex;gap:6px;flex-wrap:wrap;padding-left:5px;margin:8px 0 0}
+.reu-contato .cli-chip{height:26px;padding:0 9px;font-size:10.8px;max-width:100%}
+.reu-contato .cli-chip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.reu-acoes{display:flex;gap:6px;flex-wrap:wrap;padding-left:5px;margin-top:9px}
+.reu-acoes .btn.sm{height:28px;padding:0 9px;font-size:11px}
 /* v128: formulário limpo (Editar job) — seções, rótulos legíveis, chips grandes, dobras */
 .fx .fld label{text-transform:none;letter-spacing:0;font-size:12.2px;font-weight:650;color:var(--txt-2);margin-bottom:6px}
 .fx .inp,.fx select.inp{height:42px;font-size:14px}
@@ -3122,7 +3131,10 @@ function seedDemo(){
     entrega:{nome:'Aviso de entrega (para o cliente)',v:'Oi {cliente}! O material do job *{job}* está pronto e já subi pra você.\n\nDá uma olhada com calma e me diz se precisa de algum ajuste — a primeira rodada de revisão já está inclusa.\n\n— {studio}'},
     cobranca:{nome:'Cobrança de saldo (para o cliente)',v:'Oi {cliente}, tudo bem?\n\nPassando pra lembrar do saldo do job *{job}*: {saldo}.\nVencimento: {prazo}\n\nSe precisar de nota fiscal ou dos dados de pagamento, me avisa que já mando.\n\n— {studio}'},
     orcamento:{nome:'Follow-up de orçamento (para o cliente)',v:'Oi {cliente}! Tudo certo?\n\nSó dando um toque sobre a proposta do *{job}* ({valor}) que te mandei. Segue de pé, e consigo encaixar na agenda se você aprovar nos próximos dias.\n\nQualquer ajuste de escopo a gente conversa.\n— {studio}'},
-    interno:{nome:'Resumo interno (para você mesmo)',v:'📋 TI ARTES — resumo de {prazo}\n\n{corpo}\n\n— gerado pelo Studio OS'}
+    interno:{nome:'Resumo interno (para você mesmo)',v:'📋 TI ARTES — resumo de {prazo}\n\n{corpo}\n\n— gerado pelo Studio OS'},
+    reuniao:{nome:'Confirmar reunião (para a pessoa)',v:'Oi {cliente}! Confirmando nossa conversa {quando}{onde}.{link}\n\nQualquer coisa me avisa. Até lá!\n— {studio}'},
+    reuniaoLembrete:{nome:'Lembrete de reunião (para a pessoa)',v:'Oi {cliente}! Passando pra lembrar da nossa conversa {quando}{onde}.{link}\n\nTe espero. Abraço!\n— {studio}'},
+    reuniaoDepois:{nome:'Depois da reunião (para a pessoa)',v:'Oi {cliente}! Obrigado pela conversa de {quando}. Vou organizar o que falamos e te mando a proposta em breve.\n\nQualquer dúvida me chama.\n— {studio}'}
   };
   /* ---- SHOWS ---- */
   // [titulo, cliente, data, hora, local, cidade, cache, recebido, status, rider,pb,stems,contrato,hosp,transp]
@@ -4017,7 +4029,7 @@ function renderPipe(){
 
   const js=jobsVisiveis();
   const shs=showsNoPipe();
-  $('#kb').innerHTML=S.stages.map(st=>{
+  $('#kb').innerHTML=colunaReunioes()+S.stages.map(st=>{
     const list=js.filter(j=>j.stageId===st.id)
       .sort((a,b)=>(b.prio-a.prio)||(D(a.prazo)-D(b.prazo)));
     const lsh=shs.filter(s=>shStage(s).id===st.id).sort((a,b)=>D(a.data)-D(b.data));
@@ -4035,6 +4047,100 @@ function renderPipe(){
       <button class="col-add" data-add="${st.id}">${svgI('i-plus',13,2.4)}Adicionar job</button>
     </div>`;
   }).join('');
+}
+
+/* ============================================================
+   v129: REUNIÃO NO PIPELINE
+   A reunião é um cartão na primeira coluna, com a pessoa e o contato
+   na mão (WhatsApp, e-mail, @ — como na ficha do cliente) e as
+   mensagens prontas: confirmar, lembrar, obrigado. O contato digitado
+   na reunião vai pra ficha de quem já existe, ou cria o cliente.
+   ============================================================ */
+const REU_DIA=['dom','seg','ter','qua','qui','sex','sáb'];
+function reuPessoa(r){
+  let p=null;
+  try{ if(r.ref && typeof pessoasConversa==='function') p=pessoasConversa().find(x=>x.ref===r.ref)||null; }catch(e){ p=null; }
+  const nome=(r.com||'').trim()||(p&&p.nome)||'';
+  return { nome, primeiro:(nome.split(' ')[0]||''), pessoa:p,
+    wa:normWa(r.wa||'')||(p&&p.wa)||'', email:(soEmail(r.email||'')?r.email:'')||(p&&p.email)||'', ig:normIg(r.insta||'')||(p&&p.ig)||'' };
+}
+function reuQuandoTxt(r){
+  const d=dias(r.data), h=r.hora?' às '+r.hora:'';
+  if(d===0) return 'hoje'+h; if(d===1) return 'amanhã'+h; if(d===-1) return 'ontem'+h;
+  if(d<0) return fmtDL(r.data)+h;
+  if(d<=6) return REU_DIA[D(r.data).getDay()]+' ('+fmtD(r.data)+')'+h;
+  return fmtDL(r.data)+h;
+}
+function varsReu(r){
+  const p=reuPessoa(r);
+  return { cliente:p.primeiro||p.nome||'', clienteFull:p.nome||'', quando:reuQuandoTxt(r), titulo:r.titulo||'nossa conversa',
+    onde:r.link?' (online)':(r.local?' no '+r.local:''), link:r.link?'\nLink: '+r.link:'', dur:(+r.dur||60)+' min', studio:S.cfg.studio };
+}
+function sugerirMsgReu(r,tipo){
+  const p=reuPessoa(r);
+  const tpl=(S.tpls&&S.tpls[tipo])||{nome:'Mensagem',v:'Oi {cliente}! Sobre {titulo}: {quando}{onde}.{link}\n\n— {studio}'};
+  preview({titulo:tpl.nome, sub:(p.nome||'reunião')+' · '+(p.wa?'+'+p.wa:'sem WhatsApp'), texto:aplicaTpl(tpl.v||'',varsReu(r)),
+    wa:p.wa, email:p.email, assunto:S.cfg.studio+' — '+(r.titulo||'reunião')});
+}
+/* o contato digitado na reunião vai pra ficha: completa quem já existe (cliente ou prospect) ou cria o cliente */
+function reuGuardarContato(r, pessoa, c, com){
+  const wa=String(c.wa||'').replace(/\D/g,''), em=String(c.em||'').trim(), ig=String(c.ig||'').trim().replace(/^@+/,'');
+  r.wa=wa; r.email=em; r.insta=ig;
+  if(!wa&&!em&&!ig) return null;
+  if(pessoa&&pessoa.obj){ const o=pessoa.obj;
+    if(pessoa.tipo==='cliente'){ if(wa&&!o.wa) o.wa=wa; if(em&&!o.email) o.email=em; if(ig&&!o.insta) o.insta=ig; }
+    else { if(wa&&!o.wa) o.wa=wa; if(ig&&!o.insta) o.insta=ig; if(em){ o.contatos=Array.isArray(o.contatos)?o.contatos:[]; if(!o.contatos.includes(em)) o.contatos.push(em); } }
+    return null; }
+  const nome=String(com||'').trim(); if(!nome) return null;
+  const ja=S.clientes.find(x=>x&&String(x.nome||'').toLowerCase()===nome.toLowerCase());
+  if(ja){ if(wa&&!ja.wa) ja.wa=wa; if(em&&!ja.email) ja.email=em; if(ig&&!ja.insta) ja.insta=ig; r.ref='c:'+ja.id; return null; }
+  const novo={id:uid('c'),nome,contato:'',wa,email:em,insta:ig}; S.clientes.push(novo); r.ref='c:'+novo.id; return novo;
+}
+function reunioesNoPipe(){
+  return (S.reunioes||[]).filter(r=>{
+    if(!r||!r.data) return false;
+    const d=dias(r.data);
+    if(r.feito && d<-1) return false;          /* feita some no dia seguinte */
+    if(d<-7) return false;                     /* passou há mais de uma semana: fica só na Agenda */
+    if(FILTRO.prazo==='crit'   && !(d>=0&&d<=1&&!r.feito)) return false;
+    if(FILTRO.prazo==='atras'  && !(d<0&&!r.feito)) return false;
+    if(FILTRO.prazo==='semana' && !(d>=0&&d<=7)) return false;
+    if(BUSCA){ const p=reuPessoa(r); const t=((r.titulo||'')+' '+p.nome+' '+(r.local||'')).toLowerCase(); if(!t.includes(BUSCA)) return false; }
+    return true;
+  }).sort((a,b)=>((a.feito?1:0)-(b.feito?1:0)) || (reuQuando(a)-reuQuando(b)));
+}
+function reuniaoCard(r,i=0){
+  const p=reuPessoa(r), d=dias(r.data);
+  const cor= r.feito?'#8A8FA3' : d<=0?'#FF5A5A' : d<=2?'#FBBF24' : '#2ED9C3';
+  const quando= r.feito?'feita · '+fmtD(r.data) : d<0?'passou · '+fmtD(r.data)+(r.hora?' '+r.hora:'') : reuQuandoTxt(r);
+  const chip=(cls,ico,txt,href)=> href?`<a class="cli-chip ${cls}" href="${esc(href)}" target="_blank" rel="noopener">${svgI(ico,12,2.2)}<span>${esc(txt)}</span></a>`:'';
+  const semContato=!p.wa&&!p.email&&!p.ig;
+  return `<div class="job reu-card ${r.feito?'feita':''}" data-reu="${esc(r.id)}" style="--jc:${cor};animation-delay:${i*45}ms">
+    <div class="job-t">${svgI('i-bell',12,2.2)} ${esc(r.titulo||'Reunião')}</div>
+    <div class="job-cl">${svgI('i-user',11,2)}${esc(p.nome||'sem nome')}</div>
+    <div class="job-m"><span class="pill p-grn"><span class="dot"></span>Reunião</span><span class="pill p-gry">${esc((+r.dur||60)+' min')}</span>${r.link?`<span class="pill p-blu">online</span>`:r.local?`<span class="pill p-gry">${esc(r.local)}</span>`:''}</div>
+    <div class="reu-contato">${chip('wa','i-wa',p.wa?'+'+p.wa:'',p.wa?'https://wa.me/'+p.wa:'')}${chip('','i-mail',p.email,p.email?'mailto:'+p.email:'')}${chip('','i-insta',p.ig?'@'+p.ig:'',p.ig?'https://instagram.com/'+p.ig:'')}${semContato?`<span class="mini" style="opacity:.65">sem contato ainda</span>`:''}</div>
+    ${obsCard(r.obs)}
+    <div class="reu-acoes">
+      ${p.wa?`<button type="button" class="btn sm gr" data-reumsg="reuniao" data-r="${esc(r.id)}">${svgI('i-wa',12,2)}Confirmar</button><button type="button" class="btn sm" data-reumsg="reuniaoLembrete" data-r="${esc(r.id)}">${svgI('i-bell',12,2)}Lembrar</button>`
+        :`<button type="button" class="btn sm" data-reuedit="${esc(r.id)}">${svgI('i-wa',12,2)}Pôr o WhatsApp</button>`}
+      ${r.link?`<a class="btn sm" href="${esc(r.link)}" target="_blank" rel="noopener">${svgI('i-arrow',12,2)}Entrar</a>`:''}
+      ${!r.feito?`<button type="button" class="btn sm gh" data-reufeita="${esc(r.id)}">${svgI('i-check',12,2.4)}Feita</button>`
+        :(p.wa?`<button type="button" class="btn sm gh" data-reumsg="reuniaoDepois" data-r="${esc(r.id)}">${svgI('i-send',12,2)}Obrigado</button>`:'')}
+    </div>
+    <div class="job-f"><span class="job-dl" style="color:${corTxt(cor)}">${svgI('i-cal',11,2.2)}${esc(quando)}</span></div>
+  </div>`;
+}
+function colunaReunioes(){
+  if(FILTRO.area!=='all') return '';
+  const reus=reunioesNoPipe(), abertas=reus.filter(r=>!r.feito);
+  const prox=abertas.filter(r=>dias(r.data)>=0)[0];
+  return `<div class="col col-reu" data-stage="__reu">
+    <div class="col-h"><span class="col-dot" style="background:#2ED9C3;color:#2ED9C3"></span><span class="col-n">Reuniões</span><span class="col-c">${abertas.length}</span></div>
+    <div class="col-sum">${prox?'próxima: '+esc(reuQuandoTxt(prox)):'nenhuma marcada'}</div>
+    <div class="col-b">${reus.map((r,i)=>reuniaoCard(r,i)).join('')}</div>
+    <button class="col-add" data-addreu="1">${svgI('i-plus',13,2.4)}Marcar reunião</button>
+  </div>`;
 }
 
 function showsNoPipe(){
@@ -4189,6 +4295,7 @@ document.addEventListener('dragend',e=>{
 });
 document.addEventListener('dragover',e=>{
   const col=e.target.closest('.col'); if(!col||!(DRAG||DRAGSH)) return;
+  if(col.dataset.stage==='__reu') return;   /* v129: a coluna de reuniões não recebe job */
   e.preventDefault(); e.dataTransfer.dropEffect='move';
   $$('.col').forEach(c=>c.classList.toggle('drop',c===col));
 });
@@ -4197,6 +4304,7 @@ document.addEventListener('drop',e=>{
   e.preventDefault();
   const stId=col.dataset.stage;
   $$('.col').forEach(c=>c.classList.remove('drop'));
+  if(stId==='__reu'){ DRAG=null; DRAGSH=null; return; }
   if(DRAGSH){
     const s=(S.shows||[]).find(x=>x.id===DRAGSH);
     DRAGSH=null; DRAG=null;
@@ -4248,6 +4356,17 @@ function moverJob(j,stId){
 
 /* clique no card = editar */
 document.addEventListener('click',e=>{
+  /* v129: reunião no Pipeline (e o botão Lembrar nas notificações) */
+  const rb=e.target.closest('[data-reumsg],[data-reufeita],[data-reuedit],[data-addreu]');
+  if(rb){ e.stopImmediatePropagation();
+    if(rb.dataset.addreu){ editReuniao(null); return; }
+    const r=(S.reunioes||[]).find(x=>x.id===(rb.dataset.r||rb.dataset.reufeita||rb.dataset.reuedit)); if(!r) return;
+    if(rb.dataset.reumsg) sugerirMsgReu(r,rb.dataset.reumsg);
+    else if(rb.dataset.reufeita){ r.feito=true; r.feitoEm=iso(HOJE); save(); render(); toast('Reunião feita',(reuPessoa(r).wa?'Tem o "Obrigado" pronto no cartão.':''),'ok'); }
+    else editReuniao(r);
+    return; }
+  const reuEl=e.target.closest('.reu-card');
+  if(reuEl){ if(e.target.closest('a')) e.stopImmediatePropagation(); return; }   /* o cartão abre a reunião pelo handler de [data-reu]; link segue o link */
   const card=e.target.closest('.job');
   if(card){
     if(card.dataset.sid) editShow((S.shows||[]).find(s=>s.id===card.dataset.sid));
@@ -5788,6 +5907,10 @@ function alertas(){
     }
   });
 
+  /* v129: reuniões de hoje e amanhã, com o lembrete pronto pelo WhatsApp */
+  try{ (S.reunioes||[]).forEach(r=>{ if(!r||r.feito||!r.data) return; const d=dias(r.data); if(d<0||d>1) return; const p=reuPessoa(r);
+    out.push({id:'reu_'+r.id+'_'+r.data, reu:r.id, nivel:d===0?3:2, ico:'i-bell', cor:d===0?'#FF5A5A':'#FBBF24',
+      t:(d===0?'Reunião hoje':'Reunião amanhã')+(r.hora?' às '+r.hora:''), s:(r.titulo||'Reunião')+(p.nome?' · '+p.nome:'')+(r.link?' · online':r.local?' · '+r.local:''), canais:[], regra:'Agenda'}); }); }catch(e){}
   /* v126: contas a pagar (IAs e serviços) — só com o que já está carregado, sem ir na rede */
   try{
     const rC=reg('conta');
@@ -5845,6 +5968,7 @@ function renderNotif(){
         ${a.resumo?`<button class="btn sm" data-nres="1">${svgI('i-eye',12,2)}Ver</button>`
           :a.prosp?`<button class="btn sm" data-goto="prosp">${svgI('i-user',12,2)}Abrir</button>`
           :a.sid?`<button class="btn sm" data-sh="${a.sid}">${svgI('i-mic',12,2)}Abrir show</button>`
+          :a.reu?`<button class="btn sm" data-reumsg="reuniaoLembrete" data-r="${esc(a.reu)}">${svgI('i-wa',12,2)}Lembrar</button>`
           :a.conta?`<button class="btn sm" data-contapagar="${esc(a.conta)}">${svgI('i-wallet',12,2)}Pagar</button>`
           :a.cobranca?`<button class="btn sm" data-msg="cobranca" data-j="${a.jid}">${svgI('i-wa',12,2)}Cobrar</button>`
           :`<button class="btn sm" data-msg="status" data-j="${a.jid}">${svgI('i-wa',12,2)}Avisar</button>`}
@@ -8195,6 +8319,9 @@ const FERRAMENTAS=[
      duracao:{type:'number',description:'Minutos de duração (padrão 60)'},
      local:{type:'string',description:'Onde é, se for presencial'},
      link:{type:'string',description:'Link da chamada, se for online'},
+     whatsapp:{type:'string',description:'WhatsApp da pessoa, só dígitos com DDI (5541988887777). Se ele mencionar, MANDE — vai pra ficha e pro botão de confirmar.'},
+     email:{type:'string',description:'E-mail da pessoa, se ele mencionar.'},
+     instagram:{type:'string',description:'Instagram da pessoa, sem o @, se ele mencionar.'},
      obs:{type:'string',description:'O que ele precisa levar pronto'}},
      required:['data','hora']}},
   {name:'registrar_prospect',description:'Registra um contato de prospecção comercial (empresa, music house, produtora, pessoa do LinkedIn): cria se não existir, ou atualiza status, anotação e próximo toque.',
@@ -8675,8 +8802,10 @@ function rodarFerramenta(nome,a){
           com, ref:alvo?alvo.ref:'', data:a.data, hora:a.hora.padStart(5,'0'),
           dur:+a.duracao||60, local:(a.local||'').trim(), link:(a.link||'').trim(),
           obs:(a.obs||'').trim(), avisos:AVISOS_PADRAO.slice(), feito:false, criadoEm:iso(HOJE)};
+        const criado=reuGuardarContato(r, alvo, {wa:a.whatsapp, em:a.email, ig:a.instagram}, com);
         S.reunioes=S.reunioes||[]; S.reunioes.push(r);
         save(); render(); if(typeof conferirAlarmes==='function') conferirAlarmes();
+        if(criado) return {ok:true, reuniao:r.titulo, quando:r.data+' '+r.hora, cliente_criado:criado.nome, contato:{whatsapp:r.wa||'',email:r.email||'',instagram:r.insta||''}, apita:'1 dia, 1 hora e 10 min antes'};
         return {ok:true, reuniao:r.titulo, quando:r.data+' '+r.hora, apita:'1 dia, 1 hora e 10 min antes',
           aviso:'O apito toca com o app aberto. Pra tocar com tudo fechado, ele precisa mandar pra agenda do Google (botão na Agenda).'};
       }
@@ -10309,6 +10438,7 @@ function renderIA(){
         ['Criar job','i-briefcase','Entende valor, prazo, área e cliente da sua frase'],
         ['Cadastrar cliente','i-users','Puxa WhatsApp e e-mail do texto'],
         ['Agendar e atualizar show','i-mic','Data, casa, cidade, cachê, status'],
+        ['Marcar reunião','i-bell','"reunião com a Júlia quinta 15h, zap 41 9…" — já sai no Pipeline com o botão de confirmar'],
         ['Mover no fluxo','i-kanban','"o teaser da Motorola foi entregue"'],
         ['Ler seus dados','i-db','Responde sobre verba, prazos e prospecção com número real'],
         ['Anotar prospecção','i-users','"a Carol da Barking Owl aceitou, toca de novo dia 25"'],
@@ -16779,13 +16909,18 @@ function editReuniao(r,pre,depois){
   const d=r||{id:null,titulo:'',com:'',ref:'',data:iso(HOJE),hora:'10:00',dur:60,local:'',link:'',obs:'',
     avisos:AVISOS_PADRAO.slice(),feito:false,...(pre||{})};
   const gente=(typeof pessoasConversa==='function'?pessoasConversa():[]);
-  modal({t:nova?'Nova reunião':'Reunião', d:nova?'Com hora marcada e apito antes':'Mexa e salve',wide:true,
+  const pc=reuPessoa(d);
+  modal({t:nova?'Nova reunião':'Reunião', d:nova?'Com hora marcada, apito antes e o WhatsApp na mão':'Mexa e salve',wide:true,
     body:`<div class="fgrid">
       <div class="fld full"><label>Sobre o que é</label>
         <input class="inp" id="ru_t" value="${esc(d.titulo)}" placeholder="Ex.: Fechar o app da Júlia"></div>
       <div class="fld"><label>Com quem</label>
         <input class="inp" id="ru_c" list="ru_gente" value="${esc(d.com||reuNome(d))}" placeholder="Nome de quem vai estar">
         <datalist id="ru_gente">${gente.slice(0,200).map(p=>`<option value="${esc(p.nome)}">`).join('')}</datalist></div>
+      <div class="fld"><label>WhatsApp</label><input class="inp mono" id="ru_wa" inputmode="tel" placeholder="5541999998888" value="${esc(pc.wa||'')}"></div>
+      <div class="fld"><label>E-mail</label><input class="inp" type="email" id="ru_em" placeholder="nome@empresa.com" value="${esc(pc.email||'')}"></div>
+      <div class="fld"><label>Instagram</label><input class="inp" id="ru_ig" placeholder="@perfil" value="${esc(pc.ig||'')}"></div>
+      <div class="hint full">O contato vai pra ficha da pessoa (se não existir, crio o cliente) e o cartão no Pipeline já sai com o WhatsApp pra confirmar e lembrar.</div>
       <div class="fld"><label>Dia</label><input class="inp" type="date" id="ru_d" value="${esc(d.data)}"></div>
       <div class="fld"><label>Hora</label><input class="inp" type="time" id="ru_h" value="${esc(d.hora)}"></div>
       <div class="fld"><label>Quanto dura (minutos)</label>
@@ -16804,6 +16939,9 @@ function editReuniao(r,pre,depois){
       <button class="btn" onclick="closeM()">Fechar</button>
       <button class="btn pri" id="ru_ok">${svgI('i-check',14,2.3)}${nova?'Criar':'Salvar'}</button>`});
   let avisos=(d.avisos||AVISOS_PADRAO).slice();
+  /* escolheu alguém que já existe: o contato dela preenche sozinho (sem apagar o que ele já digitou) */
+  $('#ru_c').oninput=()=>{ const q=gente.find(p=>p.nome===$('#ru_c').value.trim()); if(!q) return;
+    if(!$('#ru_wa').value&&q.wa) $('#ru_wa').value=q.wa; if(!$('#ru_em').value&&q.email) $('#ru_em').value=q.email; if(!$('#ru_ig').value&&q.ig) $('#ru_ig').value=q.ig; };
   document.querySelectorAll('[data-ruaviso]').forEach(b=>b.onclick=()=>{
     const m=+b.dataset.ruaviso;
     if(avisos.includes(m)) avisos=avisos.filter(x=>x!==m); else avisos.push(m);
@@ -16816,6 +16954,8 @@ function editReuniao(r,pre,depois){
     const dados={titulo:t||('Reunião'+(com?' · '+com:'')),com,ref:alvo?alvo.ref:'',data:dia,hora,
       dur:+$('#ru_dur').value||60,local:($('#ru_l').value||'').trim(),link:($('#ru_link').value||'').trim(),
       obs:($('#ru_o').value||'').trim(),avisos:avisos.slice().sort((a,b)=>b-a)};
+    const criado=reuGuardarContato(dados, alvo, {wa:$('#ru_wa').value, em:$('#ru_em').value, ig:$('#ru_ig').value}, com);
+    if(criado) setTimeout(()=>toast('Cliente criado',criado.nome+' · com o contato na ficha','ok'),600);
     S.reunioes=S.reunioes||[];
     if(nova){ S.reunioes.push({id:uid('r'),feito:false,criadoEm:iso(HOJE),...dados}); }
     else Object.assign(r,dados);
@@ -17999,7 +18139,7 @@ function ocupadoAgora(){
     if(i) i.onclick=()=>{ localStorage.setItem(k,hoje); window.open(NOVO,'_blank','noopener'); closeM(); };
   }catch(e){} },1500);
 }catch(e){} })();
-const APP_VER = 'v128';
+const APP_VER = 'v129';
 
 function pintarSelo(){
   const e=$('#verSelo'); if(!e) return;
