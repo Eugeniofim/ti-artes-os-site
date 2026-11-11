@@ -1493,6 +1493,196 @@ body.conversa-mkt #dockFab{display:none}
 .icobtn.ouvindo{color:#FF5A5A;border-color:rgba(255,90,90,.5);background:rgba(255,90,90,.12);
   animation:pulsa 1.15s ease-in-out infinite}
 @keyframes pulsa{0%,100%{box-shadow:0 0 0 0 rgba(255,90,90,.45)}50%{box-shadow:0 0 0 7px rgba(255,90,90,0)}}
+/* v131: menu em 6 grupos + abas do grupo + tela Hoje */
+.grp-tabs{display:flex;gap:6px;padding:12px 26px 0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.grp-tabs::-webkit-scrollbar{display:none}
+.grp-tabs[hidden]{display:none}
+.grp-tab{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--txt-2);font:inherit;font-size:12.8px;font-weight:660;
+  padding:0 14px;height:36px;border-radius:999px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:7px;transition:.22s var(--ease)}
+.grp-tab:hover{color:var(--txt);border-color:rgba(46,217,195,.35)}
+.grp-tab.on{color:var(--acc-txt);background:rgba(46,217,195,.12);border-color:rgba(46,217,195,.45)}
+.grp-n{min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:rgba(var(--tint),.1);font-size:10.5px;font-weight:760;display:inline-grid;place-items:center}
+.grp-tab.on .grp-n{background:rgba(46,217,195,.22)}
+.grp-n.alerta{background:rgba(229,72,77,.9);color:#fff}
+.grp-tabs:not([hidden]) ~ .view{padding-top:14px}
+.mais-sec{grid-column:1/-1;font-size:10.2px;text-transform:uppercase;letter-spacing:.14em;color:var(--txt-3);font-weight:760;margin:6px 2px -2px}
+.mais-grid{grid-template-columns:repeat(4,1fr)!important;gap:8px!important}
+.mais-sheet .mais-i{min-height:70px}
+.hoje-topo{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.hoje-topo>div:first-child{flex:1;min-width:200px}
+.hoje-ola{font-size:22px;font-weight:760;letter-spacing:-.4px}
+.hoje-data{font-size:12.6px;color:var(--txt-3);font-weight:600;margin-top:2px}
+.hoje-data::first-letter{text-transform:uppercase}
+.hoje-nums{display:flex;gap:8px;flex-wrap:wrap}
+.hoje-num{appearance:none;font:inherit;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:9px 14px;min-width:132px;color:var(--txt)}
+.hoje-num small{display:block;font-size:10.2px;text-transform:uppercase;letter-spacing:.1em;color:var(--txt-3);font-weight:740}
+.hoje-num b{font-size:17px;font-weight:760;letter-spacing:-.3px}
+.hoje-num.red b{color:#FF7070}
+.hoje-nova .card-b{padding:12px 14px}
+.hoje-cont{display:inline-grid;place-items:center;min-width:22px;height:20px;padding:0 6px;margin-left:4px;border-radius:10px;background:rgba(229,72,77,.9);color:#fff;font-size:11px;font-weight:780;vertical-align:2px}
+.hoje-cont:empty{display:none}
+.hj-i{display:flex;align-items:center;gap:11px;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2)}
+.hj-i .row-ico{width:32px;height:32px}
+.hj-tx{flex:1;min-width:0}
+.hj-t{font-size:13.2px;font-weight:680;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hj-s{font-size:11.4px;color:var(--txt-3);font-weight:580;margin-top:2px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.hj-tag{font-size:9.8px;text-transform:uppercase;letter-spacing:.1em;font-weight:780;margin-right:6px}
+.hj-acts{display:flex;gap:6px;flex-shrink:0}
+.hj-acts .btn{height:34px;white-space:nowrap}
+.hj-mais summary{cursor:pointer;list-style:none;font-size:12.4px;font-weight:680;color:var(--acc-txt);padding:6px 2px}
+.hj-mais summary::-webkit-details-marker{display:none}
+.hj-mais[open] summary{margin-bottom:9px}
+.hj-mais .stack-v{gap:9px}
+.hoje-sem{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:12px}
+.hoje-sem button{appearance:none;font:inherit;border:1px solid var(--line);background:var(--panel-2);border-radius:11px;padding:6px 0 7px;cursor:pointer;color:var(--txt-2);display:flex;flex-direction:column;align-items:center;gap:1px}
+.hoje-sem small{font-size:9.6px;text-transform:uppercase;letter-spacing:.06em;font-weight:720;color:var(--txt-3)}
+.hoje-sem b{font-size:14px;font-weight:760}
+.hoje-sem i{font-style:normal;font-size:10px;font-weight:760;color:var(--acc-txt);min-height:12px}
+.hoje-sem button.hj-hoje{border-color:rgba(46,217,195,.5);background:rgba(46,217,195,.1);color:var(--txt)}
+.hj-ag{display:flex;gap:10px;align-items:flex-start;padding:8px 2px;border-bottom:1px solid var(--line);cursor:pointer}
+.hj-ag:last-child{border-bottom:0}
+.hj-ag-h{width:44px;flex-shrink:0;font-size:12px;font-weight:760;color:var(--txt-2);padding-top:1px}
+.hj-ag .hj-t{white-space:normal}
+.hj-vazio{font-size:12.6px;color:var(--txt-3);padding:10px 2px}
+@media(max-width:820px){
+  .grp-tabs{padding:10px 14px 0;gap:6px}
+  .grp-tab{height:38px;font-size:13px;padding:0 13px}
+  .grp-tabs:not([hidden]) ~ .view{padding-top:12px}
+  .hoje-ola{font-size:19px}
+  .hoje-nums{width:100%}
+  .hoje-num{flex:1;min-width:0}
+  .hj-i{flex-wrap:wrap}
+  .hj-acts{width:100%;justify-content:flex-end}
+  .hj-acts .btn{height:38px}
+  #hojeIdeia .lbl{display:none}
+}
+.arr-job{padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:var(--panel-2)}
+.arr-t{font-size:16px;font-weight:740;letter-spacing:-.2px}
+.arr-s{font-size:12.4px;color:var(--txt-2);margin-top:4px}
+.arr-p{font-size:12.4px;color:#FF7070;font-weight:680;margin-top:8px;display:flex;gap:6px;align-items:center}
+.arr-bar{height:4px;border-radius:2px;background:rgba(var(--tint),.08);margin-top:12px;overflow:hidden}.arr-bar i{display:block;height:100%;background:#2ED9C3}
+.arr-ops{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.arr-op{appearance:none;font:inherit;text-align:left;color:var(--txt);border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:4px;cursor:pointer;transition:.2s var(--ease)}
+button.arr-op:hover{border-color:rgba(46,217,195,.5);background:rgba(46,217,195,.07)}
+.arr-op svg{color:#2ED9C3}.arr-op b{font-size:14px}.arr-op small{font-size:11.6px;color:var(--txt-3)}
+.arr-data{grid-column:1/-1;cursor:default}
+.arr-dl{display:flex;gap:8px;margin-top:6px}.arr-dl .inp{flex:1;min-width:0;height:40px}.arr-dl .btn{height:40px}
+.arr-fim{display:flex;gap:10px;flex-wrap:wrap}.arr-fim div{flex:1;min-width:110px;border:1px solid var(--line);border-radius:14px;padding:12px;background:var(--panel-2)}
+.arr-fim b{display:block;font-size:22px}.arr-fim span{font-size:12px;color:var(--txt-3)}
+@media(max-width:520px){.arr-ops{grid-template-columns:1fr}}
+/* v132: pipeline em 4 colunas */
+.pipe-aviso{appearance:none;font:inherit;width:100%;display:flex;align-items:center;gap:12px;text-align:left;cursor:pointer;margin-bottom:14px;
+  padding:12px 14px;border-radius:14px;border:1px solid rgba(251,191,36,.45);background:rgba(251,191,36,.1);color:var(--txt)}
+.pipe-aviso svg{color:#F59E0B;flex-shrink:0}.pipe-aviso>span:first-of-type{flex:1;font-size:13px;line-height:1.35}
+.pipe-aviso-b{flex-shrink:0;font-weight:740;font-size:12.6px;padding:8px 12px;border-radius:10px;background:#F59E0B;color:#1d1300}
+.kb-4{display:grid;grid-template-columns:repeat(4,minmax(168px,1fr));gap:11px}
+.kb-4 .col{width:auto}
+.col4 .col-sum{line-height:1.35}
+.kb-4 .job{padding:11px 10px}
+.kb-4 .job-f{flex-wrap:wrap;gap:3px 8px}.kb-4 .job-val{white-space:nowrap}.kb-4 .job-dl{white-space:nowrap}
+.job-etapa{font-size:10px}
+.job-prox{margin-top:8px;padding:6px 8px 0 5px;border-top:1px dashed var(--line);font-size:11.4px;font-weight:680;color:var(--acc-txt)}
+.col-adds{display:flex;gap:6px;padding:0 10px 10px}.col-adds .col-add{flex:1;margin:0}
+.col-vazio{font-size:12px;color:var(--txt-3);padding:14px 6px;text-align:center}
+.col-mais{appearance:none;font:inherit;border:1px dashed var(--line);background:none;color:var(--txt-2);border-radius:10px;padding:8px;font-size:11.8px;font-weight:650;cursor:pointer}
+.pipe-seg{display:none}
+@media(max-width:820px){
+  .pipe-aviso{flex-wrap:wrap}.pipe-aviso-b{width:100%;text-align:center}
+  .kb-4{display:block;min-height:0}
+  .kb-4 .pipe-seg{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:4px;margin-bottom:10px;background:var(--panel);border:1px solid var(--line);border-radius:13px}
+  .pipe-seg button{appearance:none;font:inherit;border:0;background:none;color:var(--txt-2);border-radius:10px;padding:7px 2px;font-size:11.6px;font-weight:680;display:flex;flex-direction:column;align-items:center;gap:1px;cursor:pointer}
+  .pipe-seg button span{font-size:15px;font-weight:780;color:var(--txt)}
+  .pipe-seg button.on{background:rgba(46,217,195,.14);color:var(--acc-txt)}
+  .kb-4 .col4{display:none;width:auto;max-width:none;max-height:none}
+  .kb-4 .col4.col-on{display:flex}
+}
+/* v133: carteira de clientes mais limpa */
+.cli-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.cli-kpi{appearance:none;font:inherit;text-align:left;cursor:pointer;color:var(--txt);border:1px solid var(--line);background:linear-gradient(165deg,rgba(var(--tint),.055),rgba(var(--tint),.018));border-radius:18px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;transition:.2s var(--ease);box-shadow:var(--shadow)}
+:root[data-tema="claro"] .cli-kpi{background:#fff;border-color:rgba(16,32,34,.08)}
+#btnNewCli[hidden]{display:none}
+.cli-kpi:hover{border-color:rgba(46,217,195,.45)}
+.cli-kpi.on{border-color:rgba(46,217,195,.6);box-shadow:0 0 0 3px rgba(46,217,195,.12)}
+.cli-kpi .stat-v{margin-top:2px;font-size:22px}
+.cli-kpi small{font-size:11.4px;color:var(--txt-3);font-weight:600}
+.cli-row{grid-template-columns:44px minmax(0,1fr) auto 128px auto!important;gap:16px!important;padding:12px 10px!important;border-radius:14px}
+.cli-row:hover{background:rgba(46,217,195,.05)!important}
+.cli-ava{border:0;cursor:pointer;text-decoration:none!important;width:44px!important;height:44px!important;font-size:13.5px!important}
+.cli-nome{appearance:none;border:0;background:none;padding:0;font:inherit;font-weight:720;font-size:14.4px;text-align:left;cursor:pointer;max-width:100%;color:var(--txt)}
+.cli-meta i{font-style:normal;opacity:.6}
+.cli-ativo{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--acc-txt)}
+.cli-ativo::before{content:'';width:6px;height:6px;border-radius:50%;background:#2ED9C3}
+.cli-ct{flex-wrap:nowrap!important;gap:6px!important}
+.cli-ct-b{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;border:1px solid var(--line);background:var(--panel);color:var(--txt-2);cursor:pointer;transition:.18s var(--ease);padding:0;text-decoration:none}
+.cli-ct-b:hover{transform:translateY(-1px);color:var(--txt);border-color:var(--txt-3)}
+.cli-ct-b.wa{color:#1FAF6A;background:rgba(37,211,102,.1);border-color:rgba(37,211,102,.32)}
+.cli-ct-b.ig{color:#D6418A;background:rgba(214,65,138,.08);border-color:rgba(214,65,138,.28)}
+.cli-ct-b.em{color:#3B82F6;background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.28)}
+.cli-ct-b.falta{background:transparent;border-style:dashed;color:var(--txt-3);opacity:.55}
+.cli-ct-b.falta:hover{opacity:1}
+.cli-money{min-width:0!important;display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.cli-money b{font-size:15px!important}
+.cli-st{font-size:11.4px;color:var(--txt-3);font-weight:650;display:inline-flex;align-items:center;gap:4px}
+.cli-st.ok{color:#1F9D6B}.cli-st.deve{color:#B7791F;font-weight:720}
+:root:not([data-tema="claro"]) .cli-st.ok{color:#5BE49B}:root:not([data-tema="claro"]) .cli-st.deve{color:#FDD97A}
+.cli-bar{width:84px;height:4px;border-radius:2px;background:rgba(var(--tint),.1);overflow:hidden;margin-top:2px}
+.cli-bar i{display:block;height:100%;background:#2ED9C3;border-radius:2px}
+.cli-acts{opacity:1!important;gap:4px!important;align-items:center}
+.cli-abrir{height:34px}
+.cli-mini{width:34px;height:34px;padding:0!important;justify-content:center;opacity:0;transition:opacity .15s}
+.cli-row:hover .cli-mini,.cli-row:focus-within .cli-mini{opacity:.75}
+.cli-mini:hover{opacity:1!important}
+.cli-del:hover{color:var(--dg-txt)}
+@media(max-width:820px){
+  .cli-kpis{gap:8px}.cli-kpi{padding:11px 12px;border-radius:15px}.cli-kpi .stat-v{font-size:18px}.cli-kpi small{font-size:10.4px}
+  .cli-row{grid-template-columns:44px minmax(0,1fr) auto!important;grid-template-areas:"ava id money" "ct ct acts"!important;gap:10px 12px!important;padding:12px 4px!important}
+  .cli-acts{grid-area:acts}
+  .cli-mini{opacity:.7}
+  .cli-nome{white-space:normal;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .cli-ct-b{width:40px;height:40px}.cli-abrir{height:40px}.cli-mini{width:40px;height:40px}
+}
+/* v130: gravar ideia */
+#ideiaRec{display:none;align-items:center;gap:9px;flex-wrap:wrap;margin-top:12px;padding:9px 13px;border-radius:14px;
+  background:rgba(255,90,90,.10);border:1px solid rgba(255,90,90,.38);font-size:12.3px}
+#ideiaRec.on{display:flex}
+#ideiaRec b{color:#FF7A7A;font-weight:750}
+#ideiaRec .ouv-t{flex:1 1 160px;min-width:0;font-weight:520;color:var(--txt-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#ideiaRec .ideia-quem{color:var(--txt-3);font-weight:600}
+.ideia-bola{width:10px;height:10px;border-radius:50%;background:#FF5A5A;display:inline-block;flex-shrink:0;box-shadow:0 0 0 0 rgba(255,90,90,.6);animation:ideiaBola 1.2s ease-in-out infinite}
+@keyframes ideiaBola{0%,100%{box-shadow:0 0 0 0 rgba(255,90,90,.55)}50%{box-shadow:0 0 0 6px rgba(255,90,90,0)}}
+@media(prefers-reduced-motion:reduce){ .ideia-bola{animation:none} }
+#ideiaBtn.ouvindo{color:#FF5A5A}
+.ideia-nova{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.ideia-nova .fld{display:flex;flex-direction:column;gap:5px;font-size:11.5px;color:var(--txt-3);font-weight:600}
+.ideia-nova input{height:42px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--txt);padding:0 12px;font:inherit;font-size:14px}
+.ideia-nova .btn{height:42px;gap:8px;display:inline-flex;align-items:center}
+.ideia-aviso{font-size:11.5px;color:var(--txt-3);margin:8px 0 14px}
+.ideia-lista{display:flex;flex-direction:column;gap:12px}
+.ideia-vazio{padding:22px;text-align:center;color:var(--txt-3);font-size:13px;border:1px dashed var(--line);border-radius:14px}
+.ideia-c{border:1px solid var(--line);border-radius:16px;padding:14px;background:rgba(var(--tint),.03)}
+.ideia-c.foco{border-color:rgba(46,217,195,.55);box-shadow:0 0 0 3px rgba(46,217,195,.12)}
+.ideia-h{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+.ideia-t{font-family:var(--serif);font-size:16px;font-weight:650;letter-spacing:-.1px}
+.ideia-s{font-size:11.3px;color:var(--txt-3);font-weight:600;margin-top:2px}
+.ideia-c audio{width:100%;margin-top:10px;height:38px}
+.ideia-r{font-size:13.3px;line-height:1.5;margin:10px 0 0;color:var(--txt-2)}
+.ideia-sec{font-size:10.6px;letter-spacing:.07em;text-transform:uppercase;color:var(--txt-3);font-weight:750;margin:14px 0 6px}
+.ideia-l{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:9px;font-size:13px;line-height:1.45}
+.ideia-l li span{display:block;color:var(--txt-3);font-size:12.2px}
+.ideia-l li .chip{margin-top:5px}
+.ideia-l li em{font-style:normal;font-size:11.5px;color:var(--txt-3)}
+.ideia-p{margin-top:12px;padding:10px 12px;border-radius:12px;background:rgba(46,217,195,.08);border:1px solid rgba(46,217,195,.25);font-size:13.3px;font-weight:600}
+.ideia-p span{display:block;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:#2ED9C3;font-weight:750;margin-bottom:3px}
+.ideia-cont{font-size:13px;line-height:1.55;padding:11px 12px;border-radius:12px;background:var(--panel);border:1px solid var(--line);white-space:normal}
+.ideia-rot{margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.ideia-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.ideia-acts .btn{display:inline-flex;align-items:center;gap:6px}
+.ideia-nota{font-size:12px;color:var(--txt-3);margin-top:10px}
+.ideia-nota.erro{color:#FF9494}
+.ideia-tx{margin-top:12px;font-size:12.3px;color:var(--txt-2)}
+.ideia-tx summary{cursor:pointer;color:var(--txt-3);font-weight:650}
+.ideia-tx p{margin:6px 0}
+.ideia-tx em{font-style:normal;color:var(--txt-3);font-size:11px;margin-right:6px}
 #ouvindo{display:none;align-items:center;gap:9px;margin-top:12px;padding:9px 13px;border-radius:14px;
   background:rgba(255,90,90,.08);border:1px solid rgba(255,90,90,.28);font-size:12.3px;font-weight:600}
 #ouvindo.on{display:flex}
@@ -1944,6 +2134,270 @@ body.conversa-mkt #dockFab{display:none}
 }
 /* v71: as peças da proposta dos agentes são <label> dentro de .fld — sem isso herdam o estilo de título de campo */
 .fld label.ag-peca{display:flex;text-transform:none;letter-spacing:0;font-size:inherit;font-weight:inherit;color:inherit;margin:0}
+/* ===================== v134 — VIDRO + VITRINE =====================
+   Menu, barra de cima e barra do celular viram painéis de vidro que
+   flutuam sobre o fundo (blur + borda clara + sombra). A Vitrine ganha
+   tela própria, com as telas dos trabalhos em 3D na rolagem. */
+:root{--glass:rgba(20,22,27,.52);--glass-2:rgba(26,29,35,.64);--glass-line:rgba(255,255,255,.09);
+  --glass-hi:inset 0 1px 0 rgba(255,255,255,.07);--glass-sh:0 22px 54px -26px rgba(0,0,0,.9)}
+:root[data-tema="claro"]{--glass:rgba(255,255,255,.62);--glass-2:rgba(255,255,255,.78);--glass-line:rgba(16,32,34,.09);
+  --glass-hi:inset 0 1px 0 rgba(255,255,255,.85);--glass-sh:0 18px 44px -26px rgba(16,32,34,.38)}
+@media(min-width:821px){
+  .side{margin:12px 0 12px 12px;top:12px;height:calc(100vh - 24px);border-radius:24px;border:1px solid var(--glass-line);
+    background:linear-gradient(180deg,rgba(22,24,30,.6),rgba(10,11,14,.46));
+    backdrop-filter:blur(28px) saturate(170%);-webkit-backdrop-filter:blur(28px) saturate(170%);
+    box-shadow:var(--glass-sh),var(--glass-hi);padding:18px 12px}
+  :root[data-tema="claro"] .side{background:linear-gradient(180deg,rgba(17,48,50,.9),rgba(10,29,30,.84));border:1px solid rgba(255,255,255,.08)}
+  .nav-i.on::before{left:-7px;height:18px;border-radius:3px}
+  .top{margin:12px 14px 0;top:12px;border-radius:20px;border:1px solid var(--glass-line);
+    background:var(--glass);backdrop-filter:blur(26px) saturate(170%);-webkit-backdrop-filter:blur(26px) saturate(170%);
+    box-shadow:var(--glass-sh),var(--glass-hi);padding:12px 14px 12px 20px}
+  .grp-tabs:not([hidden]){width:max-content;max-width:calc(100% - 52px);margin:14px 26px 0;padding:4px}
+}
+.nav-i{border-radius:12px}
+.nav-i.on{background:linear-gradient(100deg,rgba(46,217,195,.22),rgba(46,217,195,.06));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 10px 26px -12px rgba(46,217,195,.6)}
+.nav-novo{margin-left:auto;font-size:9px;font-weight:820;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:20px;
+  background:linear-gradient(90deg,#2ED9C3,#7CC4FF);color:#052522}
+/* abas do grupo: um controle só, de vidro, com a aba ativa acesa */
+.grp-tabs:not([hidden]){display:flex;gap:2px;padding:4px;border-radius:999px;background:var(--glass);border:1px solid var(--glass-line);
+  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);box-shadow:var(--glass-hi)}
+.grp-tab{border-color:transparent;background:transparent;height:34px}
+.grp-tab:hover{border-color:transparent;background:rgba(var(--tint),.06)}
+.grp-tab.on{background:linear-gradient(180deg,rgba(46,217,195,.24),rgba(46,217,195,.1));border-color:rgba(46,217,195,.38);
+  box-shadow:0 8px 20px -10px rgba(46,217,195,.7),inset 0 1px 0 rgba(255,255,255,.12)}
+:root[data-tema="claro"] .grp-tab.on{color:#0A6E62;background:linear-gradient(180deg,rgba(46,217,195,.26),rgba(46,217,195,.14))}
+.grp-tab:focus-visible,.vt-chip:focus-visible,.mob-i:focus-visible{outline:2px solid #2ED9C3;outline-offset:2px}
+@media(max-width:820px){
+  .top{background:var(--glass);backdrop-filter:blur(26px) saturate(170%);-webkit-backdrop-filter:blur(26px) saturate(170%);border-bottom:1px solid var(--glass-line)}
+  .grp-tabs:not([hidden]){margin:10px 12px 0;max-width:calc(100% - 24px);width:max-content;padding:4px}
+  .view{padding-bottom:calc(112px + env(safe-area-inset-bottom))}
+  /* barra de baixo: pílula de vidro solta da borda */
+  .mobnav{left:10px;right:10px;bottom:calc(8px + env(safe-area-inset-bottom));padding:6px;border-radius:26px;
+    border:1px solid var(--glass-line);background:rgba(14,15,19,.6);
+    backdrop-filter:blur(26px) saturate(180%);-webkit-backdrop-filter:blur(26px) saturate(180%);
+    box-shadow:0 18px 42px -12px rgba(0,0,0,.75),var(--glass-hi)}
+  :root[data-tema="claro"] .mobnav{background:rgba(255,255,255,.72);box-shadow:0 16px 36px -14px rgba(16,32,34,.4),var(--glass-hi)}
+  .mob-i{border-radius:20px;min-height:52px}
+  .mob-i.on{background:linear-gradient(180deg,rgba(46,217,195,.2),rgba(46,217,195,.08));box-shadow:inset 0 0 0 1px rgba(46,217,195,.3)}
+  .mais-sheet{left:8px;right:8px;bottom:8px;border-radius:26px;border:1px solid var(--glass-line);background:var(--glass-2);
+    backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);padding-bottom:calc(14px + env(safe-area-inset-bottom))}
+}
+/* atalho da Vitrine na folha do "Mais" */
+.mais-i.mais-vit{grid-column:1/-1;flex-direction:row;justify-content:flex-start;gap:12px;padding:12px 14px;min-height:78px;overflow:hidden;
+  background:linear-gradient(120deg,rgba(46,217,195,.2),rgba(96,165,250,.08));border-color:rgba(46,217,195,.38)}
+.mais-vit-ico{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:rgba(46,217,195,.18);color:var(--acc-txt);flex-shrink:0}
+.mais-vit-t{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:2px}
+.mais-vit-t b{font-size:15px;color:var(--txt)} .mais-vit-t small{font-size:11.5px;color:var(--txt-3);font-weight:620}
+.mais-vit-imgs{margin-left:auto;display:flex;padding-right:4px}
+.mais-vit-imgs img{width:34px;height:54px;object-fit:cover;object-position:top;border-radius:8px;margin-left:-12px;border:1.5px solid rgba(255,255,255,.25);transform:rotate(-7deg);box-shadow:0 8px 16px -6px rgba(0,0,0,.6)}
+.mais-vit-imgs img:nth-child(2){transform:translateY(-5px);z-index:1}
+.mais-vit-imgs img:nth-child(3){transform:rotate(7deg)}
+
+/* ---------------- VITRINE ---------------- */
+.vt-hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:28px;align-items:center;min-height:430px;padding:8px 0 34px}
+.vt-kick{display:inline-flex;gap:9px;align-items:center;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc-txt);font-weight:780}
+:root[data-tema="claro"] .vt-kick{color:#0A7A6D}
+.vt-kick i{width:7px;height:7px;border-radius:50%;background:#2ED9C3;box-shadow:0 0 12px #2ED9C3;animation:vtPulso 2.4s ease-in-out infinite}
+@keyframes vtPulso{50%{opacity:.35;transform:scale(.7)}}
+.vt-h{font-family:var(--serif);font-size:clamp(56px,7.6vw,118px);line-height:.9;letter-spacing:-.035em;font-weight:600;margin:14px 0 16px;
+  background:linear-gradient(180deg,var(--txt) 35%,rgba(var(--tint),.38));-webkit-background-clip:text;background-clip:text;color:transparent}
+.vt-lead{font-size:16px;line-height:1.6;color:var(--txt-2);max-width:44ch}
+.vt-nums{display:flex;gap:10px;margin:22px 0 22px;flex-wrap:wrap}
+.vt-num{padding:10px 16px 9px;border-radius:16px;background:var(--glass);border:1px solid var(--glass-line);backdrop-filter:blur(16px);box-shadow:var(--glass-hi)}
+.vt-num b{display:block;font-size:24px;font-weight:780;line-height:1.05;letter-spacing:-.02em}
+.vt-num span{font-size:11.5px;color:var(--txt-3);font-weight:680}
+.vt-acts{display:flex;gap:10px;flex-wrap:wrap}
+.vt-acts .btn{height:44px;padding:0 18px;border-radius:13px;font-size:13.5px}
+/* palco: três telas boiando em 3D, que se afastam quando a página rola */
+.vt-stage{position:relative;height:420px;perspective:1500px;--sy:0}
+.vt-flutua{position:absolute;transform-style:preserve-3d;will-change:transform}
+.vt-flutua > *{animation:vtBoia 8s ease-in-out infinite}
+.vt-f0{left:0;top:12%;width:74%;z-index:1;transform:rotateY(calc(18deg - var(--sy)*12deg)) rotateX(6deg) translateZ(-30px) translateY(calc(var(--sy)*-30px))}
+.vt-f1{right:4%;top:16%;width:31%;z-index:3;transform:rotateY(calc(-16deg + var(--sy)*10deg)) rotateX(4deg) translateZ(90px) translateY(calc(var(--sy)*40px))}
+.vt-f1 > *{animation-delay:-2.6s}
+.vt-f2{left:22%;top:-4%;width:54%;z-index:0;opacity:.55;transform:rotateY(10deg) rotateX(10deg) translateZ(-220px) translateY(calc(var(--sy)*-60px))}
+.vt-f2 > *{animation-delay:-5s}
+@keyframes vtBoia{50%{transform:translateY(-12px)}}
+.vt-stage::after{content:'';position:absolute;left:8%;right:8%;bottom:-4%;height:60px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(46,217,195,.32),transparent);filter:blur(18px);z-index:-1}
+/* moldura de navegador e de celular */
+.vt-browser{border-radius:14px;overflow:hidden;background:#0E1013;border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 44px 90px -34px rgba(0,0,0,.95),0 0 0 1px rgba(0,0,0,.35)}
+.vt-bar{height:26px;display:flex;align-items:center;gap:6px;padding:0 10px;background:linear-gradient(#1c1e24,#14161a);border-bottom:1px solid rgba(255,255,255,.06)}
+.vt-bar i{width:8px;height:8px;border-radius:50%;background:#3a3d44;flex-shrink:0}
+.vt-bar i:nth-child(1){background:#ff5f57}.vt-bar i:nth-child(2){background:#febc2e}.vt-bar i:nth-child(3){background:#28c840}
+.vt-bar span{flex:1;min-width:0;margin-left:8px;height:16px;border-radius:6px;background:rgba(255,255,255,.06);font:600 10px/16px ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:#97a2a2;text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding:0 8px}
+.vt-shot{position:relative;overflow:hidden;background:#0b0c0e;aspect-ratio:1200/585}
+.vt-shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transform:scale(1.08);will-change:transform;user-select:none}
+.vt-phone{position:relative;border-radius:36px;padding:8px;background:linear-gradient(145deg,#33363d,#0c0d10 60%);
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.14),0 44px 90px -34px rgba(0,0,0,.95)}
+.vt-phone .vt-shot{border-radius:29px;aspect-ratio:540/804}
+.vt-ilha{position:absolute;top:15px;left:50%;transform:translateX(-50%);width:30%;height:14px;border-radius:20px;background:#000;z-index:2}
+.vt-gera{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:8px;text-align:center;padding:16px;color:#fff;
+  background:radial-gradient(circle at 25% 15%,var(--ac),transparent 62%),radial-gradient(circle at 85% 90%,rgba(46,217,195,.5),transparent 55%),#101216}
+.vt-gera b{font-family:var(--serif);font-size:clamp(40px,6vw,74px);line-height:1;letter-spacing:-.04em}
+.vt-gera span{font-size:13px;font-weight:700;opacity:.82}
+/* filtros */
+.vt-filtros{display:flex;gap:2px;width:max-content;max-width:100%;overflow-x:auto;scrollbar-width:none;padding:4px;margin:0 0 26px;border-radius:999px;
+  background:var(--glass);border:1px solid var(--glass-line);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);box-shadow:var(--glass-hi);
+  position:sticky;top:96px;z-index:6}
+.vt-filtros:empty{display:none}
+.vt-chip{height:38px;padding:0 15px;border-radius:999px;border:0;background:transparent;color:var(--txt-2);font:inherit;font-size:13px;font-weight:700;
+  display:inline-flex;gap:8px;align-items:center;cursor:pointer;white-space:nowrap;transition:background .2s,color .2s}
+.vt-chip span{font-size:11px;padding:1px 7px;border-radius:9px;background:rgba(var(--tint),.08);color:var(--txt-3)}
+.vt-chip:hover{color:var(--txt);background:rgba(var(--tint),.05)}
+.vt-chip.on{background:linear-gradient(180deg,rgba(46,217,195,.24),rgba(46,217,195,.1));color:var(--acc-txt);box-shadow:inset 0 0 0 1px rgba(46,217,195,.4)}
+:root[data-tema="claro"] .vt-chip.on{color:#0A6E62}
+.vt-chip.on span{background:rgba(46,217,195,.22);color:inherit}
+/* cartões */
+.vt-lista{display:flex;flex-direction:column;gap:clamp(26px,4.5vw,64px);padding-bottom:40px}
+.vt-card{position:relative;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(22px,4vw,60px);align-items:center;
+  padding:clamp(18px,2.6vw,36px);border-radius:30px;overflow:hidden;isolation:isolate;
+  background:radial-gradient(60% 75% at 30% 50%,color-mix(in srgb,var(--ac) 20%,transparent),transparent 72%),var(--glass);
+  border:1px solid var(--glass-line);box-shadow:var(--glass-hi),var(--glass-sh);
+  opacity:0;transform:translateY(46px) scale(.98);transition:opacity .8s var(--ease),transform 1s var(--ease)}
+.vt-card.vt-dir{background:radial-gradient(60% 75% at 70% 50%,color-mix(in srgb,var(--ac) 20%,transparent),transparent 72%),var(--glass)}
+.vt-card.vt-cel{background:radial-gradient(45% 75% at 22% 50%,color-mix(in srgb,var(--ac) 24%,transparent),transparent 72%),var(--glass)}
+.vt-card.vt-cel.vt-dir{background:radial-gradient(45% 75% at 78% 50%,color-mix(in srgb,var(--ac) 24%,transparent),transparent 72%),var(--glass)}
+@media(max-width:820px){.vt-card,.vt-card.vt-dir,.vt-card.vt-cel,.vt-card.vt-cel.vt-dir{background:radial-gradient(90% 45% at 50% 22%,color-mix(in srgb,var(--ac) 22%,transparent),transparent 75%),var(--glass)}}
+.vt-card.vt-in{opacity:1;transform:none}
+.vt-card.vt-cel{grid-template-columns:minmax(0,.85fr) minmax(0,1fr)}
+.vt-card.vt-dir .vt-media{order:2}
+.vt-media{position:relative;display:block;perspective:1600px;transform-style:preserve-3d;text-decoration:none;
+  transform:rotateY(var(--tx,0deg)) rotateX(var(--ty,0deg));transition:transform .6s var(--ease);border-radius:18px}
+.vt-media:focus-visible{outline:2px solid #2ED9C3;outline-offset:6px}
+.vt-obj{position:relative;z-index:1;transform-style:preserve-3d;will-change:transform}
+.vt-cel .vt-obj{width:min(290px,100%);margin:0 auto}
+.vt-luz{display:none}
+.vt-media.vt-tilt .vt-shot::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,30%),rgba(255,255,255,.16),transparent 45%)}
+.vt-info{position:relative;z-index:1;will-change:transform,opacity}
+.vt-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.vt-tag{display:inline-flex;gap:6px;align-items:center;padding:5px 11px 5px 9px;border-radius:999px;font-size:10.8px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--txt);background:color-mix(in srgb,var(--ac) 20%,transparent);border:1px solid color-mix(in srgb,var(--ac) 46%,transparent)}
+.vt-tag svg{width:12px;height:12px}
+.vt-loc{font-size:12.5px;color:var(--txt-3);font-weight:680}
+.vt-idx{margin-left:auto;font-family:var(--serif);font-size:40px;line-height:1;font-weight:600;color:rgba(var(--tint),.12)}
+.vt-t{font-family:var(--serif);font-size:clamp(30px,3.3vw,48px);line-height:1;letter-spacing:-.025em;font-weight:600}
+.vt-cli{margin-top:9px;font-size:14px;color:var(--txt-2);font-weight:650}
+.vt-res{margin-top:14px;font-size:15.5px;line-height:1.6;color:var(--txt-2);max-width:42ch}
+.vt-dom{display:inline-flex;gap:6px;align-items:center;margin-top:16px;font:650 12.8px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--acc-txt);
+  text-decoration:none;padding-bottom:2px;border-bottom:1px dashed rgba(46,217,195,.45);word-break:break-all}
+:root[data-tema="claro"] .vt-dom{color:#0A7A6D}
+.vt-dom svg{width:13px;height:13px;flex-shrink:0;transition:transform .25s var(--ease)}
+.vt-dom:hover svg{transform:translate(2px,-2px)}
+.vt-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px;align-items:center}
+.vt-btns .btn{height:44px;padding:0 18px;border-radius:13px;font-size:13.5px;text-decoration:none}
+.vt-btns .icobtn{width:44px;height:44px;border-radius:13px}
+.vt-vazio{padding:46px 20px;text-align:center;color:var(--txt-3);border:1px dashed var(--line-2);border-radius:24px}
+@media(max-width:1100px){ .vt-hero{grid-template-columns:1fr;min-height:0} .vt-stage{height:360px} }
+@media(max-width:820px){
+  .vt-hero{gap:6px;padding:0 0 22px}
+  .vt-stage{height:270px;order:-1;margin:4px -6px 4px}
+  .vt-h{font-size:58px;margin:10px 0 12px}
+  .vt-lead{font-size:15px}
+  .vt-filtros{position:static}
+  .vt-card,.vt-card.vt-cel{grid-template-columns:1fr;border-radius:26px;gap:22px}
+  .vt-card.vt-dir .vt-media{order:0}
+  .vt-cel .vt-obj{width:min(250px,74%)}
+  .vt-idx{font-size:32px}
+  .vt-btns{display:grid;grid-template-columns:1fr 1fr 44px 44px;gap:8px}
+  .vt-btns .btn{padding:0 8px;font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){
+  .vt-card{opacity:1;transform:none;transition:none}
+  .vt-flutua > *,.vt-kick i{animation:none}
+  .vt-media{transition:none}
+}
+/* ---------------- PORTFÓLIO · PRODUÇÃO MUSICAL (v135) ---------------- */
+.pf-hero{position:relative;padding:26px 0 30px;min-height:380px;display:flex;align-items:center;isolation:isolate;overflow:hidden;overflow:clip}
+.pf-hero-txt{position:relative;z-index:1}
+.pf-h em{font-style:italic;background:linear-gradient(100deg,#2ED9C3,#7CC4FF 60%,#C9A6FF);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.06em}
+/* equalizador ao fundo: barras que respiram, se afastam ao rolar */
+.pf-eq{position:absolute;inset:0 0 0 38%;z-index:0;display:flex;align-items:flex-end;gap:1.1%;padding:0 2% 26px;
+  opacity:calc(.9 - var(--sy,0)*.7);transform:perspective(900px) rotateY(-18deg) rotateX(calc(8deg + var(--sy,0)*14deg));transform-origin:right bottom;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 85%,transparent);mask-image:linear-gradient(90deg,transparent,#000 22%,#000 85%,transparent);pointer-events:none}
+.pf-eq i{flex:1;height:var(--h);border-radius:6px 6px 2px 2px;transform-origin:bottom;
+  background:linear-gradient(180deg,#7CC4FF,#2ED9C3 55%,rgba(46,217,195,.15));box-shadow:0 0 18px -4px rgba(46,217,195,.6);
+  animation:pfEq 1.3s ease-in-out infinite alternate;animation-delay:var(--d)}
+@keyframes pfEq{0%{transform:scaleY(.18)}40%{transform:scaleY(.9)}70%{transform:scaleY(.45)}100%{transform:scaleY(1)}}
+:root[data-tema="claro"] .pf-eq i{background:linear-gradient(180deg,#5AA9E6,#17A695 55%,rgba(23,166,149,.12));box-shadow:none}
+/* faixa das marcas */
+.pf-marcas{overflow:hidden;margin:0 0 30px;padding:14px 0;border-block:1px solid var(--glass-line);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.pf-marcas-in{display:flex;gap:44px;width:max-content;animation:pfMarca 38s linear infinite}
+.pf-marcas-in span{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--txt-3);white-space:nowrap;letter-spacing:-.01em}
+.pf-marcas-in span:nth-child(n+11):nth-child(-n+14),.pf-marcas-in span:nth-child(n+25){font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;letter-spacing:.12em;color:var(--acc-txt);align-self:center}
+@keyframes pfMarca{to{transform:translateX(-50%)}}
+/* seções = faixas */
+.pf-sec{margin-bottom:clamp(36px,5vw,64px)}
+.pf-sec-h{display:grid;grid-template-columns:140px 1fr;gap:22px;align-items:end;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--glass-line)}
+.pf-trk{display:flex;flex-direction:column;gap:4px;font:700 11px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;color:var(--txt-3)}
+.pf-trk span{color:var(--acc-txt);font-size:12.5px}
+:root[data-tema="claro"] .pf-trk span{color:#0A7A6D}
+.pf-sec-h h3{font-family:var(--serif);font-size:clamp(26px,2.8vw,38px);line-height:1.05;letter-spacing:-.02em;font-weight:600}
+.pf-sec-h p{margin-top:6px;font-size:14.5px;color:var(--txt-2);max-width:62ch;line-height:1.55}
+.pf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.pf-card.vt-card{display:flex;flex-direction:column;gap:0;padding:0;border-radius:22px;align-items:stretch;
+  background:var(--glass);transition:opacity .7s var(--ease) calc(var(--i,0)*70ms),transform .9s var(--ease) calc(var(--i,0)*70ms),border-color .3s}
+.pf-card.vt-card:hover{border-color:color-mix(in srgb,var(--ac) 50%,transparent)}
+.pf-card.pf-big{grid-column:span 2;grid-row:span 2}
+.pf-big .pf-obj{aspect-ratio:auto;flex:1;min-height:0}
+.pf-big .pf-th{flex:1;display:flex;flex-direction:column}
+.pf-big .pf-obj{height:100%;min-height:300px}
+.pf-big .pf-info.vt-info{flex:0 0 auto}
+.pf-th{appearance:none;border:0;padding:0;background:none;cursor:pointer;display:block;width:100%;border-radius:22px 22px 0 0;overflow:hidden;color:inherit;font:inherit}
+.pf-th:disabled{cursor:default}
+.pf-obj{position:relative;aspect-ratio:16/9;overflow:hidden;background:#0b0c0e}
+.pf-obj img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.1);transition:filter .4s;will-change:transform}
+.pf-obj::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.55));pointer-events:none}
+.pf-th:hover .pf-obj img{filter:brightness(1.08) saturate(1.1)}
+.pf-play{position:absolute;left:50%;top:50%;z-index:2;width:62px;height:62px;margin:-31px 0 0 -31px;border-radius:50%;display:grid;place-items:center;color:#06231F;
+  background:rgba(255,255,255,.88);backdrop-filter:blur(10px);box-shadow:0 14px 34px -10px rgba(0,0,0,.7),0 0 0 8px rgba(255,255,255,.16);transition:transform .35s var(--ease-2),background .3s}
+.pf-play svg{width:24px;height:24px;margin-left:3px}
+.pf-th:hover .pf-play{transform:scale(1.1);background:#2ED9C3}
+.pf-big .pf-play{width:78px;height:78px;margin:-39px 0 0 -39px}
+.pf-wave{position:absolute;left:14px;bottom:12px;z-index:2;display:flex;gap:3px;align-items:flex-end;height:18px}
+.pf-wave i{width:3px;height:100%;border-radius:2px;background:#fff;opacity:0;transform-origin:bottom;transform:scaleY(.3);transition:opacity .3s}
+.pf-th:hover .pf-wave i{opacity:.9}
+.pf-th:hover .pf-wave i{animation:pfEq .9s ease-in-out infinite alternate}
+.pf-wave i:nth-child(2){animation-delay:-.3s}.pf-wave i:nth-child(3){animation-delay:-.6s}.pf-wave i:nth-child(4){animation-delay:-.15s}.pf-wave i:nth-child(5){animation-delay:-.45s}
+.pf-info.vt-info{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+.pf-cli{font:700 10.8px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:color-mix(in srgb,var(--ac) 70%,var(--txt))}
+.pf-info h4{margin-top:7px;font-family:var(--serif);font-size:22px;line-height:1.12;letter-spacing:-.015em;font-weight:600}
+.pf-big .pf-info h4{font-size:28px}
+.pf-info p{margin-top:8px;font-size:14px;line-height:1.55;color:var(--txt-2)}
+.pf-btns{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto;padding-top:14px;align-items:center}
+.pf-btns .btn{height:40px;padding:0 14px;border-radius:12px}
+.pf-btns .icobtn{width:40px;height:40px;border-radius:12px}
+/* o player abre por cima, dentro do app */
+.pf-player{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:20px;background:rgba(2,3,5,.78);
+  backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);opacity:0;transition:opacity .25s var(--ease)}
+.pf-player.on{opacity:1}
+.pf-player[hidden]{display:none}
+.pf-player-box{width:min(1100px,100%);border-radius:22px;overflow:hidden;background:#0b0c0f;border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 40px 100px -30px #000;transform:scale(.96);transition:transform .35s var(--ease)}
+.pf-player.on .pf-player-box{transform:none}
+.pf-player-top{display:flex;align-items:center;gap:12px;padding:10px 10px 10px 18px;color:#EEF2F2}
+.pf-player-top b{flex:1;min-width:0;font-size:14px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.pf-player-top .icobtn{width:44px;height:44px;color:#EEF2F2}
+.pf-player-v{aspect-ratio:16/9;background:#000}
+.pf-player-v iframe{width:100%;height:100%;border:0;display:block}
+/* atalho do portfólio no "Mais" */
+.mais-i.mais-pf{background:linear-gradient(120deg,rgba(124,196,255,.18),rgba(201,166,255,.08));border-color:rgba(124,196,255,.35)}
+.mais-pf .mais-vit-ico{background:rgba(124,196,255,.18);color:#9CCFFF}
+.mais-vit-imgs.pf img{width:46px;height:32px;margin-left:-14px}
+@media(max-width:900px){ .pf-card.pf-big{grid-column:auto;grid-row:auto} .pf-big .pf-obj{aspect-ratio:16/9;min-height:0;height:auto} .pf-eq{inset:0 0 0 0;opacity:calc(.35 - var(--sy,0)*.3)} }
+@media(max-width:820px){
+  .pf-hero{min-height:0;padding:10px 0 22px}
+  .pf-sec-h{grid-template-columns:1fr;gap:8px}
+  .pf-grid{grid-template-columns:1fr;gap:14px}
+  .pf-marcas-in span{font-size:18px}
+  .pf-btns .btn{flex:1 1 auto}
+}
+@media(prefers-reduced-motion:reduce){ .pf-eq i,.pf-marcas-in,.pf-wave i{animation:none!important} .pf-eq i{transform:scaleY(.6)} }
 </style>
 </head>
 <body>
@@ -1977,7 +2431,8 @@ body.conversa-mkt #dockFab{display:none}
 <g id="i-back"><path d="M15 18l-6-6 6-6"/></g>
 <g id="i-clip"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57a4 4 0 0 1 5.66 5.66l-8.58 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></g>
 <g id="i-share"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></g>
-<g id="i-mic"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3M8 22h8"/></g>
+<g id="i-sol"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g>
+<g id="i-ideia"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V17h6v-.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z"/></g><g id="i-mic"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3M8 22h8"/></g>
 <g id="i-mail"><rect x="2" y="4" width="20" height="16" rx="2.5"/><path d="M2.5 6l9.5 7 9.5-7"/></g>
 <g id="i-wa"><path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.4z"/><path d="M8.5 9.5c0 3 2 5 5 5.2.9.1 1.5-.4 1.7-1.1.1-.4-.1-.6-.4-.8l-1.4-.7c-.3-.2-.6-.1-.8.2l-.4.5c-1-.5-1.7-1.2-2.2-2.2l.5-.4c.3-.2.4-.5.2-.8l-.7-1.4c-.2-.3-.4-.5-.8-.4-.7.2-1.2.8-1.1 1.7"/></g>
 <g id="i-send"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></g>
@@ -1994,6 +2449,7 @@ body.conversa-mkt #dockFab{display:none}
 <g id="i-db"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/></g>
 <g id="i-insta"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></g>
 <g id="i-globe"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z"/></g>
+<g id="i-vitrine"><rect x="2.5" y="4" width="14" height="10.5" rx="2.2"/><path d="M7.5 19.5h10a3 3 0 0 0 3-3V9"/><path d="M5.8 11.4l2.6-2.6 2.1 2.1 2.6-3"/></g>
 <g id="i-eye"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></g>
 <g id="i-inbox"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5.5h13l3.5 6.5v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-6z"/></g>
 <g id="i-refresh"><path d="M22 11.5A9.5 9.5 0 0 0 5 6.5L2 9.5"/><path d="M2 4v5.5h5.5M2 12.5A9.5 9.5 0 0 0 19 17.5l3-3"/><path d="M22 20v-5.5h-5.5"/></g>
@@ -2034,27 +2490,17 @@ body.conversa-mkt #dockFab{display:none}
     </div>
   </div>
 
-  <div class="nav-i" data-v="chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-zap"/></svg>Assistente</div>
-  <div class="nav-lbl">Dia a dia</div>
-  <div class="nav-i on" data-v="dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-grid"/></svg>Dashboard</div>
-  <div class="nav-i" data-v="tarefas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-checkc"/></svg>Tarefas<span class="nav-badge" id="navTar" style="display:none">0</span></div>
-  <div class="nav-i" data-v="recados"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-inbox"/></svg>Recados<span class="nav-badge aviso" id="navRec" style="display:none">0</span></div>
-  <div class="nav-i" data-v="agenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-cal"/></svg>Agenda</div>
-  <div class="nav-lbl">Clientes e vendas</div>
-  <div class="nav-i" data-v="pipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-kanban"/></svg>Pipeline<span class="nav-badge" id="navPipe">0</span></div>
-  <div class="nav-i" data-v="cli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-users"/></svg>Clientes</div>
-  <div class="nav-i" data-v="prosp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-user"/></svg>Prospecção<span class="nav-badge" id="navProsp">0</span></div>
-  <div class="nav-i" data-v="conv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-wa"/></svg>Conversas<span class="nav-badge aviso" id="navConv" style="display:none">0</span></div>
-  <div class="nav-lbl">Marca e conteúdo</div>
-  <div class="nav-i" data-v="mkt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-mega"/></svg>Marketing<span class="nav-badge" id="navMkt" style="display:none">0</span></div>
-  <div class="nav-i" data-v="vitrine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye"/></svg>Vitrine</div>
-  <div class="nav-i" data-v="site"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-globe"/></svg>Meu site</div>
-  <div class="nav-lbl">Palco e dinheiro</div>
-  <div class="nav-i" data-v="shows"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-mic"/></svg>Shows<span class="nav-badge" id="navShows">0</span></div>
-  <div class="nav-i" data-v="fin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-wallet"/></svg>Financeiro</div>
-  <div class="nav-lbl">Sistema</div>
-  <div class="nav-i" data-v="notif"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-bell"/></svg>Notificações<span class="nav-badge alerta" id="navNotif">0</span></div>
-  <div class="nav-i" data-v="adm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-sliders"/></svg>ADM</div>
+  <div class="nav-i" data-v="chat" data-g="chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-zap"/></svg>Assistente</div>
+  <div class="nav-lbl">Seu dia e o estúdio</div>
+  <div class="nav-i on" data-v="hoje" data-g="hoje"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-sol"/></svg>Hoje<span class="nav-badge alerta" id="navHoje" style="display:none">0</span></div>
+  <div class="nav-i" data-v="pipe" data-g="vendas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-kanban"/></svg>Vendas</div>
+  <div class="nav-i" data-v="mkt" data-g="mkt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-mega"/></svg>Marketing<span class="nav-badge" id="navMkt" style="display:none">0</span></div>
+  <div class="nav-i nav-vit" data-v="vitrine" data-g="vitrine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-vitrine"/></svg>Vitrine<span class="nav-novo">novo</span></div>
+  <div class="nav-i nav-vit" data-v="portfolio" data-g="portfolio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-music"/></svg>Portfólio<span class="nav-novo">novo</span></div>
+  <div class="nav-i" data-v="dash" data-g="dinheiro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-wallet"/></svg>Dinheiro</div>
+  <div class="nav-i" data-v="adm" data-g="ajustes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-sliders"/></svg>Ajustes</div>
+  <!-- v131: os contadores antigos continuam vivos (o resto do app escreve neles); as abas de cima leem daqui -->
+  <div id="navVelho" hidden><span class="nav-badge" id="navTar" style="display:none">0</span><span class="nav-badge" id="navRec" style="display:none">0</span><span class="nav-badge" id="navPipe" style="display:none">0</span><span class="nav-badge" id="navProsp" style="display:none">0</span><span class="nav-badge" id="navConv" style="display:none">0</span><span class="nav-badge" id="navShows" style="display:none">0</span><span class="nav-badge" id="navNotif" style="display:none">0</span></div>
 
   <div style="padding:0 16px 10px"><div id="syncSelo" class="mini" style="display:none;font-size:10.8px;font-weight:640"></div></div>
   <div class="side-foot">
@@ -2072,8 +2518,8 @@ body.conversa-mkt #dockFab{display:none}
 <main class="main">
   <header class="top">
     <div>
-      <h1 id="pgT">Dashboard</h1>
-      <div class="top-sub" id="pgS">Visão geral do estúdio</div>
+      <h1 id="pgT">Hoje</h1>
+      <div class="top-sub" id="pgS">O que precisa de você agora — e o que tem no dia</div>
     </div>
     <div class="spacer"></div>
     <label class="search">
@@ -2092,8 +2538,10 @@ body.conversa-mkt #dockFab{display:none}
     </button>
   </header>
 
-  <!-- ---------- DASHBOARD ---------- -->
-  <section class="view on" id="v-dash">
+  <nav class="grp-tabs" id="grpTabs" aria-label="Telas desta parte"></nav>
+
+  <!-- ---------- HOJE (v131) ---------- -->
+  <section class="view on" id="v-hoje">
     <div class="install-bar" id="installBar">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;color:#2ED9C3;flex-shrink:0"><use href="#i-down"/></svg>
       <div style="flex:1;min-width:0">
@@ -2103,6 +2551,37 @@ body.conversa-mkt #dockFab{display:none}
       <button class="btn pri sm" id="btnInstall">Instalar</button>
       <button class="icobtn" id="btnInstallX" style="width:30px;height:30px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><use href="#i-x"/></svg></button>
     </div>
+    <div class="hoje-topo">
+      <div><div class="hoje-ola" id="hojeOla">Olá</div><div class="hoje-data" id="hojeData"></div></div>
+      <div class="hoje-nums" id="hojeNums"></div>
+    </div>
+    <div class="card hoje-nova"><div class="card-b">
+      <div class="tar-nova">
+        <input class="inp" id="hojeNova" placeholder="Anotar algo pra fazer…" autocomplete="off" enterkeyhint="done">
+        <button class="btn" id="hojeIdeia" type="button" title="Gravar uma conversa e tirar as ideias dela"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-ideia"/></svg><span class="lbl">Gravar ideia</span></button>
+        <button class="btn pri" id="hojeAdd" type="button">Anotar</button>
+      </div>
+    </div></div>
+    <div class="grid g-23" style="margin-top:14px">
+      <div class="card">
+        <div class="card-h"><div><div class="card-t">Precisa de você <span class="hoje-cont" id="hojeN"></span></div><div class="card-d">Cada linha tem um botão que resolve ou leva até lá</div></div></div>
+        <div class="card-b"><div class="stack-v" id="hojePrecisa"></div></div>
+      </div>
+      <div class="stack-v" style="gap:14px">
+        <div class="card">
+          <div class="card-h"><div><div class="card-t">Hoje na agenda</div><div class="card-d" id="hojeAgD">—</div></div><div class="spacer"></div><button class="btn sm gh" data-goto="agenda" type="button">Agenda inteira</button></div>
+          <div class="card-b"><div class="hoje-sem" id="hojeSem"></div><div class="stack-v" id="hojeAgenda"></div></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><div><div class="card-t">Pra fazer</div><div class="card-d">Anotado, sem dia marcado</div></div><div class="spacer"></div><button class="btn sm gh" data-goto="tarefas" type="button">Todas</button></div>
+          <div class="card-b"><div class="stack-v" id="hojeTar"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- DASHBOARD ---------- -->
+  <section class="view" id="v-dash">
     <div class="grid g4" id="kpis"></div>
 
     <div class="grid g-32" style="margin-top:14px">
@@ -2187,12 +2666,22 @@ body.conversa-mkt #dockFab{display:none}
         <button class="chip" id="ouvCanc">descartar</button>
         <button class="chip on" id="ouvPara">enviar</button>
       </div>
+      <div id="ideiaRec" role="status">
+        <span class="ideia-bola"></span>
+        <b>Gravando ideia</b><span class="ouv-rel" id="ideiaRel">0:00</span><span class="ideia-quem" id="ideiaQuem"></span>
+        <span class="ouv-t" id="ideiaTxt">Gravando — pode conversar normal.</span>
+        <button class="chip" id="ideiaDesc">descartar</button>
+        <button class="chip on" id="ideiaFim">parar e salvar</button>
+      </div>
       <div id="chatCtx"></div>
       <div id="anexos"></div>
       <div class="chat-in">
         <input type="file" id="anexoIn" multiple accept="image/png,image/jpeg,image/webp,image/gif,application/pdf" style="display:none">
         <button class="icobtn" id="anexoBtn" title="Anexar foto ou PDF">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-clip"/></svg>
+        </button>
+        <button class="icobtn" id="ideiaBtn" title="Gravar ideia — grava a conversa e vira conteúdo" aria-label="Gravar ideia">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-ideia"/></svg>
         </button>
         <button class="icobtn" id="micBtn" title="Falar — aperta, fala, e vai sozinho quando você parar"
                 aria-label="Falar por voz">
@@ -2216,6 +2705,7 @@ body.conversa-mkt #dockFab{display:none}
 
   <!-- ---------- PIPELINE ---------- -->
   <section class="view" id="v-pipe">
+    <div id="pipeAviso"></div>
     <div class="filters" id="pipeFilters"></div>
     <div class="kb-wrap"><div class="kb" id="kb"></div></div>
   </section>
@@ -2371,16 +2861,46 @@ body.conversa-mkt #dockFab{display:none}
 
   <!-- ---------- VITRINE ---------- -->
   <section class="view" id="v-vitrine">
-    <div class="card">
-      <div class="card-h">
-        <div><div class="card-t">O que eu já entreguei</div>
-          <div class="card-d">Apps, trilhas e sites prontos pra mostrar. Um toque monta a mensagem de WhatsApp com o link.</div></div>
-        <div class="spacer"></div>
-        <button class="btn pri" id="btnVitNovo">+ Novo trabalho</button>
+    <div class="vt-hero">
+      <div class="vt-hero-txt">
+        <div class="vt-kick"><i></i>Portfólio · studio Ti Artes</div>
+        <h2 class="vt-h">Vitrine</h2>
+        <p class="vt-lead">Os sites e apps que já estão no ar. Abra na reunião, mostre no celular ou mande o link no WhatsApp em um toque.</p>
+        <div class="vt-nums" id="vtNums"></div>
+        <div class="vt-acts">
+          <button class="btn pri" id="btnVitNovo" type="button">+ Novo trabalho</button>
+          <button class="btn" id="btnVitTudo" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-wa"/></svg>Mandar a vitrine inteira</button>
+        </div>
       </div>
-      <div class="card-b"><div id="vitLista"></div></div>
+      <div class="vt-stage" id="vtStage" aria-hidden="true"></div>
     </div>
+    <div class="vt-filtros" id="vtFiltros" role="group" aria-label="Filtrar trabalhos"></div>
+    <div id="vitLista" class="vt-lista"></div>
   </section>
+
+  <section class="view" id="v-portfolio">
+    <div class="pf-hero">
+      <div class="pf-eq" id="pfEq" aria-hidden="true"></div>
+      <div class="pf-hero-txt">
+        <div class="vt-kick"><i></i>Portfólio · produção musical</div>
+        <h2 class="vt-h pf-h">Som feito <em>à mão</em></h2>
+        <p class="vt-lead">Trilha, sound design e mixagem em Dolby Atmos para publicidade, exposições imersivas e artistas. Toque num trabalho para assistir aqui mesmo.</p>
+        <div class="vt-nums" id="pfNums"></div>
+        <div class="vt-acts">
+          <button class="btn pri" id="btnPfNovo" type="button">+ Novo trabalho</button>
+          <button class="btn" id="btnPfTudo" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-wa"/></svg>Mandar o portfólio inteiro</button>
+        </div>
+      </div>
+    </div>
+    <div class="pf-marcas" aria-label="Marcas atendidas"><div class="pf-marcas-in" id="pfMarcas"></div></div>
+    <div id="pfLista"></div>
+  </section>
+  <div class="pf-player" id="pfPlayer" role="dialog" aria-modal="true" aria-label="Assistir" hidden>
+    <div class="pf-player-box">
+      <div class="pf-player-top"><b id="pfPlayerT"></b><button class="icobtn" type="button" id="pfPlayerX" aria-label="Fechar o vídeo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><use href="#i-x"/></svg></button></div>
+      <div class="pf-player-v" id="pfPlayerV"></div>
+    </div>
+  </div>
 
   <!-- ---------- RECADOS ---------- -->
   <section class="view" id="v-recados">
@@ -2573,14 +3093,12 @@ body.conversa-mkt #dockFab{display:none}
        Estava escondido numa aba dentro do ADM. Cliente não é
        configuração: é o trabalho. Agora mora na barra lateral. -->
   <section class="view" id="v-cli">
-    <div class="card" style="margin-bottom:14px">
-      <div class="card-b" style="padding-top:2px"><div class="stat-row" id="cliResumo"></div></div>
-    </div>
+    <div class="cli-kpis" id="cliResumo"></div>
     <div class="card">
       <div class="card-h">
         <div><div class="card-t">Carteira de clientes</div><div class="card-d">Contato, WhatsApp e e-mail — é daqui que saem as cobranças e os avisos</div></div>
         <div class="spacer"></div>
-        <button class="btn sm pri" id="btnNewCli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-plus"/></svg>Novo cliente</button>
+        <button class="btn sm pri" id="btnNewCli" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-plus"/></svg>Novo cliente</button>
       </div>
       <div class="card-b" style="padding:8px 14px 14px">
         <div class="cli-tool">
@@ -2785,10 +3303,10 @@ body.conversa-mkt #dockFab{display:none}
 
 <!-- ================= NAV MOBILE ================= -->
 <nav class="mobnav" id="mobnav">
-  <div class="mob-i" data-v="chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-zap"/></svg><span class="mob-t">Chat</span></div>
-  <div class="mob-i" data-v="pipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-kanban"/></svg><span class="mob-t">Pipeline</span><span class="bdg" id="mobPipe" style="display:none">0</span></div>
-  <div class="mob-i" data-v="agenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-cal"/></svg><span class="mob-t">Agenda</span></div>
-  <div class="mob-i" data-v="cli" title="Clientes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-users"/></svg><span class="mob-t">Client</span></div>
+  <div class="mob-i" data-v="hoje" data-g="hoje"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-sol"/></svg><span class="mob-t">Hoje</span><span class="bdg" id="mobHoje" style="display:none">0</span></div>
+  <div class="mob-i" data-v="pipe" data-g="vendas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-kanban"/></svg><span class="mob-t">Vendas</span><span class="bdg" id="mobPipe" style="display:none">0</span></div>
+  <div class="mob-i" data-v="chat" data-g="chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-zap"/></svg><span class="mob-t">Chat</span></div>
+  <div class="mob-i" data-v="mkt" data-g="mkt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-mega"/></svg><span class="mob-t">Mktg</span><span class="bdg" id="mobMkt" style="display:none">0</span></div>
   <div class="mob-i" id="mobMais" data-mais="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-layers"/></svg><span class="mob-t">Mais</span><span class="bdg" id="mobMaisBdg" style="display:none">0</span></div>
 </nav>
 <!-- A FOLHA DO "MAIS".
@@ -2799,15 +3317,23 @@ body.conversa-mkt #dockFab{display:none}
 <div class="mais-sheet" id="maisSheet" role="dialog" aria-label="Mais telas" aria-modal="true">
   <div class="mais-pega"></div>
   <div class="mais-grid">
+    <div class="mais-i mais-vit" data-v="vitrine"><span class="mais-vit-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-vitrine"/></svg></span><span class="mais-vit-t"><b>Vitrine</b><small>Sites e apps que já estão no ar</small></span><span class="mais-vit-imgs"><img src="vitrine/carol.webp" alt="" loading="lazy"><img src="vitrine/b12.webp" alt="" loading="lazy"><img src="vitrine/dinamarca.webp" alt="" loading="lazy"></span></div>
+    <div class="mais-i mais-vit mais-pf" data-v="portfolio"><span class="mais-vit-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-music"/></svg></span><span class="mais-vit-t"><b>Portfólio</b><small>Produção musical: trilha, sound design, Atmos</small></span><span class="mais-vit-imgs pf"><img src="portfolio/monet.webp" alt="" loading="lazy"><img src="portfolio/sport.webp" alt="" loading="lazy"><img src="portfolio/song2.webp" alt="" loading="lazy"></span></div>
+    <div class="mais-sec">Seu dia</div>
+    <div class="mais-i" data-v="agenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-cal"/></svg><span>Agenda</span></div>
     <div class="mais-i" data-v="tarefas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-checkc"/></svg><span>Tarefas</span><span class="bdg" id="mobTar" style="display:none">0</span></div>
     <div class="mais-i" data-v="recados"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-inbox"/></svg><span>Recados</span><span class="bdg" id="mobRec" style="display:none">0</span></div>
-    <div class="mais-i" data-v="dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-grid"/></svg><span>Painel</span></div>
     <div class="mais-i" data-v="conv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-wa"/></svg><span>Msgs</span><span class="bdg" id="mobConv" style="display:none">0</span></div>
-    <div class="mais-i" data-v="shows"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-mic"/></svg><span>Shows</span></div>
-    <div class="mais-i" data-v="fin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-wallet"/></svg><span>Verba</span></div>
+    <div class="mais-sec">Vendas</div>
+    <div class="mais-i" data-v="cli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-users"/></svg><span>Clientes</span></div>
     <div class="mais-i" data-v="prosp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-user"/></svg><span>Prosp</span><span class="bdg" id="mobProsp" style="display:none">0</span></div>
-    <div class="mais-i" data-v="mkt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-mega"/></svg><span>Mktg</span><span class="bdg" id="mobMkt" style="display:none">0</span></div>
+    <div class="mais-i" data-v="shows"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-mic"/></svg><span>Shows</span></div>
+    <div class="mais-sec">Marca</div>
     <div class="mais-i" data-v="site"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-globe"/></svg><span>Site</span></div>
+    <div class="mais-sec">Dinheiro e ajustes</div>
+    <div class="mais-i" data-v="dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-grid"/></svg><span>Resumo</span></div>
+    <div class="mais-i" data-v="fin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-wallet"/></svg><span>Verba</span></div>
+    <div class="mais-i" data-v="notif"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-bell"/></svg><span>Alertas</span></div>
     <div class="mais-i" data-v="adm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-sliders"/></svg><span>ADM</span></div>
   </div>
 </div>
@@ -3314,7 +3840,8 @@ function prazoInfo(j){
    NAVEGAÇÃO
    ============================================================ */
 const PG={chat:['Assistente','Fala do jeito que você fala — eu leio e mexo em qualquer aba do app'],
-  dash:['Dashboard','Visão geral do estúdio'],
+  hoje:['Hoje','O que precisa de você agora — e o que tem no dia'],
+  dash:['Resumo','Dinheiro, metas e números do estúdio'],
   pipe:['Pipeline','Arraste os cards entre as etapas do fluxo'],
   cli:['Clientes','Sua carteira: contato, WhatsApp, e-mail e quanto cada um já rendeu'],
   cliente:['Cliente','Briefing, anotações e histórico'],
@@ -3322,15 +3849,16 @@ const PG={chat:['Assistente','Fala do jeito que você fala — eu leio e mexo em
   mkt:['Marketing','Crie o post, confira a prévia e deixe na fila'],
   conv:['Conversas','Tudo que você falou com cada cliente e contato — e o que mandar agora'],
   site:['Meu site','Seu site e a página dos agentes — abertos aqui dentro, prontos pra mandar'],
-  vitrine:['Vitrine','Seus trabalhos prontos — mande pra quem você quiser em um toque'],
+  vitrine:['Vitrine','Sites e apps que já estão no ar — mostre ou mande em um toque'],
+  portfolio:['Portfólio','Produção musical — trilha, sound design e Dolby Atmos'],
   tarefas:['Tarefas','Anote o que tem que fazer — e decida o que vai pra agenda'],
   recados:['Recados','O que chegou pelo WhatsApp e pelo Instagram — o atendente anota, quem confirma é você'],
   agenda:['Agenda','Prazos, entregas, shows e tarefas em ordem'],
   shows:['Shows','Roteiro de datas, produção e cachês'],
   fin:['Financeiro','Verba, recebíveis e histórico'],
-  notif:['Notificações','Alertas calculados pelas suas regras'],
+  notif:['Alertas','Avisos calculados pelas suas regras'],
   adm:['ADM','Você manda no fluxo, nos preços e nos avisos']};
-let VIEW='dash';
+let VIEW='hoje';
 /* lateral: tela larga e ele nao recolheu. dockOff e por aparelho. */
 function dockCabe(){ return window.innerWidth>=1280; }
 function conversaNoMkt(){ try{ return VIEW==='mkt'; }catch(e){ return false; } }   /* v86: no Marketing inteiro o assistente mora na aba Conversa, não na lateral */
@@ -3345,8 +3873,9 @@ function dockAplicar(){
   if(on && wrap.parentNode!==corpo) corpo.appendChild(wrap);
   if(!on){ const casa=(typeof chatCasa==='function'&&chatCasa())||aba; if(wrap.parentNode!==casa) casa.appendChild(wrap); }
   /* a aba Assistente vira a propria lateral; se ele estava nela, vai pro painel */
-  if(on && VIEW==='chat'){ VIEW='dash'; $$('.view').forEach(x=>x.classList.toggle('on',x.id==='v-dash'));
-    $$('.nav-i').forEach(n=>n.classList.toggle('on',n.dataset.v==='dash')); $('#pgT').textContent=PG.dash[0]; $('#pgS').textContent=PG.dash[1]; }
+  if(on && VIEW==='chat'){ VIEW='hoje'; $$('.view').forEach(x=>x.classList.toggle('on',x.id==='v-hoje'));
+    $('#pgT').textContent=PG.hoje[0]; $('#pgS').textContent=PG.hoje[1]; if(typeof renderHoje==='function') try{ renderHoje(); }catch(_){} }
+  if(typeof pintarGrupo==='function') try{ pintarGrupo(); }catch(_){}
   $$('.nav-i[data-v="chat"]').forEach(n=>n.classList.toggle('on', on || VIEW==='chat'));
   if(typeof renderChat==='function' && chatNaTela()) try{ renderChat(); }catch(_){}
 }
@@ -3369,6 +3898,7 @@ function go(v){
   $$('.nav-i').forEach(n=>n.classList.toggle('on',n.dataset.v===v || (n.dataset.v==='chat'&&dockLigado())));
   $$('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
   $('#pgT').textContent=PG[v][0]; $('#pgS').textContent=PG[v][1];
+  if(typeof pintarGrupo==='function') try{ pintarGrupo(); }catch(_){}
   window.scrollTo({top:0,behavior:'smooth'});
   render();
 }
@@ -4029,6 +4559,12 @@ function renderPipe(){
 
   const js=jobsVisiveis();
   const shs=showsNoPipe();
+  $('#pipeFilters').innerHTML+=`<span style="width:1px;height:20px;background:var(--line);margin:0 4px"></span>`+
+    `<button class="chip ${pipeSimples()?'on':''}" data-pmodo="simples" type="button">4 colunas</button><button class="chip ${pipeSimples()?'':'on'}" data-pmodo="todas" type="button">Todas as etapas</button>`;
+  const venc=arrumarLista().length;
+  const aviso=$('#pipeAviso'); if(aviso) aviso.innerHTML= venc? `<button class="pipe-aviso" type="button" data-arrumar="1">${svgI('i-alert',16,2.2)}<span><b>${venc} job${venc>1?'s':''} com prazo vencido</b> — muitos já foram entregues e ficaram no lugar errado</span><span class="pipe-aviso-b">Arrumar em 1 minuto</span></button>` : '';
+  $('#kb').classList.toggle('kb-4',pipeSimples());
+  if(pipeSimples()){ $('#kb').innerHTML=pipe4(js,shs); return; }
   $('#kb').innerHTML=colunaReunioes()+S.stages.map(st=>{
     const list=js.filter(j=>j.stageId===st.id)
       .sort((a,b)=>(b.prio-a.prio)||(D(a.prazo)-D(b.prazo)));
@@ -4048,6 +4584,72 @@ function renderPipe(){
     </div>`;
   }).join('');
 }
+
+
+/* ============================================================
+   v132: PIPELINE EM 4 COLUNAS
+   As etapas dele continuam existindo (ADM › fluxo) — aqui elas só são
+   agrupadas no que importa pra decidir: estou conversando, estou fazendo,
+   entreguei e falta receber, recebi. A etapa de verdade aparece no cartão.
+   "Todas as etapas" volta pro quadro antigo.
+   ============================================================ */
+function pipeSimples(){ return !(S.cfg&&S.cfg.pipeTodas); }
+const RX_CONVERSA=/or[cç]amento|proposta|conversa|negocia|lead|contato|briefing|cota[cç]/i;
+function pipeGrupos(){
+  const ab=S.stages.filter(x=>x.tipo==='aberto');
+  let conv=ab.filter(x=>RX_CONVERSA.test(x.nome||''));
+  if(!conv.length && ab.length>1) conv=[ab[0]];
+  const faz=ab.filter(x=>!conv.includes(x));
+  return [
+    {k:'conv',n:'Conversando',d:'orçamento, proposta, reunião',cor:'#60A5FA',st:conv},
+    {k:'faz', n:'Fazendo',d:'aprovado, em produção, revisão',cor:'#2ED9C3',st:faz},
+    {k:'ent', n:'Entregue',d:'falta receber',cor:'#FBBF24',st:S.stages.filter(x=>x.tipo==='entregue')},
+    {k:'pago',n:'Pago',d:'dinheiro na conta',cor:'#34D399',st:S.stages.filter(x=>x.tipo==='pago')}
+  ];
+}
+let PIPE_COL='conv', PIPE_PAGO_TUDO=false;
+function pipeProx(j,k){
+  const p=prazoInfo(j);
+  if(k==='conv') return dias(j.prazo)<0? 'responder ou arquivar' : 'fechar o orçamento';
+  if(k==='faz')  return dias(j.prazo)<0? 'entregar ou dar baixa' : dias(j.prazo)===0? 'entregar hoje' : 'entregar até '+fmtD(j.prazo);
+  if(k==='ent')  return saldo(j)>0? 'cobrar '+BRL(saldo(j)) : 'marcar como pago';
+  return '';
+}
+function pipe4(js,shs){
+  const G=pipeGrupos(), mesP=iso(new Date(HOJE.getFullYear(),HOJE.getMonth()-1,1));
+  const cols=G.map(g=>{
+    const ids=g.st.map(x=>x.id);
+    let list=js.filter(j=>ids.includes(j.stageId));
+    let lsh=shs.filter(x=>ids.includes(shStage(x).id));
+    let escond=0;
+    if(g.k==='pago' && !PIPE_PAGO_TUDO){ const a=list.length+lsh.length;
+      list=list.filter(j=>!j.pagoEm||j.pagoEm>=mesP); lsh=lsh.filter(x=>!x.pagoEm||x.pagoEm>=mesP); escond=a-list.length-lsh.length; }
+    list.sort((a,b)=> g.k==='pago'? String(b.pagoEm||'').localeCompare(String(a.pagoEm||'')) : (D(a.prazo)-D(b.prazo)) || (b.prio-a.prio));
+    lsh.sort((a,b)=>D(a.data)-D(b.data));
+    const reus= g.k==='conv' && FILTRO.area==='all' ? reunioesNoPipe() : [];
+    const n=list.length+lsh.length;
+    const v=list.reduce((t,j)=>t+(g.k==='ent'?saldo(j):(j.valor||0)),0)+lsh.reduce((t,x)=>t+(g.k==='ent'?shSaldo(x):(x.cache||0)),0);
+    const sub= g.st.length>1;
+    const card=(j,i)=>jobCard(j,i,{etapa:sub?stage(j.stageId).nome:'',prox:pipeProx(j,g.k)});
+    const alvo=g.st[0]?g.st[0].id:'';
+    return {g,n,html:`<div class="col col4 ${PIPE_COL===g.k?'col-on':''}" data-stage="${alvo||'__nada'}" data-grp="${g.k}" data-grpids="${ids.join(',')}">
+      <div class="col-h"><span class="col-dot" style="background:${g.cor};color:${g.cor}"></span><span class="col-n">${esc(g.n)}</span><span class="col-c">${n}${reus.length?' + '+reus.filter(r=>!r.feito).length+' reun.':''}</span></div>
+      <div class="col-sum">${esc(g.d)}${n?' · '+(g.k==='ent'?'a receber ':'')+BRLc(v):''}</div>
+      <div class="col-b" data-body="${alvo}">${reus.map((r,i)=>reuniaoCard(r,i)).join('')}${list.map(card).join('')}${lsh.map((x,i)=>showCard(x,list.length+i)).join('')}
+        ${!n&&!reus.length?`<div class="col-vazio">${g.k==='conv'?'Nenhuma conversa aberta.':g.k==='faz'?'Nada em produção.':g.k==='ent'?'Ninguém te devendo.':'Nada pago este mês ainda.'}</div>`:''}
+        ${escond?`<button class="col-mais" type="button" data-pagotudo="1">+ ${escond} pago${escond>1?'s':''} antes de ${esc(fmtD(mesP))}</button>`:''}</div>
+      ${g.k==='conv'?`<div class="col-adds">${alvo?`<button class="col-add" data-add="${alvo}">${svgI('i-plus',13,2.4)}Orçamento</button>`:''}<button class="col-add" data-addreu="1">${svgI('i-plus',13,2.4)}Reunião</button></div>`
+        : g.k==='faz'&&alvo?`<button class="col-add" data-add="${alvo}">${svgI('i-plus',13,2.4)}Adicionar job</button>`:''}
+    </div>`};
+  });
+  const seg=`<div class="pipe-seg" role="tablist">${cols.map(c=>`<button type="button" role="tab" class="${PIPE_COL===c.g.k?'on':''}" data-pcol="${c.g.k}" aria-selected="${PIPE_COL===c.g.k}">${esc(c.g.n)}<span>${c.n}</span></button>`).join('')}</div>`;
+  return seg+cols.map(c=>c.html).join('');
+}
+document.addEventListener('click',e=>{ let b;
+  if(b=e.target.closest('[data-pmodo]')){ S.cfg.pipeTodas=b.dataset.pmodo==='todas'; save(); renderPipe(); return; }
+  if(b=e.target.closest('[data-pcol]')){ PIPE_COL=b.dataset.pcol; renderPipe(); return; }
+  if(b=e.target.closest('[data-pagotudo]')){ PIPE_PAGO_TUDO=true; renderPipe(); return; }
+});
 
 /* ============================================================
    v129: REUNIÃO NO PIPELINE
@@ -4262,13 +4864,13 @@ function obsCard(t){
   if(!s) return '';
   return `<div class="job-obs">${svgI('i-edit',11,2)}<span>${esc(s)}</span></div>`;
 }
-function jobCard(j,i=0){
-  const a=area(j.areaId), c=cli(j.cliId), p=prazoInfo(j);
+function jobCard(j,i=0,o){
+  const a=area(j.areaId), c=cli(j.cliId), p=prazoInfo(j); o=o||{};
   return `<div class="job" draggable="true" data-id="${j.id}" style="--jc:${a.cor};animation-delay:${i*45}ms">
     <div class="prio p${j.prio}"><i></i><i></i><i></i></div>
     <div class="job-t">${esc(j.titulo)}</div>
     <div class="job-cl">${svgI('i-user',11,2)}${esc(c.nome)}</div>
-    <div class="job-m"><span class="pill ${a.cls}"><span class="dot"></span>${esc(a.curta)}</span></div>
+    <div class="job-m"><span class="pill ${a.cls}"><span class="dot"></span>${esc(a.curta)}</span>${o.etapa?`<span class="pill p-gry job-etapa">${esc(o.etapa)}</span>`:''}</div>
     <div class="prog"><i style="width:${j.prog}%"></i></div>
     ${(j.pgVezes>1||j.pgEntrada>0)?`<div class="job-pag">${svgI('i-wallet',10,2.2)}${esc(resumoPagamento(j))}</div>`:''}
     ${obsCard(j.obs)}
@@ -4276,6 +4878,7 @@ function jobCard(j,i=0){
       <span class="job-val">${BRL(j.valor)}</span>
       <span class="job-dl" style="color:${corTxt(p.cor)}">${svgI('i-clock',11,2.2)}${esc(p.txt)}</span>
     </div>
+    ${o.prox?`<div class="job-prox">→ ${esc(o.prox)}</div>`:''}
   </div>`;
 }
 
@@ -4295,7 +4898,7 @@ document.addEventListener('dragend',e=>{
 });
 document.addEventListener('dragover',e=>{
   const col=e.target.closest('.col'); if(!col||!(DRAG||DRAGSH)) return;
-  if(col.dataset.stage==='__reu') return;   /* v129: a coluna de reuniões não recebe job */
+  if(col.dataset.stage==='__reu'||col.dataset.stage==='__nada') return;   /* v129: a coluna de reuniões não recebe job */
   e.preventDefault(); e.dataTransfer.dropEffect='move';
   $$('.col').forEach(c=>c.classList.toggle('drop',c===col));
 });
@@ -4304,7 +4907,11 @@ document.addEventListener('drop',e=>{
   e.preventDefault();
   const stId=col.dataset.stage;
   $$('.col').forEach(c=>c.classList.remove('drop'));
-  if(stId==='__reu'){ DRAG=null; DRAGSH=null; return; }
+  if(stId==='__reu'||stId==='__nada'){ DRAG=null; DRAGSH=null; return; }
+  /* v132: nas 4 colunas, soltar no mesmo grupo não troca a etapa (Em produção não volta pra Aprovado) */
+  const mesmos=(col.dataset.grpids||'').split(',').filter(Boolean);
+  if(mesmos.length){ const atual= DRAGSH? shStage((S.shows||[]).find(x=>x.id===DRAGSH)||{}).id : (S.jobs.find(x=>x.id===DRAG)||{}).stageId;
+    if(mesmos.includes(atual)){ DRAG=null; DRAGSH=null; return; } }
   if(DRAGSH){
     const s=(S.shows||[]).find(x=>x.id===DRAGSH);
     DRAGSH=null; DRAG=null;
@@ -4350,7 +4957,7 @@ function moverJob(j,stId){
   if(st.id==='apr' && j.recebido===0){ j.recebido=Math.round(j.valor*(S.cfg.sinal/100)); marcarEntrada(j); }
   save(); render();
   toast('Job movido',`${j.titulo.slice(0,38)} · ${de} → ${st.nome}`,'info');
-  if(st.tipo==='entregue') setTimeout(()=>sugerirMsg(j,'entrega'),450);
+  if(st.tipo==='entregue' && !moverJob.quieto) setTimeout(()=>sugerirMsg(j,'entrega'),450);   /* v131: no "arrumar" em série não abre a mensagem a cada job */
   if(st.tipo==='pago')     toast('Pagamento registrado',BRL(j.valor)+' entrou no caixa','ok');
 }
 
@@ -6229,19 +6836,22 @@ function corIni(nome){ let h=0; for(const ch of String(nome||'')) h=(h*31+ch.cha
 function renderClientes(){
   if(!$('#cliTbl')) return;
   const dados=c=>{ const js=S.jobs.filter(j=>j.cliId===c.id); return {js,tot:js.reduce((s,j)=>s+(j.valor||0),0),abertos:js.filter(aberto).length,dev:js.reduce((s,j)=>s+(pago(j)?0:saldo(j)),0)}; };
+  /* v133: linha da carteira — contatos viram 3 botões do mesmo tamanho (cheio = tem, tracejado = falta),
+     o dinheiro mostra quanto já entrou numa barrinha, e editar/apagar ficam quietos até passar o mouse. */
   const linhaNova=c=>{
-    const d=dados(c), temFicha=!!(c.brief||(c.notas&&c.notas.length));
-    const ct=[];
-    ct.push(c.wa?`<a class="cli-chip wa" href="https://wa.me/${esc(String(c.wa).replace(/\D/g,''))}" target="_blank" rel="noopener" title="Abrir WhatsApp">${svgI('i-wa',13,2.2)}+${esc(c.wa)}</a>`:`<button type="button" class="cli-chip falta" data-ecli="${c.id}" title="Sem WhatsApp — toque pra cadastrar" aria-label="Cadastrar o WhatsApp">${svgI('i-wa',13,2.2)}<span>WhatsApp</span></button>`);
-    ct.push(c.email?`<a class="cli-chip" href="mailto:${esc(c.email)}" title="${esc(c.email)}">${svgI('i-mail',13,2.2)}${esc(c.email)}</a>`:`<button type="button" class="cli-chip falta" data-ecli="${c.id}" title="Sem e-mail — toque pra cadastrar" aria-label="Cadastrar o e-mail">${svgI('i-mail',13,2.2)}<span>e-mail</span></button>`);
-    ct.push(c.insta?`<a class="cli-chip" href="https://instagram.com/${esc(String(c.insta).replace(/^@/,''))}" target="_blank" rel="noopener">${svgI('i-insta',13,2.2)}@${esc(String(c.insta).replace(/^@/,''))}</a>`:`<button type="button" class="cli-chip falta" data-ecli="${c.id}" title="Sem Instagram — toque pra cadastrar" aria-label="Cadastrar o Instagram">${svgI('i-insta',13,2.2)}<span>Instagram</span></button>`);
+    const d=dados(c), pagoV=Math.max(0,d.tot-d.dev), pct=d.tot?Math.round(pagoV/d.tot*100):0;
+    const ig=String(c.insta||'').replace(/^@/,''), wa=String(c.wa||'').replace(/\D/g,'');
+    const bt=(tem,cls,ico,href,tit,falta)=> tem
+      ? `<a class="cli-ct-b ${cls}" href="${esc(href)}" ${href.startsWith('http')?'target="_blank" rel="noopener"':''} title="${esc(tit)}" aria-label="${esc(tit)}">${svgI(ico,15,2.1)}</a>`
+      : `<button type="button" class="cli-ct-b falta" data-ecli="${c.id}" title="${esc(falta)}" aria-label="${esc(falta)}">${svgI(ico,15,2.1)}</button>`;
+    const st= d.dev>0? `<span class="cli-st deve">falta ${BRLc(d.dev)}</span>` : d.tot? `<span class="cli-st ok">${svgI('i-check',11,2.6)}em dia</span>` : `<span class="cli-st">sem job</span>`;
     return `<div class="cli-row" data-clirow="${c.id}">
-      <a class="cli-ava" href="javascript:void 0" data-ficha="${c.id}" style="background:${corIni(c.nome)}" aria-label="Abrir ${esc(c.nome)}">${esc(mkIniciais(c.nome))}</a>
-      <div class="cli-id"><a class="cli-nome" href="javascript:void 0" data-ficha="${c.id}">${esc(c.nome)}</a>
-        <div class="cli-meta">${c.contato?`<span>${esc(c.contato)}</span><span>·</span>`:''}<span>${d.js.length} job${d.js.length===1?'':'s'}</span>${d.abertos?`<span class="pill p-grn"><span class="dot"></span>${d.abertos} ativo${d.abertos>1?'s':''}</span>`:''}${temFicha?`<span class="pill p-vio" title="tem briefing ou anotações">ficha</span>`:''}</div></div>
-      <div class="cli-ct">${ct.join('')}</div>
-      <div class="cli-money"><b>${d.tot?BRLc(d.tot):'—'}</b>${d.dev>0?`<small class="deve">falta ${BRLc(d.dev)}</small>`:d.tot?'<small>em dia</small>':'<small>sem job</small>'}</div>
-      <div class="cli-acts"><button class="btn sm gh" data-ficha="${c.id}" title="Briefing e anotações">${svgI('i-layers',13,2)}Ficha</button><button class="btn sm gh" data-ecli="${c.id}" title="Editar" aria-label="Editar">${svgI('i-edit',13,2)}</button><button class="btn sm gh" data-dcli="${c.id}" title="Apagar" aria-label="Apagar" style="color:var(--dg-txt)">${svgI('i-trash',13,2)}</button></div>
+      <button type="button" class="cli-ava" data-ficha="${c.id}" style="background:${corIni(c.nome)}" aria-label="Abrir ${esc(c.nome)}">${esc(mkIniciais(c.nome))}</button>
+      <div class="cli-id"><button type="button" class="cli-nome" data-ficha="${c.id}">${esc(c.nome)}</button>
+        <div class="cli-meta">${c.contato&&c.contato.trim().toLowerCase()!==String(c.nome).trim().toLowerCase()?`<span>${esc(c.contato)}</span><i>·</i>`:''}<span>${d.js.length} job${d.js.length===1?'':'s'}</span>${d.abertos?`<span class="cli-ativo">${d.abertos} rolando</span>`:''}</div></div>
+      <div class="cli-ct">${bt(!!wa,'wa','i-wa','https://wa.me/'+wa,'WhatsApp +'+wa,'Sem WhatsApp — toque pra cadastrar')}${bt(!!c.email,'em','i-mail','mailto:'+(c.email||''),c.email||'','Sem e-mail — toque pra cadastrar')}${bt(!!ig,'ig','i-insta','https://instagram.com/'+ig,'@'+ig,'Sem Instagram — toque pra cadastrar')}</div>
+      <div class="cli-money"><b>${d.tot?BRLc(d.tot):'—'}</b>${st}${d.tot?`<span class="cli-bar" title="${pct}% já recebido"><i style="width:${pct}%"></i></span>`:''}</div>
+      <div class="cli-acts"><button class="btn sm cli-abrir" data-ficha="${c.id}" type="button">Abrir</button><button class="btn sm gh cli-mini" data-ecli="${c.id}" title="Editar" aria-label="Editar ${esc(c.nome)}" type="button">${svgI('i-edit',14,2)}</button><button class="btn sm gh cli-mini cli-del" data-dcli="${c.id}" title="Apagar" aria-label="Apagar ${esc(c.nome)}" type="button">${svgI('i-trash',14,2)}</button></div>
     </div>`;
   };
   const semWa=S.clientes.filter(c=>!c.wa).length, semIg=S.clientes.filter(c=>!c.insta).length;
@@ -6256,11 +6866,10 @@ function renderClientes(){
   $('#cliTbl').innerHTML=ordemNova.map(linhaNova).join('')||`<div class="cli-vazio">${S.clientes.length?'Ninguém com esse filtro.':'Nenhum cliente ainda. Toque em "Novo cliente".'}</div>`;
   const aReceber=S.jobs.filter(j=>!pago(j)).reduce((s,j)=>s+saldo(j),0);
   if($('#cliResumo')) $('#cliResumo').innerHTML=[
-    ['Na carteira',S.clientes.length,''],
-    ['Com job rolando',comJob,'#2ED9C3'],
-    ['Falta receber',BRLc(aReceber),aReceber>0?'#FDD97A':''],
-    ['Clientes devendo',devendo,devendo?'#FDD97A':''],
-  ].map(([t,v,cor])=>`<div class="stat"><div class="stat-l">${t}</div><div class="stat-v"${cor?` style="color:${cor}"`:''}>${v}</div></div>`).join('');
+    ['todos','Na carteira',S.clientes.length,'','clientes'],
+    ['job','Com job rolando',comJob,'#2ED9C3','ver quem'],
+    ['deve','Falta receber',BRLc(aReceber),aReceber>0?'#E0A100':'',devendo+' cliente'+(devendo===1?'':'s')+' devendo'],
+  ].map(([k,t,v,cor,sub])=>`<button type="button" class="cli-kpi ${CLI_FILTRO===k?'on':''}" data-clif="${k}"><span class="stat-l">${t}</span><span class="stat-v"${cor?` style="color:${corTxt(cor)}"`:''}>${v}</span><small>${esc(sub)}</small></button>`).join('');
 }
 
 function renderAdm(){
@@ -7539,6 +8148,7 @@ function pararOuvir(){
 }
 function ouvir(){
   if(OUVINDO){ pararOuvir(); return; }
+  if(typeof ideiaGravando==='function' && ideiaGravando()){ toast('Está gravando uma ideia','pare a gravação antes de ditar','warn'); return; }
   if(!temMicrofone()){
     toast('Este navegador não ouve','No iPhone use o Safari; no Mac, Chrome ou Safari','warn'); return;
   }
@@ -8513,7 +9123,7 @@ Se ele gravou um áudio contando várias coisas de um cliente, faça UMA chamada
      hora:{type:'string',description:'HH:MM, só se deu hora'}},required:['texto']}},
   {name:'abrir_aba',description:'Leva ele até uma aba do app. Use quando ele disser "abre as tarefas", "me mostra o marketing da Aurora", "vai pra agenda" — ou quando ele pedir algo que só dá pra fazer com o dedo na tela (aí abra a aba certa e diga o que tocar). Nunca responda só "não consigo": abra a aba que faz.',
    input_schema:{type:'object',properties:{
-     aba:{type:'string',enum:['dash','tarefas','recados','pipe','cli','prosp','mkt','conv','site','vitrine','agenda','shows','fin','notif','adm'],description:'dash=Dashboard, pipe=Pipeline, cli=Clientes, prosp=Prospecção, mkt=Marketing, conv=Conversas, site=Meu site, fin=Financeiro, notif=Notificações, adm=ADM'},
+     aba:{type:'string',enum:['hoje','dash','tarefas','recados','pipe','cli','prosp','mkt','conv','site','vitrine','portfolio','agenda','shows','fin','notif','adm'],description:'hoje=Hoje (o que precisa dele + agenda do dia), dash=Resumo (números e dinheiro), pipe=Pipeline, cli=Clientes, prosp=Prospecção, mkt=Marketing, conv=Conversas, site=Meu site, fin=Financeiro, notif=Notificações, adm=ADM'},
      marca:{type:'string',description:'Só no Marketing: qual marca deixar escolhida'},
      parte:{type:'string',enum:['inicio','criar','fila','propostas','marca'],description:'Só no Marketing: Início (o que fazer agora), Criar (peças), Fila (posts e Instagram), Propostas, Marca (identidade e plano)'}},required:['aba']}},
   {name:'instagram',description:'Instagram da aba Marketing. acao "conectar" abre a janela de conectar a conta da marca; acao "postar" abre a confirmação de publicar um post da fila, com a peça e a legenda. Em nenhum dos dois você publica nem conecta sozinho: a janela abre e QUEM TOCA é ele (entrar no Instagram / Publicar agora). Diga isso em uma linha.',
@@ -8526,6 +9136,10 @@ Se ele gravou um áudio contando várias coisas de um cliente, faça UMA chamada
      quais:{type:'string',enum:['abertos','hoje','todos'],description:'abertos = ainda não resolvidos (padrão); hoje = os que chegaram hoje, resolvidos ou não; todos = inclui os resolvidos'}}}},
   {name:'marcar_recado_atendido',description:'Dá baixa num recado (marca como resolvido). Use quando ele disser "marca o da Joana como resolvido" ou "já respondi o fulano". Ache pelo nome, assunto ou id. Se servir pra mais de um recado aberto, a ferramenta devolve as opções: pergunte qual, não chute.',
    input_schema:{type:'object',properties:{busca:{type:'string',description:'Nome de quem pediu, assunto ou id do recado'}},required:['busca']}},
+  {name:'ver_ideias',description:'Lista as IDEIAS GRAVADAS (conversas que ele gravou no botão 💡 do Assistente): quando, com quem, título, resumo, as ideias e de onde cada uma veio, a principal e o conteúdo gerado. Use quando ele perguntar "o que a gente falou com a Ju?", "quais ideias eu gravei?", "transforma a ideia de ontem em post". Pra gravar uma nova ou ouvir o áudio: abrir_ideias.',
+   input_schema:{type:'object',properties:{busca:{type:'string',description:'Opcional: nome da pessoa ou palavra do assunto'}}}},
+  {name:'abrir_ideias',description:'Abre a janela das ideias gravadas (onde ele começa uma gravação nova, ouve o áudio e põe o conteúdo na fila). Quem toca em gravar é ele.',
+   input_schema:{type:'object',properties:{}}},
   {name:'lembrar',description:'Guarda uma informação na memória de longo prazo do assistente (vale em todos os aparelhos, para sempre). Use quando o usuário contar algo que deve ser lembrado: preferência, combinado com cliente, fato sobre o estúdio, decisão. Uma frase curta.',
    input_schema:{type:'object',properties:{nota:{type:'string',description:'Uma frase curta e objetiva'}},required:['nota']}},
   {name:'esquecer',description:'Apaga da memória de longo prazo as notas que contenham o trecho informado.',
@@ -8726,6 +9340,8 @@ function rodarFerramenta(nome,a){
       case 'abrir_aba': return abrirAba(a);
       case 'instagram': return instagramPeloChat(a);
       case 'ver_recados': return verRecados(a);
+      case 'ver_ideias': return verIdeias(a);
+      case 'abrir_ideias': setTimeout(()=>abrirIdeias(),0); return {ok:true,aviso:'Abri a janela das ideias. Quem toca em gravar é ele.'};
       case 'marcar_recado_atendido': return marcarRecadoAtendido(a);
       case 'montar_kit_marca': return montarKitMarca(a);
       case 'montar_criativos':{ const r=montarCriativos(a);
@@ -9330,6 +9946,7 @@ Faça as cinco primeiras na MESMA rodada de ferramentas. O app junta tudo num ca
 VOCÊ ALCANÇA TODAS AS ABAS. Se ele pedir, você faz — não mande ele fazer na mão o que uma ferramenta faz:
 - Tarefas → anotar_tarefa; mudar, riscar (feita:true), tirar da agenda (data:"sem") ou apagar → mexer onde:"tarefas".
 - Recados → ver_recados, marcar_recado_atendido.
+- Ideias gravadas (conversas que ele gravou no botão 💡) → ver_ideias; abrir a janela pra gravar/ouvir → abrir_ideias. Ao montar post a partir delas, use só o que foi dito.
 - Pipeline e Financeiro → criar_job, mover_job, atualizar_job, mexer jobs (recebido = pagamento).
 - Clientes e Conversas → criar_cliente, anotar_cliente, preparar_mensagem, mexer clientes.
 - Prospecção → registrar_prospect, mexer prospects.  Agenda → criar_reuniao, mexer reunioes (e as tarefas com dia).  Shows → criar_show, atualizar_show.
@@ -9408,7 +10025,7 @@ function carregarSkills(forcar){
   const g=lerLS(K_SKILLS,null); if(!forcar && g && g.em && Date.now()-g.em < 6*3600*1000) return;
   igChama('skills',{tudo:true},20000).then(j=>{ if(j&&Array.isArray(j.skills)&&j.skills.length){ const o={}; j.skills.forEach(s=>{ if(s&&s.nome&&s.texto) o[s.nome]={versao:s.versao,titulo:s.titulo,texto:s.texto}; }); gravarLS(K_SKILLS,{em:Date.now(),skills:o}); } }).catch(()=>{});
 }
-const MKT_TOOLS=new Set(['listar_dados','planejar_campanha','fazer_post','mexer_peca','conselho_revisa','impulsionar_post','resultados_anuncio','pausar_anuncio','retomar_anuncio','encerrar_anuncio','criar_post','montar_kit_marca','montar_criativos','atualizar_post','por_na_fila','aprovar_post','fundo_peca','apagar_pecas','publicar_post','resultados','usar_foto','oferecer_opcoes','instagram','montar_proposta','proposta_agentes','enviar_proposta','anotar_tarefa','lembrar','esquecer','abrir_aba']);
+const MKT_TOOLS=new Set(['listar_dados','planejar_campanha','fazer_post','mexer_peca','conselho_revisa','impulsionar_post','resultados_anuncio','pausar_anuncio','retomar_anuncio','encerrar_anuncio','criar_post','montar_kit_marca','montar_criativos','atualizar_post','por_na_fila','aprovar_post','fundo_peca','apagar_pecas','publicar_post','resultados','usar_foto','oferecer_opcoes','instagram','montar_proposta','proposta_agentes','enviar_proposta','anotar_tarefa','lembrar','esquecer','abrir_aba','ver_ideias','abrir_ideias']);
 function ferramentasAtivas(){ return (typeof THREAD!=='undefined'&&THREAD==='mkt')? FERRAMENTAS.filter(f=>MKT_TOOLS.has(f.name)) : FERRAMENTAS; }
 function sistemaMkt(){
   const m=(CHAT_MKT||marcaAtual()||'').toString(), todas=!m||m==='*';
@@ -10011,7 +10628,7 @@ function rotuloFerramenta(n,a){
     listar_dados:'lendo seus dados',preparar_mensagem:'montando mensagem',
     registrar_prospect:'anotando na prospecção',lembrar:'guardando na memória',esquecer:'apagando da memória',
     mexer:'mexendo no app', anotar_cliente:'anotando no cliente',
-    ver_recados:'lendo os recados', marcar_recado_atendido:'dando baixa no recado',
+    ver_recados:'lendo os recados', ver_ideias:'lendo as ideias gravadas', abrir_ideias:'abrindo as ideias', marcar_recado_atendido:'dando baixa no recado',
     anotar_tarefa:'anotando tarefa', abrir_aba:'abrindo', instagram:'abrindo o Instagram', montar_proposta:'montando a proposta', proposta_agentes:'montando a proposta dos agentes', enviar_proposta:'abrindo o envio da proposta'};
   if(n==='mexer'){
     const q=({criar:'criando',mudar:'ajustando',apagar:'apagando'})[a.acao]||'mexendo em';
@@ -10664,7 +11281,7 @@ async function nuvFetch(caminho,opcoes,jaTentou){
    aparelhos, é o comportamento que ela espera.
    ============================================================ */
 
-const COLS      = ['jobs','clientes','shows','servicos','prospects','vitrine','areas','stages','regras','msgs','reunioes','aparelhos','campanhas','posts','marcas','criativos','instas','tarefas','recados','propostas'];
+const COLS      = ['jobs','clientes','shows','servicos','prospects','vitrine','areas','stages','regras','msgs','reunioes','aparelhos','campanhas','posts','marcas','criativos','instas','tarefas','recados','propostas','ideias'];
 const SOLTOS    = ['cfg','tpls','lidos'];        /* uma linha cada, sem id próprio */
 /* o que é TRABALHO de verdade (o resto é catálogo/padrão de fábrica) */
 const TRABALHO  = ['jobs','clientes','shows','prospects','vitrine','msgs','reunioes'];
@@ -15214,7 +15831,7 @@ function baixarTexto(nome,txt,tipo){ const a=document.createElement('a'); a.href
    o app toda vez que ele liga.
    ============================================================ */
 function sitesLista(){
-  const base = /surge\.sh$/.test(location.hostname) ? location.origin : 'https://studio-ti-artes.surge.sh';
+  const base = /(surge\.sh|eugeniofim\.com)$/.test(location.hostname) ? location.origin : 'https://os.eugeniofim.com';
   return [
     {id:'pessoal', t:'eugeniofim.com', d:'Seu site pessoal — trilhas, sound design, portfólio.',
      url:(S.cfg.siteUrl||'https://eugeniofim.com'), cor:'#60A5FA'},
@@ -15806,47 +16423,278 @@ if($('#btnProspImp'))  $('#btnProspImp').onclick=importarProsp;
    ============================================================ */
 
 const VIT_TIPO = {
-  app:    {n:'App',      cls:'p-app',    ico:'i-code'},
-  trilha: {n:'Trilha',   cls:'p-trilha', ico:'i-music'},
-  sfx:    {n:'Sound design', cls:'p-sfx', ico:'i-wave'},
-  site:   {n:'Site',     cls:'p-social', ico:'i-share'},
-  show:   {n:'Show',     cls:'p-show',   ico:'i-mic'},
-  outro:  {n:'Outro',    cls:'p-gry',    ico:'i-grid'},
+  site:   {n:'Site',     p:'Sites',   cls:'p-social', ico:'i-globe'},
+  app:    {n:'App',      p:'Apps',    cls:'p-app',    ico:'i-code'},
+  imersivo:{n:'Imersivo', p:'Imersivo', cls:'p-trilha', ico:'i-wave'},
+  trilha: {n:'Trilha',   p:'Trilhas', cls:'p-trilha', ico:'i-music'},
+  musica: {n:'Música',   p:'Música',  cls:'p-trilha', ico:'i-music'},
+  sfx:    {n:'Sound design', p:'Sound design', cls:'p-sfx', ico:'i-wave'},
+  show:   {n:'Show',     p:'Shows',   cls:'p-show',   ico:'i-mic'},
+  outro:  {n:'Outro',    p:'Outros',  cls:'p-gry',    ico:'i-grid'},
 };
 
+/* v134: os trabalhos que já estão no ar entram sozinhos na vitrine, uma vez.
+   Id fixo: dois aparelhos sincronizando não duplicam. Se ele apagar um,
+   não volta (a marca fica em S.cfg.vitSemente). */
+const VIT_SEMENTE=[
+  {id:'vt-s-marsales', titulo:'Marsales Studio', tipo:'site', tela:'pc', cliente:'Jhennyfer Sales', local:'Estética e beleza', link:'https://rottaguide.com/marsales/', img:'vitrine/marsales.webp', cor:'#C9A27E',
+   resumo:'Site de estética e beleza: serviços, agenda e a página do workshop com mentoria.'},
+  {id:'vt-s-glikiso', titulo:'Gliki Sô Cookeria', tipo:'site', tela:'pc', cliente:'Melissa', local:'Curitiba · Paraná', link:'https://rottaguide.com/glikiso/', img:'vitrine/glikiso.webp', cor:'#F2C98A',
+   resumo:'Site da cookeria com pedido, clube de clientes e app para baixar no celular.'},
+  {id:'vt-s-paula', titulo:'Paula Oliveira Parfum', tipo:'site', tela:'pc', cliente:'Paula Oliveira', local:'Perfumaria', link:'https://rottaguide.com/paulaoliveira/', img:'vitrine/paula.webp', cor:'#3FA27C',
+   resumo:'Página de links com anel 3D de perfumes, as duas lojas e o app da comunidade.'},
+  {id:'vt-s-guia', titulo:'Guia · app modelo', tipo:'app', tela:'cel', cliente:'Protótipo Ti Artes', local:'Para guias de turismo', link:'https://guia.eugeniofim.com', img:'vitrine/guia.webp', cor:'#F4C430',
+   resumo:'O modelo dos apps de guia: passeios, reserva na hora, seis idiomas e o painel do guia.'},
+  {id:'vt-s-yalla', titulo:'Yalla Experiences', tipo:'app', tela:'pc', cliente:'Yalla', local:'Dubai · Emirados', link:'https://yallaexperiences.com', img:'vitrine/yalla.webp', cor:'#E0B24A',
+   resumo:'Site e app de passeios em Dubai e Abu Dhabi, em português, inglês e espanhol.'},
+  {id:'vt-s-carol', titulo:'Lovely London by Carol', tipo:'app', tela:'cel', cliente:'Carol', local:'Londres', link:'https://lovelylondon.app', img:'vitrine/carol.webp', cor:'#C2416A',
+   resumo:'App da guia Blue Badge em Londres: passeios, reserva e consultoria de roteiro por vídeo.'},
+  {id:'vt-s-berlim', titulo:'Conexão Berlim', tipo:'app', tela:'cel', cliente:'Dulcinéia', local:'Berlim', link:'https://conexaoberlim.com', img:'vitrine/berlim.webp', cor:'#B9B48C',
+   resumo:'Passeios, transfer e roteiro sob medida em Berlim, com reserva pelo app.'},
+  {id:'vt-s-dinamarca', titulo:'Tour na Dinamarca', tipo:'app', tela:'cel', cliente:'Mari', local:'Copenhague', link:'https://tournadinamarca.com', img:'vitrine/dinamarca.webp', cor:'#F2C230',
+   resumo:'Tours em português pela Dinamarca e Malmö, com agenda de datas livres e reserva.'},
+  {id:'vt-s-ananda', titulo:'Confeito por Ananda', tipo:'app', tela:'cel', cliente:'Ananda', local:'Confeitaria', link:'https://app.confeitoporananda.com', img:'vitrine/ananda.webp', cor:'#E7A0B4',
+   resumo:'App de fidelidade: pontos por compra, QR no balcão, cardápio e prêmios.'},
+  {id:'vt-s-b12', titulo:'Estação B12', tipo:'app', tela:'cel', cliente:'Estação B12', local:'Ilha do Mel', link:'https://app.estacaob12.com.br', img:'vitrine/b12.webp', cor:'#22B07D',
+   resumo:'Mar e vento do dia, o que fazer na ilha e reserva direto no WhatsApp.'},
+];
+function vitSemear(){
+  try{
+    S.cfg=S.cfg||{}; const ja=new Set(S.cfg.vitSemente||[]); S.vitrine=S.vitrine||[];
+    const tem=new Set(S.vitrine.map(v=>v.id)), links=new Set(S.vitrine.map(v=>String(v.link||'').replace(/\/+$/,'').toLowerCase()));
+    let n=0;
+    VIT_SEMENTE.concat(typeof PF_SEMENTE!=='undefined'?PF_SEMENTE:[]).forEach(s=>{ if(ja.has(s.id)) return; ja.add(s.id);
+      if(tem.has(s.id)||(s.link&&links.has(s.link.replace(/\/+$/,'').toLowerCase()))) return;
+      S.vitrine.push({...s, ano:''}); n++; });
+    S.cfg.vitSemente=[...ja];
+    if(n) save();
+  }catch(e){ console.warn('vitrine semente:',e); }
+}
+let VIT_FILTRO='todos';
+function vitDominio(u){ try{ const x=new URL(u); return (x.hostname.replace(/^www\./,'')+x.pathname).replace(/\/+$/,''); }catch(_){ return String(u||''); } }
+function vitTela(v){ return v.tela || (v.tipo==='app'?'cel':'pc'); }
+function vitCapa(v,cls){
+  const tela=vitTela(v), dom=vitDominio(v.link);
+  const img=v.img? `<img src="${esc(v.img)}" alt="Tela de ${esc(v.titulo)}" loading="lazy" decoding="async" draggable="false">`
+    : `<div class="vt-gera" style="--ac:${esc(v.cor||'#2ED9C3')}"><b>${esc((v.titulo||'?').split(/\s+/).slice(0,2).map(p=>p[0]).join('').toUpperCase())}</b><span>${esc(v.titulo)}</span></div>`;
+  return tela==='cel'
+    ? `<div class="vt-phone ${cls||''}"><div class="vt-ilha"></div><div class="vt-shot">${img}</div></div>`
+    : `<div class="vt-browser ${cls||''}"><div class="vt-bar"><i></i><i></i><i></i><span>${esc(dom||'')}</span></div><div class="vt-shot">${img}</div></div>`;
+}
 function renderVitrine(){
-  const V=S.vitrine||[];
+  vitSemear();
+  const V=(S.vitrine||[]).filter(v=>!pfEhSom(v));
   const box=$('#vitLista'); if(!box) return;
-
+  const tipos=Object.keys(VIT_TIPO).filter(k=>V.some(v=>(v.tipo||'outro')===k));
+  if(VIT_FILTRO!=='todos'&&!tipos.includes(VIT_FILTRO)) VIT_FILTRO='todos';
+  const nums=$('#vtNums');
+  if(nums) nums.innerHTML=[[V.length,'no ar']].concat(tipos.map(k=>[V.filter(v=>(v.tipo||'outro')===k).length,(V.filter(v=>(v.tipo||'outro')===k).length===1?VIT_TIPO[k].n:VIT_TIPO[k].p).toLowerCase()]))
+    .map(([n,t])=>`<div class="vt-num"><b>${n}</b><span>${esc(t)}</span></div>`).join('');
+  const fb=$('#vtFiltros');
+  if(fb) fb.innerHTML=V.length? [['todos','Tudo',V.length]].concat(tipos.map(k=>[k,VIT_TIPO[k].p,V.filter(v=>(v.tipo||'outro')===k).length]))
+    .map(([k,n,c])=>`<button type="button" class="vt-chip ${VIT_FILTRO===k?'on':''}" data-vtf="${k}" aria-pressed="${VIT_FILTRO===k}">${esc(n)}<span>${c}</span></button>`).join('') : '';
+  /* palco do topo: 3 telas boiando em 3D */
+  const st=$('#vtStage');
+  if(st){ const comImg=V.filter(v=>v.img); const pc=comImg.filter(v=>vitTela(v)==='pc'), ce=comImg.filter(v=>vitTela(v)==='cel');
+    const pref=(L,ids)=>ids.map(i=>L.find(v=>v.id===i)).find(Boolean)||L[0];
+    const a=pref(pc,['vt-s-yalla']), b=pref(ce,['vt-s-carol']), c=pref(pc.filter(v=>v!==a),['vt-s-paula']);
+    const esc3=[a,b,c].filter(Boolean);
+    st.innerHTML=esc3.map((v,i)=>`<div class="vt-flutua vt-f${i}">${vitCapa(v)}</div>`).join(''); st.hidden=!esc3.length; }
   if(!V.length){
-    box.innerHTML=`<div class="empty" style="padding:38px 18px;text-align:center;color:var(--txt-3)">
-      Nada aqui ainda. Aperte <b>+ Novo trabalho</b> e cadastre o primeiro app,
-      trilha ou site que você já entregou — com o link. Depois é um toque pra mandar
-      pra qualquer pessoa no WhatsApp.</div>`;
-    return;
+    box.innerHTML=`<div class="vt-vazio">Nada aqui ainda. Aperte <b>+ Novo trabalho</b> e cadastre o primeiro app, trilha ou site que você já entregou, com o link.</div>`;
+    vitMotion(); return;
   }
-
-  box.innerHTML=V.map(v=>{
-    const t=VIT_TIPO[v.tipo]||VIT_TIPO.outro;
-    return `<div class="card" style="margin-bottom:12px">
-      <div class="card-b" style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap">
-        <div class="row-ico" style="background:var(--panel-2);border-color:var(--line)">${svgI(t.ico,16,2)}</div>
-        <div style="flex:1;min-width:190px">
-          <div class="row-t">${esc(v.titulo)} <span class="pill ${t.cls}" style="margin-left:6px">${t.n}</span></div>
-          ${v.cliente?`<div class="row-s">para ${esc(v.cliente)}${v.ano?' · '+esc(v.ano):''}</div>`:''}
-          ${v.resumo?`<div class="mini" style="margin-top:6px;max-width:62ch">${esc(v.resumo)}</div>`:''}
-          ${v.link?`<div class="mini mono" style="margin-top:5px;word-break:break-all;color:var(--teal)">${esc(v.link)}</div>`:''}
-        </div>
-        <div style="display:flex;gap:7px;flex-wrap:wrap">
-          ${v.link?`<button class="btn sm gr" data-vwa="${v.id}">${svgI('i-wa',12,2)}Mandar no WhatsApp</button>`:''}
-          ${v.link?`<button class="btn sm" data-vlink="${v.id}">${svgI('i-copy',12,2)}Copiar link</button>`:''}
-          ${v.link?`<button class="btn sm" data-vabrir="${v.id}">${svgI('i-eye',12,2)}Abrir</button>`:''}
-          <button class="btn sm" data-vedit="${v.id}">Editar</button>
+  const L=V.filter(v=>VIT_FILTRO==='todos'||(v.tipo||'outro')===VIT_FILTRO);
+  box.innerHTML=L.map((v,i)=>{
+    const t=VIT_TIPO[v.tipo]||VIT_TIPO.outro, tela=vitTela(v);
+    return `<article class="vt-card vt-${tela} ${i%2?'vt-dir':''}" data-vtc="${esc(v.id)}" style="--ac:${esc(v.cor||'#2ED9C3')}">
+      <a class="vt-media" ${v.link?`href="${esc(v.link)}" target="_blank" rel="noopener"`:''} aria-label="Abrir ${esc(v.titulo)}">
+        <div class="vt-luz"></div>${vitCapa(v,'vt-obj')}
+      </a>
+      <div class="vt-info">
+        <div class="vt-meta"><span class="vt-tag">${svgI(t.ico,12,2)}${t.n}</span>${v.local?`<span class="vt-loc">${esc(v.local)}</span>`:''}<span class="vt-idx">${String(i+1).padStart(2,'0')}</span></div>
+        <h3 class="vt-t">${esc(v.titulo)}</h3>
+        ${v.cliente?`<div class="vt-cli">para ${esc(v.cliente)}${v.ano?' · '+esc(v.ano):''}</div>`:''}
+        ${v.resumo?`<p class="vt-res">${esc(v.resumo)}</p>`:''}
+        ${v.link?`<a class="vt-dom" href="${esc(v.link)}" target="_blank" rel="noopener">${esc(vitDominio(v.link))}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>`:''}
+        <div class="vt-btns">
+          ${v.link?`<a class="btn pri" href="${esc(v.link)}" target="_blank" rel="noopener">${svgI('i-eye',14,2)}Abrir</a>`:''}
+          ${v.link?`<button class="btn" type="button" data-vwa="${esc(v.id)}">${svgI('i-wa',14,2)}WhatsApp</button>`:''}
+          ${v.link?`<button class="icobtn" type="button" data-vlink="${esc(v.id)}" title="Copiar link" aria-label="Copiar o link de ${esc(v.titulo)}">${svgI('i-copy',15,2)}</button>`:''}
+          <button class="icobtn" type="button" data-vedit="${esc(v.id)}" title="Editar" aria-label="Editar ${esc(v.titulo)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
         </div>
       </div>
-    </div>`;
+    </article>`;
   }).join('');
+  vitMotion();
 }
+
+/* ---------- movimento 3D na rolagem ----------
+   Cada tela gira de leve conforme passa pelo meio da tela: chega inclinada,
+   fica reta no centro e sai inclinada pro outro lado. Só transform e
+   opacity (nada de layout), um rAF por quadro, e desligado pra quem pediu
+   "reduzir movimento" no sistema. */
+const VIT_MOV={on:false, raf:0, quieto:matchMedia('(prefers-reduced-motion: reduce)').matches};
+function vitQuadro(){
+  VIT_MOV.raf=0;
+  if(VIEW!=='vitrine'&&VIEW!=='portfolio'){ VIT_MOV.on=false; return; }
+  const H=innerHeight;
+  $$('#pfLista .pf-card').forEach(c=>{
+    const r=c.getBoundingClientRect(); if(r.bottom<-80||r.top>H+80) return;
+    let p=((r.top+r.height/2)-H/2)/(H*.8); p=Math.max(-1,Math.min(1,p)); const a=Math.abs(p);
+    const m=c.querySelector('.vt-obj'), sh=c.querySelector('.vt-obj img');
+    if(m) m.style.transform=`perspective(1200px) rotateX(${(p*14).toFixed(2)}deg) translateZ(${(-a*40).toFixed(1)}px)`;
+    if(sh) sh.style.transform=`translateY(${(p*-14).toFixed(1)}px) scale(1.1)`;
+  });
+  const eq=$('#pfEq'); if(eq&&VIEW==='portfolio') eq.style.setProperty('--sy',Math.min(1,scrollY/(H*.7)).toFixed(3));
+  $$('#vitLista .vt-card').forEach(c=>{
+    const r=c.getBoundingClientRect(); if(r.bottom<-80||r.top>H+80) return;
+    let p=((r.top+r.height/2)-H/2)/(H*.75); p=Math.max(-1,Math.min(1,p));
+    const lado=c.classList.contains('vt-dir')?-1:1, a=Math.abs(p);
+    const m=c.querySelector('.vt-obj'), sh=c.querySelector('.vt-shot img'), inf=c.querySelector('.vt-info');
+    if(m) m.style.transform=`perspective(1600px) rotateY(${(lado*p*16).toFixed(2)}deg) rotateX(${(p*9).toFixed(2)}deg) translateZ(${(-a*70).toFixed(1)}px) scale(${(1-a*.06).toFixed(3)})`;
+    if(sh) sh.style.transform=`translateY(${(p*-22).toFixed(1)}px) scale(1.08)`;
+    if(inf){ inf.style.transform=`translateY(${(p*26).toFixed(1)}px)`; inf.style.opacity=(1-Math.max(0,a-.55)*1.6).toFixed(3); }
+  });
+  const st=$('#vtStage');
+  if(st){ const y=Math.min(1,scrollY/(H*.8)); st.style.setProperty('--sy',y.toFixed(3)); }
+}
+function vitPedeQuadro(){ if(!VIT_MOV.quieto && !VIT_MOV.raf) VIT_MOV.raf=requestAnimationFrame(vitQuadro); }
+function vitMotion(){
+  const L=$('#vitLista'); if(!L) return;
+  /* entrada: cada cartão sobe quando aparece */
+  if(!vitMotion.io && 'IntersectionObserver' in window)
+    vitMotion.io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('vt-in'); vitMotion.io.unobserve(e.target); } }),{rootMargin:'0px 0px -8% 0px',threshold:.12});
+  $$('#vitLista .vt-card, #pfLista .vt-card').forEach(c=>{ if(VIT_MOV.quieto||!vitMotion.io) c.classList.add('vt-in'); else vitMotion.io.observe(c); });
+  if(VIT_MOV.quieto) return;
+  if(!VIT_MOV.on){ VIT_MOV.on=true; }
+  vitPedeQuadro();
+}
+addEventListener('scroll',()=>{ if(VIEW==='vitrine'||VIEW==='portfolio') vitPedeQuadro(); },{passive:true});
+addEventListener('resize',()=>{ if(VIEW==='vitrine'||VIEW==='portfolio') vitPedeQuadro(); });
+/* inclinação com o mouse por cima (só em quem tem mouse) */
+if(matchMedia('(hover: hover) and (pointer: fine)').matches && !VIT_MOV.quieto){
+  document.addEventListener('pointermove',e=>{
+    const md=e.target.closest&&e.target.closest('#vitLista .vt-media, #pfLista .vt-media'); 
+    $$('.vt-media.vt-tilt').forEach(x=>{ if(x!==md){ x.classList.remove('vt-tilt'); x.style.removeProperty('--tx'); x.style.removeProperty('--ty'); } });
+    if(!md) return;
+    const r=md.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+    md.classList.add('vt-tilt'); md.style.setProperty('--tx',(x*10).toFixed(2)+'deg'); md.style.setProperty('--ty',(-y*8).toFixed(2)+'deg');
+    md.style.setProperty('--mx',((x+.5)*100).toFixed(1)+'%'); md.style.setProperty('--my',((y+.5)*100).toFixed(1)+'%');
+  },{passive:true});
+}
+document.addEventListener('click',e=>{ const b=e.target.closest('[data-vtf]'); if(!b) return;
+  VIT_FILTRO=b.dataset.vtf; renderVitrine(); });
+
+/* a vitrine inteira numa mensagem só (pra mandar antes de uma reunião) */
+function vitMandarTudo(){
+  const V=(S.vitrine||[]).filter(v=>v.link&&!pfEhSom(v)); if(!V.length){ toast('Nada com link','Cadastre um trabalho com link primeiro','warn'); return; }
+  const por=k=>V.filter(v=>(v.tipo||'outro')===k);
+  const blocos=Object.keys(VIT_TIPO).filter(k=>por(k).length).map(k=>`*${VIT_TIPO[k].p}*\n`+por(k).map(v=>`• ${v.titulo}${v.local?' ('+v.local+')':''}: ${v.link}`).join('\n'));
+  preview({titulo:'A vitrine inteira', sub:'copie e cole no WhatsApp ou no e-mail',
+    texto:`Oi! Separei aqui o que eu já pus no ar, pra você ver funcionando:\n\n${blocos.join('\n\n')}\n\n${S.cfg.studio||'studio Ti Artes'} · som feito à mão`, wa:'', email:'', assunto:'Trabalhos do studio Ti Artes'});
+}
+if($('#btnVitTudo')) $('#btnVitTudo').onclick=vitMandarTudo;
+
+/* ============================================================
+   PORTFÓLIO · PRODUÇÃO MUSICAL (v135)
+   Mesma lista da Vitrine (S.vitrine), só os tipos de som. A Vitrine
+   mostra sites e apps; aqui ficam trilha, sound design, imersivo e
+   música. Toque no trabalho abre o vídeo dentro do app (reunião).
+   ============================================================ */
+const PF_TIPOS=['imersivo','trilha','sfx','musica','show'];
+const PF_SEC={
+  imersivo:{t:'Imersivo e mapping', d:'Produção musical e mixagem em Dolby Atmos para exposições imersivas e trilha ao vivo sincronizada com projeção.'},
+  trilha:{t:'Trilha publicitária', d:'Trilha original e sound design para campanhas, filmes e TV.'},
+  sfx:{t:'Sound design', d:'Desenho de som, efeitos e mixagem.'},
+  musica:{t:'Música e clipes', d:'Produção, arranjo e mixagem para artistas e bandas.'},
+  show:{t:'Shows', d:'Som ao vivo.'}
+};
+const PF_MARCAS=['Amazon','Meta','Ford','Motorola','Hennessy','Heinz','Greenpeace','O Boticário','Schweppes','Umbro','W+K','Ogilvy','BBDO','DDB'];
+const PF_SEMENTE=[
+  {id:'vt-m-monet', tipo:'imersivo', titulo:"Monet à Beira d'Água", cliente:'Exposição imersiva · 2021–2024', link:'https://www.youtube.com/watch?v=HRQjKXDYjLQ', img:'portfolio/monet.webp', cor:'#3FC1C9',
+   resumo:'Produção musical e Dolby Atmos em quatro montagens: EUA, Museu do Amanhã, Parque Villa-Lobos e Santiago. Cerca de 500 mil visitantes.'},
+  {id:'vt-m-quantum', tipo:'imersivo', titulo:'Quantum · Tudo Vira Tela', cliente:'Fantástica Filmes', link:'https://vimeo.com/248657903', img:'portfolio/quantum.webp', cor:'#5B8DEF', resumo:''},
+  {id:'vt-m-oceano', tipo:'imersivo', titulo:'Oceano em Nós', cliente:'2025 · Década do Oceano da UNESCO', link:'', img:'', cor:'#1F7FA8',
+   resumo:'Direção artística e trilha tocada ao vivo, sincronizada à projeção mapeada no prédio histórico da UFPR.'},
+  {id:'vt-m-sport', tipo:'trilha', titulo:'Adote um Pequeno Torcedor', cliente:'Sport Recife · Ogilvy', link:'https://www.youtube.com/watch?v=y3EyUKbtX3Q', img:'portfolio/sport.webp', cor:'#E5322D', resumo:''},
+  {id:'vt-m-nota', tipo:'trilha', titulo:'Nota Paraná', cliente:'Comercial · 2016', link:'https://www.youtube.com/watch?v=Ird2BVWF6aE', img:'portfolio/nota.webp', cor:'#3BAA35', resumo:''},
+  {id:'vt-m-ric', tipo:'trilha', titulo:'Campanha 30 Anos', cliente:'Grupo RIC', link:'https://www.youtube.com/watch?v=LXBztYdoba0', img:'portfolio/ric.webp', cor:'#6FA8DC', resumo:''},
+  {id:'vt-m-basquete', tipo:'trilha', titulo:'Olimpíadas · Basquete', cliente:'Deiro Filmes', link:'https://www.youtube.com/watch?v=zxh8Kw-Z9uA', img:'portfolio/basquete.webp', cor:'#E8833A', resumo:''},
+  {id:'vt-m-leticia', tipo:'musica', titulo:'Por que você', cliente:'Leticia Sabatella · clipe oficial', link:'https://www.youtube.com/watch?v=DxhvJq2kxmU', img:'portfolio/leticia.webp', cor:'#B9B9B9', resumo:''},
+  {id:'vt-m-bewater', tipo:'musica', titulo:'Be Water', cliente:'LacduoFim', link:'https://www.youtube.com/watch?v=eIgOF9eA_lU', img:'portfolio/bewater.webp', cor:'#7EC8E3', resumo:''},
+  {id:'vt-m-violax', tipo:'musica', titulo:'Violax Feeling', cliente:'LacduoFim', link:'https://www.youtube.com/watch?v=tEGeTqfG1g0', img:'portfolio/violax.webp', cor:'#2ED9C3', resumo:''},
+  {id:'vt-m-song2', tipo:'musica', titulo:'Song 2 (Blur cover)', cliente:'Jacu Eletrônico', link:'https://www.youtube.com/watch?v=3fJoveF-HKU', img:'portfolio/song2.webp', cor:'#D64545', resumo:''},
+  {id:'vt-m-poetica', tipo:'musica', titulo:'Poética da Terra em Crise', cliente:'Leticia Sabatella & Juliano Holanda', link:'https://www.youtube.com/watch?v=A9ZUBbmQjuA', img:'portfolio/poetica.webp', cor:'#9A7BD8', resumo:''},
+];
+function pfEhSom(v){ return PF_TIPOS.includes(v.tipo); }
+function pfVideoUrl(u){
+  u=String(u||''); let m;
+  if(m=u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/))([\w-]{11})/)) return 'https://www.youtube-nocookie.com/embed/'+m[1]+'?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+  if(m=u.match(/vimeo\.com\/(?:video\/)?(\d+)/)) return 'https://player.vimeo.com/video/'+m[1]+'?autoplay=1&title=0&byline=0';
+  return '';
+}
+function pfAssistir(v){
+  if(!v||!v.link) return;
+  const e=pfVideoUrl(v.link); if(!e){ window.open(v.link,'_blank','noopener'); return; }
+  const P=$('#pfPlayer'); if(!P) return;
+  $('#pfPlayerT').textContent=v.titulo+(v.cliente?' · '+v.cliente:'');
+  $('#pfPlayerV').innerHTML=`<iframe src="${esc(e)}" title="${esc(v.titulo)}" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+  P.hidden=false; requestAnimationFrame(()=>P.classList.add('on')); pfAssistir.volta=document.activeElement; $('#pfPlayerX').focus();
+}
+function pfFechar(){ const P=$('#pfPlayer'); if(!P||P.hidden) return; P.classList.remove('on'); $('#pfPlayerV').innerHTML=''; P.hidden=true;
+  try{ pfAssistir.volta&&pfAssistir.volta.focus(); }catch(_){} }
+if($('#pfPlayerX')) $('#pfPlayerX').onclick=pfFechar;
+if($('#pfPlayer')) $('#pfPlayer').addEventListener('click',e=>{ if(e.target.id==='pfPlayer') pfFechar(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') pfFechar(); });
+
+function renderPortfolio(){
+  vitSemear();
+  const V=(S.vitrine||[]).filter(pfEhSom);
+  const eq=$('#pfEq'); if(eq&&!eq.children.length) eq.innerHTML=Array.from({length:48},(_,i)=>`<i style="--d:${(-(i*137)%1300)/1000}s;--h:${(28+((i*53)%60))}%"></i>`).join('');
+  const mk=$('#pfMarcas'); if(mk&&!mk.children.length){ const l=PF_MARCAS.map(m=>`<span>${esc(m)}</span>`).join(''); mk.innerHTML=l+l; }
+  const tipos=PF_TIPOS.filter(k=>V.some(v=>v.tipo===k));
+  const nums=$('#pfNums');
+  if(nums) nums.innerHTML=[[V.length,'trabalhos']].concat(tipos.map(k=>[V.filter(v=>v.tipo===k).length,(PF_SEC[k]||{t:k}).t.toLowerCase()]))
+    .map(([n,t])=>`<div class="vt-num"><b>${n}</b><span>${esc(t)}</span></div>`).join('');
+  const box=$('#pfLista'); if(!box) return;
+  if(!V.length){ box.innerHTML=`<div class="vt-vazio">Nada aqui ainda. Aperte <b>+ Novo trabalho</b> e cadastre uma trilha, um sound design ou um clipe, com o link do vídeo.</div>`; vitMotion(); return; }
+  box.innerHTML=tipos.map((k,si)=>{ const L=V.filter(v=>v.tipo===k), S0=PF_SEC[k]||{t:k,d:''};
+    return `<section class="pf-sec">
+      <div class="pf-sec-h"><div class="pf-trk"><span>TRK ${String(si+1).padStart(2,'0')}</span><b>${L.length} ${L.length===1?'faixa':'faixas'}</b></div>
+        <div><h3>${esc(S0.t)}</h3><p>${esc(S0.d)}</p></div></div>
+      <div class="pf-grid">${L.map((v,i)=>`
+        <article class="pf-card vt-card ${i===0&&L.length>2?'pf-big':''}" data-vtc="${esc(v.id)}" style="--ac:${esc(v.cor||'#2ED9C3')};--i:${i}">
+          <button type="button" class="pf-th vt-media" ${v.link?`data-pfplay="${esc(v.id)}"`:'disabled'} aria-label="${v.link?'Assistir '+esc(v.titulo):esc(v.titulo)}">
+            <div class="pf-obj vt-obj">${v.img?`<img src="${esc(v.img)}" alt="" loading="lazy" decoding="async">`:`<div class="vt-gera" style="--ac:${esc(v.cor||'#2ED9C3')}"><b>${esc((v.titulo||'?').split(/\s+/).slice(0,2).map(p=>p[0]).join('').toUpperCase())}</b><span>${esc(v.titulo)}</span></div>`}
+              ${v.link?`<span class="pf-play"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>`:''}
+              <span class="pf-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></div>
+          </button>
+          <div class="pf-info vt-info">
+            ${v.cliente?`<div class="pf-cli">${esc(v.cliente)}</div>`:''}
+            <h4>${esc(v.titulo)}</h4>
+            ${v.resumo?`<p>${esc(v.resumo)}</p>`:''}
+            <div class="pf-btns">
+              ${v.link?`<button class="btn sm pri" type="button" data-pfplay="${esc(v.id)}">${svgI('i-eye',13,2)}Assistir</button>`:''}
+              ${v.link?`<button class="btn sm" type="button" data-vwa="${esc(v.id)}">${svgI('i-wa',13,2)}WhatsApp</button>`:''}
+              ${v.link?`<button class="icobtn" type="button" data-vlink="${esc(v.id)}" title="Copiar link" aria-label="Copiar o link de ${esc(v.titulo)}">${svgI('i-copy',14,2)}</button>`:''}
+              <button class="icobtn" type="button" data-vedit="${esc(v.id)}" title="Editar" aria-label="Editar ${esc(v.titulo)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
+            </div>
+          </div>
+        </article>`).join('')}</div>
+    </section>`; }).join('');
+  vitMotion();
+}
+document.addEventListener('click',e=>{ const b=e.target.closest('[data-pfplay]'); if(!b) return;
+  pfAssistir((S.vitrine||[]).find(x=>x.id===b.dataset.pfplay)); });
+function pfMandarTudo(){
+  const V=(S.vitrine||[]).filter(v=>pfEhSom(v)&&v.link); if(!V.length){ toast('Nada com link','Cadastre um trabalho com o link do vídeo','warn'); return; }
+  const blocos=PF_TIPOS.filter(k=>V.some(v=>v.tipo===k)).map(k=>`*${(PF_SEC[k]||{t:k}).t}*\n`+V.filter(v=>v.tipo===k).map(v=>`• ${v.titulo}${v.cliente?' ('+v.cliente+')':''}: ${v.link}`).join('\n'));
+  preview({titulo:'O portfólio inteiro', sub:'copie e cole no WhatsApp ou no e-mail',
+    texto:`Oi! Separei aqui alguns trabalhos de som meus, pra você ouvir:\n\n${blocos.join('\n\n')}\n\n${S.cfg.studio||'studio Ti Artes'} · som feito à mão`, wa:'', email:'', assunto:'Portfólio de produção musical'});
+}
+if($('#btnPfTudo')) $('#btnPfTudo').onclick=pfMandarTudo;
+if($('#btnPfNovo')) $('#btnPfNovo').onclick=()=>editVit(null,'trilha');
 
 /* ---------- a mensagem ---------- */
 function vitMensagem(v, quem){
@@ -15856,6 +16704,8 @@ function vitMensagem(v, quem){
   const oq = v.tipo==='app' ? 'um app que eu fiz'
            : v.tipo==='site' ? 'um site que eu fiz'
            : v.tipo==='trilha' ? 'uma trilha minha'
+           : v.tipo==='musica' ? 'uma produção musical minha'
+           : v.tipo==='imersivo' ? 'um trabalho de som imersivo meu'
            : v.tipo==='sfx' ? 'um trabalho de som meu'
            : 'um trabalho meu';
   return `${abre}Queria te mostrar ${oq}${v.cliente?', feito pra '+v.cliente:''}:
@@ -15897,9 +16747,9 @@ function vitMandar(v){
 }
 
 /* ---------- cadastro ---------- */
-function editVit(v){
+function editVit(v,tipoNovo){
   const novo=!v;
-  const d=v||{titulo:'',tipo:'app',cliente:'',ano:String(HOJE.getFullYear()),link:'',resumo:''};
+  const d=v||{titulo:'',tipo:tipoNovo||'app',cliente:'',ano:String(HOJE.getFullYear()),link:'',resumo:''};
   modal({
     t:novo?'Novo trabalho na vitrine':'Editar',
     d:'O que você já entregou e quer poder mostrar num toque',
@@ -15910,6 +16760,9 @@ function editVit(v){
       <div class="fld"><label>Ano</label><input class="inp" id="v_a" value="${esc(d.ano||'')}"></div>
       <div class="fld full"><label>Cliente</label><input class="inp" id="v_c" value="${esc(d.cliente||'')}"></div>
       <div class="fld full"><label>Link</label><input class="inp mono" id="v_l" value="${esc(d.link||'')}" placeholder="https://..."></div>
+      <div class="fld"><label>Onde / de quê <span style="opacity:.6">— aparece no cartão</span></label><input class="inp" id="v_lc" value="${esc(d.local||'')}" placeholder="Londres, Confeitaria…"></div>
+      <div class="fld"><label>Tela</label><select class="inp" id="v_tl"><option value="pc"${vitTela(d)==='pc'?' selected':''}>Computador (site)</option><option value="cel"${vitTela(d)==='cel'?' selected':''}>Celular (app)</option></select></div>
+      <div class="fld full"><label>Imagem de apresentação <span style="opacity:.6">— link de uma imagem (print). Vazio: eu desenho uma capa</span></label><input class="inp mono" id="v_im" value="${esc(d.img||'')}" placeholder="https://.../print.jpg"></div>
       <div class="fld full"><label>Uma linha explicando <span style="opacity:.6">— é o que vai na mensagem</span></label>
         <input class="inp" id="v_r" value="${esc(d.resumo||'')}" placeholder="Controla pedidos, entregas e recebimentos, direto no celular."></div>
     </div>`,
@@ -15924,7 +16777,8 @@ function editVit(v){
     /* sem http o WhatsApp não transforma em link clicável */
     if(link && !/^https?:\/\//i.test(link)) link='https://'+link;
     const o={titulo:t, tipo:$('#v_tp').value, cliente:($('#v_c').value||'').trim(),
-      ano:($('#v_a').value||'').trim(), link, resumo:($('#v_r').value||'').trim()};
+      ano:($('#v_a').value||'').trim(), link, resumo:($('#v_r').value||'').trim(),
+      local:($('#v_lc').value||'').trim(), tela:$('#v_tl').value, img:($('#v_im').value||'').trim()};
     if(novo){ S.vitrine=S.vitrine||[]; S.vitrine.unshift({id:uid('vt'),...o}); }
     else Object.assign(v,o);
     save(); closeM(); render(); toast(novo?'Adicionado à vitrine':'Atualizado',t.slice(0,38),'ok');
@@ -16148,6 +17002,7 @@ $('#btnNew').onclick=()=>{
   if(VIEW==='agenda' && typeof editReuniao==='function') return editReuniao(null);
   if(VIEW==='tarefas' && typeof editTarefa==='function') return editTarefa(null);
   if(VIEW==='vitrine' && typeof editVit==='function') return editVit(null);
+  if(VIEW==='portfolio' && typeof editVit==='function') return editVit(null,'trilha');
   if(VIEW==='prosp' && typeof editProsp==='function') return editProsp(null);
   if(VIEW==='mkt' && MKT_SUB==='propostas') return editProposta(null, marcaAtual()==='*'? nomeEstudio() : marcaAtual());
   if(VIEW==='mkt'){ MKT_SUB='criar'; renderMkt(); window.scrollTo({top:0,behavior:'smooth'}); return; }
@@ -16578,6 +17433,265 @@ function lerJson(t){
   if(a<0||b<=a) return null;
   try{ return JSON.parse(s.slice(a,b+1)); }catch(_){ return null; }
 }
+
+/* ============================================================
+   v130 — GRAVAR IDEIA (dentro do Assistente)
+   ------------------------------------------------------------
+   Ele pediu: "apertar um botãozinho simples, ouvir essas ideias
+   depois, entender de onde elas vieram, e a cada troca de ideia
+   gerar um conteúdo".
+   - Um toque no 💡 do Assistente abre a lista e o "Começar a gravar".
+   - Grava o ÁUDIO (MediaRecorder) e, junto, escreve o que é falado
+     (o mesmo reconhecimento de voz do ditado), com o minuto de cada fala.
+   - Parou: guarda a ideia na coleção `ideias` (sincroniza) e o áudio
+     NESTE aparelho (IndexedDB — áudio é pesado demais pra linha do banco).
+   - Com a IA ligada, já sai o resumo, de onde cada ideia veio (com o
+     minuto, que toca o áudio ali) e um conteúdo pronto pra fila.
+   - Nunca grava sozinho: só quando ele aperta, com aviso vermelho na tela.
+   Não é um segundo chat: é um botão do mesmo Assistente.
+   ============================================================ */
+function ideias(){ return Array.isArray(S.ideias)? S.ideias : (S.ideias=[]); }
+
+/* ---- áudio no aparelho (IndexedDB) ---- */
+const IDEIA_DB={
+  _db:null,
+  abrir(){ if(this._db) return Promise.resolve(this._db);
+    return new Promise((ok,erro)=>{ let r; try{ r=indexedDB.open('tiartes_ideias',1); }catch(e){ return erro(e); }
+      r.onupgradeneeded=()=>{ try{ r.result.createObjectStore('audio'); }catch(_){} };
+      r.onsuccess=()=>{ this._db=r.result; ok(r.result); }; r.onerror=()=>erro(r.error); }); },
+  async op(modo,fn){ const db=await this.abrir();
+    return new Promise((ok,erro)=>{ const tx=db.transaction('audio',modo), st=tx.objectStore('audio'); const q=fn(st);
+      tx.oncomplete=()=>ok(q&&q.result); tx.onerror=()=>erro(tx.error); }); },
+  put(id,blob){ return this.op('readwrite',st=>st.put(blob,id)); },
+  get(id){ return this.op('readonly',st=>st.get(id)); },
+  del(id){ return this.op('readwrite',st=>st.delete(id)); }
+};
+
+/* ---- estado da gravação ---- */
+let IDEIA_REC=null;   /* {rec, fluxo, pedacos, ini, trechos, inicioFala, fala, timer, com, parando} */
+const mmss=s=>{ s=Math.max(0,Math.round(s||0)); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); };
+const ideiaGravando=()=>!!IDEIA_REC;
+
+function ideiaPinta(){
+  const on=!!IDEIA_REC, b=$('#ideiaBtn'), f=$('#ideiaRec');
+  if(b){ b.classList.toggle('ouvindo',on);
+    b.title=on?'Gravando a ideia — toque pra parar e salvar':'Gravar ideia — grava a conversa e vira conteúdo';
+    b.setAttribute('aria-label',on?'Parar e salvar a ideia':'Gravar ideia'); }
+  if(f) f.classList.toggle('on',on);
+}
+function ideiaTextoAoVivo(){
+  const R=IDEIA_REC; if(!R) return;
+  const ult=[...R.trechos.map(t=>t.txt),R.meio||''].join(' ').replace(/\s+/g,' ').trim();
+  const el=$('#ideiaTxt'); if(el) el.textContent = ult? '“'+ult.slice(-90)+'”' : (R.semTexto? 'Gravando o áudio (este navegador não escreve a fala).' : 'Gravando — pode conversar normal.');
+}
+
+async function ideiaComecar(com){
+  if(IDEIA_REC) return;
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||typeof MediaRecorder==='undefined')
+    return toast('Este navegador não grava','No Mac use Chrome ou Safari; no iPhone, o Safari','warn');
+  try{ if(typeof OUVINDO!=='undefined'&&OUVINDO) pararOuvir(); }catch(_){}
+  try{ pararFala(); }catch(_){}
+  let fluxo;
+  try{ fluxo=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}}); }
+  catch(e){ return toast('Falta liberar o microfone','Clique no cadeado ao lado do endereço e permita o microfone','warn'); }
+  const tipos=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/aac'];
+  const mime=tipos.find(t=>{ try{ return MediaRecorder.isTypeSupported(t); }catch(_){ return false; } })||'';
+  let rec; try{ rec=mime? new MediaRecorder(fluxo,{mimeType:mime}) : new MediaRecorder(fluxo); }
+  catch(e){ fluxo.getTracks().forEach(t=>t.stop()); return toast('Não consegui gravar',e.message||'','warn'); }
+  const R=IDEIA_REC={rec,fluxo,mime:rec.mimeType||mime||'audio/webm',pedacos:[],ini:Date.now(),trechos:[],meio:'',com:String(com||'').trim(),
+    fala:null,inicioFala:{},sessao:0,semTexto:!FALA,timer:null};
+  rec.ondataavailable=e=>{ if(e.data&&e.data.size) R.pedacos.push(e.data); };
+  rec.start(1000);
+  R.timer=setInterval(()=>{ const el=$('#ideiaRel'); if(el) el.textContent=mmss((Date.now()-R.ini)/1000); },500);
+  ideiaOuvir();
+  const rel=$('#ideiaRel'); if(rel) rel.textContent='0:00';
+  const quem=$('#ideiaQuem'); if(quem) quem.textContent=R.com? 'com '+R.com : '';
+  ideiaPinta(); ideiaTextoAoVivo();
+  if(typeof closeM==='function' && $('#ov')?.classList.contains('on') && IDEIA_MODAL) closeM();
+  toast('Gravando a ideia','Toque no botão vermelho (ou em "parar e salvar") quando terminar','info');
+}
+/* o reconhecimento de voz para sozinho de tempos em tempos: religa enquanto grava */
+function ideiaOuvir(){
+  const R=IDEIA_REC; if(!R||!FALA) return;
+  let r; try{ r=new FALA(); }catch(_){ R.semTexto=true; return; }
+  r.lang='pt-BR'; r.continuous=true; r.interimResults=true; r.maxAlternatives=1;
+  const ses=++R.sessao;
+  r.onresult=e=>{
+    let meio='';
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      const k=ses+':'+i, agora=(Date.now()-R.ini)/1000;
+      if(R.inicioFala[k]==null) R.inicioFala[k]=Math.max(0,agora-1.5);
+      const t=(e.results[i][0].transcript||'').trim();
+      if(e.results[i].isFinal){ if(t) R.trechos.push({t:+R.inicioFala[k].toFixed(1),txt:t}); }
+      else meio+=' '+t;
+    }
+    R.meio=meio.trim(); ideiaTextoAoVivo();
+    try{ orbePulso(420,0.5); }catch(_){}
+  };
+  r.onerror=e=>{ const q=e&&e.error;
+    if(q==='not-allowed'||q==='service-not-allowed'){ R.semTexto=true; ideiaTextoAoVivo(); } };
+  r.onend=()=>{ if(IDEIA_REC===R && !R.parando && !R.semTexto) setTimeout(()=>{ if(IDEIA_REC===R&&!R.parando) ideiaOuvir(); },250); };
+  try{ r.start(); R.fala=r; }catch(_){ R.semTexto=true; }
+}
+
+async function ideiaParar(salvar=true){
+  const R=IDEIA_REC; if(!R||R.parando) return; R.parando=true;
+  clearInterval(R.timer);
+  try{ R.fala&&R.fala.stop(); }catch(_){}
+  /* o último pedaço falado ainda em andamento entra como trecho */
+  if(R.meio) R.trechos.push({t:+((Date.now()-R.ini)/1000-2).toFixed(1),txt:R.meio});
+  const dur=Math.round((Date.now()-R.ini)/1000);
+  const blob=await new Promise(ok=>{
+    if(R.rec.state==='inactive') return ok(new Blob(R.pedacos,{type:R.mime}));
+    R.rec.onstop=()=>ok(new Blob(R.pedacos,{type:R.mime}));
+    try{ R.rec.stop(); }catch(_){ ok(new Blob(R.pedacos,{type:R.mime})); }
+  });
+  R.fluxo.getTracks().forEach(t=>t.stop());
+  IDEIA_REC=null; ideiaPinta();
+  try{ orbeMicFecha(); }catch(_){}
+  if(!salvar){ toast('Gravação descartada','nada foi guardado','info'); return; }
+  if(dur<2 && !R.trechos.length){ toast('Gravação curta demais','nada foi guardado','warn'); return; }
+  const id=uid('id');
+  let temAudio=false;
+  try{ if(blob.size){ await IDEIA_DB.put(id,blob); temAudio=true; } }
+  catch(e){ toast('Não consegui guardar o áudio','o texto ficou salvo','warn'); }
+  const trechos=R.trechos.slice().sort((a,b)=>a.t-b.t);
+  const it={id,quando:new Date().toISOString(),com:R.com,dur,trechos,
+    texto:trechos.map(x=>x.txt).join(' '),audio:temAudio,audioMime:R.mime,
+    titulo:'',resumo:'',ideias:[],principal:'',conteudo:null,status:'nova'};
+  ideias().unshift(it); save();
+  if(typeof iaAtiva==='function' && iaAtiva() && it.texto.length>=25){
+    toast('Ideia salva','estou resumindo e montando o conteúdo…','ok');
+    await ideiaProcessar(id);
+  } else {
+    toast('Ideia salva', it.texto.length<25? 'sem fala escrita — o áudio está guardado' : 'ligue a inteligência pra sair o resumo e o conteúdo','ok');
+  }
+  abrirIdeias(id);
+}
+
+/* ---- a IA lê a conversa: resumo, de onde veio, conteúdo ---- */
+function sistemaIdeia(it){
+  const m=(typeof mktMarcasLista==='function'? (marcaAtual()==='*'? mktMarcasLista()[0] : marcaAtual()) : '')||nomeEstudio();
+  return `Você ajuda ${S.cfg.dono||'o Eugênio'}, do ${nomeEstudio()}, a não perder ideia boa.
+Recebe a transcrição automática de uma conversa (${it.com? 'com '+it.com : 'com outra pessoa'}), com o minuto de cada fala entre colchetes. A transcrição é de máquina: tem erro de palavra e NÃO separa quem falou. Interprete com bom senso, sem inventar.
+Devolva SÓ um JSON, numa linha só, sem quebras de linha dentro dos textos:
+{"titulo":"até 7 palavras","resumo":"2 frases: do que se falou e o que ficou decidido","ideias":[{"ideia":"a ideia em 1 frase","origem":"de onde ela saiu: o problema, a pergunta ou o comentário que puxou","momento":"m:ss"}],"principal":"a ideia mais forte, 1 frase","conteudo":{"formato":"post|reel|carrossel","gancho":"1ª linha, até 90 caracteres","legenda":"parágrafos separados por ' || '","hashtags":["3 a 5"],"roteiro":"se for reel: falas curtas, até 30 segundos; senão vazio"}}
+Regras: de 1 a 5 ideias, na ordem em que apareceram; "momento" é o minuto da fala onde a ideia nasceu. O conteúdo é da marca ${m} e parte da ideia principal. Só use o que foi dito: não invente número, cliente, resultado nem depoimento. Proibido: imperdível, incrível, o melhor, experiência única, revolucionário, luxo, sensacional. Português do Brasil, direto.`;
+}
+async function ideiaProcessar(id){
+  const it=ideias().find(x=>x.id===id); if(!it) return;
+  if(!(typeof iaAtiva==='function'&&iaAtiva())) return toast('Ligue a inteligência','no Assistente, em "Ligar"','warn');
+  if(!(it.texto||'').trim()) return toast('Não tem fala escrita','só o áudio ficou guardado','warn');
+  it.status='lendo'; IDEIA_PROC.add(id); renderIdeias();
+  try{
+    const conteudo='Transcrição:\n'+(it.trechos||[]).map(x=>'['+mmss(x.t)+'] '+x.txt).join('\n').slice(0,24000)+'\n\nResponda só com o JSON, numa linha só.';
+    const r=await iaTexto({modelo:(typeof modeloMkt==='function'&&modeloMkt())||undefined,sistema:sistemaIdeia(it),conteudo,max:1800});
+    const j=lerJsonTolerante(r.texto);
+    if(!j) throw new Error('A resposta veio fora do formato. Toque em "Gerar de novo".');
+    it.titulo=String(j.titulo||'').slice(0,90); it.resumo=String(j.resumo||'');
+    it.ideias=(Array.isArray(j.ideias)?j.ideias:[]).slice(0,6).map(x=>({ideia:String(x.ideia||''),origem:String(x.origem||''),momento:String(x.momento||'')}));
+    it.principal=String(j.principal||'');
+    const c=j.conteudo||{};
+    it.conteudo={formato:['post','reel','carrossel'].includes(c.formato)?c.formato:'post',gancho:String(c.gancho||''),
+      legenda:String(c.legenda||'').split(/\s*\|\|\s*/).join('\n\n'),hashtags:(Array.isArray(c.hashtags)?c.hashtags:[]).map(h=>'#'+String(h).replace(/^#/,'')).slice(0,6),
+      roteiro:String(c.roteiro||'')};
+    it.status='pronta';
+  }catch(e){ it.status='erro'; it.erro=e.message||String(e); toast('Não saiu o resumo',it.erro,'warn'); }
+  IDEIA_PROC.delete(id); save(); renderIdeias();
+}
+const IDEIA_PROC=new Set();
+
+function ideiaLegendaCompleta(c){ return [c.gancho,c.legenda,(c.hashtags||[]).join(' ')].filter(x=>String(x||'').trim()).join('\n\n'); }
+function ideiaPraFila(id){
+  const it=ideias().find(x=>x.id===id); if(!it||!it.conteudo) return;
+  if(mktPosts().some(p=>p.ideiaId===id)) return toast('Já está na fila','Marketing → Fila e Instagram','info');
+  const m=marcaAtual()==='*'? mktMarcasLista()[0] : marcaAtual();
+  mktPosts().push({id:uid('po'),cliente:m,ideiaId:id,ideia:(it.conteudo.gancho||it.principal||it.titulo||'Ideia').slice(0,120),
+    legenda:ideiaLegendaCompleta(it.conteudo),formato:it.conteudo.formato==='reel'?'reel':'post',data:'',status:'ideia',criadoEm:iso(HOJE)});
+  save(); render(); renderIdeias();
+  toast('Foi pra fila do Marketing','da marca '+m+' — falta só a peça e a data','ok');
+}
+async function ideiaApagar(id){
+  const it=ideias().find(x=>x.id===id); if(!it) return;
+  if(!confirm('Apagar a ideia "'+(it.titulo||'sem título')+'" e o áudio dela? Não dá pra desfazer.')) return;
+  S.ideias=ideias().filter(x=>x.id!==id); try{ await IDEIA_DB.del(id); }catch(_){}
+  save(); renderIdeias(); toast('Ideia apagada','','ok');
+}
+
+/* ---- a lista (janela) ---- */
+let IDEIA_MODAL=false, IDEIA_FOCO=null;
+function abrirIdeias(foco){ IDEIA_FOCO=foco||null; IDEIA_MODAL=true; renderIdeias(true); }
+function quandoCurto(s){ const d=new Date(s); if(isNaN(d)) return ''; return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})+' · '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}); }
+function cartaoIdeia(it){
+  const lendo=IDEIA_PROC.has(it.id)||it.status==='lendo', c=it.conteudo, naFila=mktPosts().some(p=>p.ideiaId===it.id);
+  const seg=s=>{ const p=String(s||'').split(':'); return p.length===2? (+p[0])*60+(+p[1]) : 0; };
+  return `<div class="ideia-c${IDEIA_FOCO===it.id?' foco':''}" data-ideia="${esc(it.id)}">
+    <div class="ideia-h"><div style="min-width:0"><div class="ideia-t">${esc(it.titulo||(lendo?'Lendo a conversa…':'Ideia gravada'))}</div>
+      <div class="ideia-s">${esc(quandoCurto(it.quando))}${it.com?' · com '+esc(it.com):''} · ${mmss(it.dur)}</div></div>
+      <button class="icobtn" data-ideia-apaga="${esc(it.id)}" title="Apagar">${svgI('i-trash',15,2)}</button></div>
+    ${it.audio? `<audio controls preload="none" data-ideia-audio="${esc(it.id)}"></audio>` : `<div class="ideia-nota">Áudio não está neste aparelho${it.texto?' — o texto está aqui embaixo':''}.</div>`}
+    ${lendo? `<div class="ideia-nota">Resumindo e montando o conteúdo…</div>` : ''}
+    ${it.resumo? `<p class="ideia-r">${esc(it.resumo)}</p>` : ''}
+    ${(it.ideias||[]).length? `<div class="ideia-sec">As ideias e de onde vieram</div><ol class="ideia-l">${it.ideias.map(x=>`<li><b>${esc(x.ideia)}</b>
+        <span>${esc(x.origem)}</span>${x.momento&&it.audio?`<button class="chip" data-ideia-ir="${esc(it.id)}" data-seg="${seg(x.momento)}">▶ ouvir em ${esc(x.momento)}</button>`:(x.momento?`<em>${esc(x.momento)}</em>`:'')}</li>`).join('')}</ol>` : ''}
+    ${it.principal? `<div class="ideia-p"><span>A principal</span>${esc(it.principal)}</div>` : ''}
+    ${c? `<div class="ideia-sec">Conteúdo pronto · ${esc(c.formato)}</div>
+      <div class="ideia-cont">${esc(ideiaLegendaCompleta(c)).replace(/\n/g,'<br>')}${c.roteiro?`<div class="ideia-rot"><b>Roteiro do reel</b><br>${esc(c.roteiro).replace(/\n/g,'<br>')}</div>`:''}</div>
+      <div class="ideia-acts"><button class="btn sm" data-ideia-copia="${esc(it.id)}">${svgI('i-copy',14,2)} Copiar</button>
+        <button class="btn pri sm" data-ideia-fila="${esc(it.id)}" ${naFila?'disabled':''}>${naFila?'Já está na fila':'Pôr na fila do Marketing'}</button>
+        <button class="btn gh sm" data-ideia-gera="${esc(it.id)}">Gerar de novo</button></div>`
+      : (!lendo && (it.texto||'').trim()? `<div class="ideia-acts"><button class="btn pri sm" data-ideia-gera="${esc(it.id)}">${svgI('i-zap',14,2)} Resumir e gerar conteúdo</button></div>`:'')}
+    ${it.status==='erro'&&it.erro? `<div class="ideia-nota erro">${esc(it.erro)}</div>` : ''}
+    ${(it.trechos||[]).length? `<details class="ideia-tx"><summary>A conversa escrita (${it.trechos.length} falas)</summary>${it.trechos.map(x=>`<p><em>${mmss(x.t)}</em> ${esc(x.txt)}</p>`).join('')}</details>` : ''}
+  </div>`;
+}
+function renderIdeias(abrir){
+  if(!IDEIA_MODAL) return;
+  if(!abrir && !$('#ov')?.classList.contains('on')) { IDEIA_MODAL=false; return; }
+  const L=ideias().slice().sort((a,b)=>String(b.quando||'').localeCompare(String(a.quando||'')));
+  const ultimo=(L.find(x=>x.com)||{}).com||'';
+  const aberta=document.querySelector('#mB .ideia-lista'); const rol=aberta? $('#mB').scrollTop : 0;
+  modal({t:'Ideias gravadas',d:'Grave a conversa: sai o resumo, de onde cada ideia veio e um conteúdo pronto.',wide:true,
+    body:`<div class="ideia-nova">
+        <label class="fld" style="flex:1;min-width:0"><span>Com quem você está conversando? (opcional)</span>
+          <input id="ideiaCom" placeholder="ex.: Juliana Lana" value="${esc(ultimo)}" autocomplete="off"></label>
+        <button class="btn pri" id="ideiaVai"><span class="ideia-bola"></span> Começar a gravar</button>
+      </div>
+      <div class="ideia-aviso">Avise a pessoa antes de gravar. O áudio fica guardado neste aparelho; o texto e o resumo vão junto com o resto do app.</div>
+      <div class="ideia-lista">${L.length? L.map(cartaoIdeia).join('') : '<div class="ideia-vazio">Nenhuma ideia gravada ainda.</div>'}</div>`,
+    foot:`<button class="btn gh" onclick="closeM()">Fechar</button>`});
+  mClose=()=>{ IDEIA_MODAL=false; IDEIA_FOCO=null; };
+  if(!abrir && rol) $('#mB').scrollTop=rol;
+  $('#ideiaVai').onclick=()=>{ const com=$('#ideiaCom').value; closeM(); ideiaComecar(com); };
+  $$('[data-ideia-audio]').forEach(a=>{ IDEIA_DB.get(a.dataset.ideiaAudio).then(b=>{ if(b){ a.src=URL.createObjectURL(b); } else a.replaceWith(Object.assign(document.createElement('div'),{className:'ideia-nota',textContent:'Áudio não está neste aparelho.'})); }).catch(()=>{}); });
+  $$('[data-ideia-ir]').forEach(b=>b.onclick=()=>{ const a=document.querySelector(`[data-ideia-audio="${b.dataset.ideiaIr}"]`); if(!a) return;
+    const vai=()=>{ a.currentTime=+b.dataset.seg||0; a.play().catch(()=>{}); };
+    if(a.readyState>=1) vai(); else { a.addEventListener('loadedmetadata',vai,{once:true}); a.load(); } });
+  $$('[data-ideia-copia]').forEach(b=>b.onclick=()=>{ const it=ideias().find(x=>x.id===b.dataset.ideiaCopia); if(!it||!it.conteudo) return;
+    const t=ideiaLegendaCompleta(it.conteudo)+(it.conteudo.roteiro?'\n\nRoteiro:\n'+it.conteudo.roteiro:'');
+    (navigator.clipboard?.writeText(t)||Promise.reject()).then(()=>toast('Copiado','','ok')).catch(()=>toast('Não consegui copiar','selecione o texto e copie','warn')); });
+  $$('[data-ideia-fila]').forEach(b=>b.onclick=()=>ideiaPraFila(b.dataset.ideiaFila));
+  $$('[data-ideia-gera]').forEach(b=>b.onclick=()=>ideiaProcessar(b.dataset.ideiaGera));
+  $$('[data-ideia-apaga]').forEach(b=>b.onclick=()=>ideiaApagar(b.dataset.ideiaApaga));
+  if(abrir && IDEIA_FOCO){ const el=document.querySelector(`[data-ideia="${IDEIA_FOCO}"]`); if(el) el.scrollIntoView({block:'nearest'}); }
+}
+
+/* ---- o assistente também enxerga as ideias ---- */
+function verIdeias(a){
+  let L=ideias().slice().sort((x,y)=>String(y.quando||'').localeCompare(String(x.quando||'')));
+  const b=String(a&&a.busca||'').toLowerCase().trim();
+  if(b) L=L.filter(x=>[x.com,x.titulo,x.resumo,x.principal,x.texto].join(' ').toLowerCase().includes(b));
+  return {total:L.length, ideias:L.slice(0,10).map(x=>({id:x.id,quando:x.quando,com:x.com||'',titulo:x.titulo,resumo:x.resumo,
+    ideias:x.ideias,principal:x.principal,conteudo:x.conteudo?{formato:x.conteudo.formato,gancho:x.conteudo.gancho}:null,
+    conversa:x.resumo? undefined : String(x.texto||'').slice(0,1500)})),
+    dica:'Pra ouvir o áudio ou gravar uma nova, ele toca no botão 💡 do Assistente (abrir_ideias).'};
+}
+
+/* ---- botões ---- */
+if($('#ideiaBtn')) $('#ideiaBtn').onclick=()=>{ if(IDEIA_REC) ideiaParar(true); else abrirIdeias(); };
+if($('#ideiaFim')) $('#ideiaFim').onclick=()=>ideiaParar(true);
+if($('#ideiaDesc')) $('#ideiaDesc').onclick=()=>{ if(confirm('Descartar esta gravação? Nada vai ser guardado.')) ideiaParar(false); };
+window.addEventListener('beforeunload',e=>{ if(IDEIA_REC){ e.preventDefault(); e.returnValue=''; } });
 function contextoDaPessoa(pe){
   const linhas=['Nome: '+pe.nome, 'Tipo: '+(pe.tipo==='cliente'?'cliente do estúdio':'contato de prospecção')];
   if(pe.tipo==='cliente'){
@@ -17398,6 +18512,204 @@ function gagLigar(){
    ============================================================ */
 /* Contador no menu = pendência. Zero não aparece; número grande vira 99+.
    A cor diz o que é: cinza = conta, âmbar = esperando você, vermelho = atrasado/urgente. */
+/* ============================================================
+   v131: MENU EM 6 GRUPOS + TELA HOJE
+   Antes eram 16 itens na lateral e o mesmo "atrasado" aparecia com 4
+   números diferentes. Agora: Assistente · Hoje · Vendas · Marketing ·
+   Dinheiro · Ajustes. Cada grupo tem as abas dele em cima da tela.
+   Nenhuma tela antiga sumiu — os ids (pipe, cli, agenda…) são os mesmos,
+   então atalhos, o assistente (abrir_aba) e os links continuam valendo.
+   ============================================================ */
+const GRUPOS=[
+  {g:'chat',n:'Assistente',v:['chat']},
+  {g:'hoje',n:'Hoje',v:['hoje','agenda','tarefas','recados','conv'],rot:{hoje:'Hoje',agenda:'Agenda',tarefas:'Tarefas',recados:'Recados',conv:'Mensagens'}},
+  {g:'vendas',n:'Vendas',v:['pipe','cli','prosp','shows'],extra:['cliente'],rot:{pipe:'Pipeline',cli:'Clientes',prosp:'Prospecção',shows:'Shows'}},
+  {g:'mkt',n:'Marketing',v:['mkt','site'],rot:{mkt:'Posts',site:'Meu site'}},
+  {g:'vitrine',n:'Vitrine',v:['vitrine']},
+  {g:'portfolio',n:'Portfólio',v:['portfolio']},
+  {g:'dinheiro',n:'Dinheiro',v:['dash','fin'],rot:{dash:'Resumo',fin:'Financeiro'}},
+  {g:'ajustes',n:'Ajustes',v:['adm','notif'],rot:{adm:'ADM',notif:'Alertas'}}
+];
+function grupoDe(v){ return GRUPOS.find(G=>G.v.includes(v)||(G.extra||[]).includes(v)) || GRUPOS[1]; }
+const GRP_BDG={tarefas:'navTar',recados:'navRec',conv:'navConv',prosp:'navProsp',mkt:'navMkt'};
+function grpBdgN(v){ const id=GRP_BDG[v], e=id&&document.getElementById(id);
+  if(!e||e.style.display==='none') return 0; return parseInt(e.textContent,10)||0; }
+function pintarGrupo(){
+  const G=grupoDe(VIEW), box=$('#grpTabs');
+  const dk=typeof dockLigado==='function'&&dockLigado();
+  $$('.side .nav-i[data-g]').forEach(n=>n.classList.toggle('on', n.dataset.g===G.g || (n.dataset.g==='chat'&&dk)));
+  if(!box) return;
+  const naBarra=['hoje','vendas','mkt','chat'].includes(G.g);
+  $$('.mob-i').forEach(n=>n.classList.toggle('on', n.dataset.mais? !naBarra : n.dataset.g===G.g));
+  if(G.v.length<2){ box.innerHTML=''; box.hidden=true; return; }
+  box.hidden=false;
+  const ativo=G.v.includes(VIEW)? VIEW : (VIEW==='cliente'?'cli':G.v[0]);
+  const tarAtr=typeof tarPendentes==='function'&&tarPendentes().some(t=>t.data&&dias(t.data)<0);
+  box.innerHTML=G.v.map(v=>{ const n=grpBdgN(v);
+    return `<button type="button" class="grp-tab ${v===ativo?'on':''}" data-grpv="${v}" ${v===ativo?'aria-current="page"':''}>${esc((G.rot&&G.rot[v])||PG[v][0])}${
+      n?`<span class="grp-n ${v==='tarefas'&&tarAtr?'alerta':''}">${n>99?'99+':n}</span>`:''}</button>`; }).join('');
+}
+document.addEventListener('click',e=>{ const b=e.target.closest('[data-grpv]'); if(!b) return;
+  const v=b.dataset.grpv; if(v==='mkt'&&VIEW!=='mkt'&&typeof MKT_SUB!=='undefined') MKT_SUB='criar';
+  go(v); try{ b.scrollIntoView({block:'nearest',inline:'center'}); }catch(_){} });
+
+/* ---------- o que precisa dele: UMA lista, UM número ----------
+   Esse número é o do menu "Hoje" e o do ícone do celular. Atrasado é
+   atrasado em um lugar só. */
+function hojePendencias(){
+  const L=[], dd=d=>dias(d);
+  const B=(attr,txt,pri)=>`<button class="btn sm ${pri?'pri':''}" type="button" ${attr}>${txt}</button>`;
+  try{ (S.jobs||[]).filter(aberto).forEach(j=>{ const n=dd(j.prazo); if(n>0) return; const c=cli(j.cliId);
+    L.push({ord:n<0?0:2, venc:n<0, ico:'i-flag', cor:'#FF5A5A', tag:n<0?Math.abs(n)+'d atrasado':'entrega hoje', t:j.titulo, s:[c.nome,BRL(j.valor),(j.prog||0)+'% pronto'].filter(x=>x&&x!=='—').join(' · '),
+      btn:B(`data-job="${esc(j.id)}"`,'Abrir',false)+B(`data-hojenova="${esc(j.id)}"`,n<0?'Nova data':'Entreguei',true)}); }); }catch(e){}
+  try{ recAbertos().forEach(r=>{ const link=recLinkResposta(r);
+    L.push({ord:1, ico:r.canal==='instagram'?'i-insta':'i-inbox', cor:'#FBBF24', tag:'recado', t:recNome(r), s:recAssunto(r)+(r.resumo?' — '+r.resumo:''),
+      btn:(link?`<a class="btn sm pri" href="${esc(link)}" target="_blank" rel="noopener">Responder</a>`:B('data-goto="recados"','Ver',true))+B(`data-recok="${esc(r.id)}"`,'Baixa',false)}); }); }catch(e){}
+  try{ pessoasConversa().filter(esperandoVoce).forEach(pe=>{ const u=ultimaMsg(pe);
+    L.push({ord:1, ico:'i-wa', cor:'#2ED9C3', tag:'mensagem', t:pe.nome, s:'Mandou: '+String((u&&(u.resumo||u.texto))||'').replace(/\s+/g,' ').slice(0,90),
+      btn:B(`data-hojeconv="${esc(pe.ref)}"`,'Responder',true)}); }); }catch(e){}
+  try{ (S.jobs||[]).forEach(j=>{ const st=stage(j.stageId); if(st.tipo!=='entregue'||saldo(j)<=0) return; const c=cli(j.cliId);
+    L.push({ord:3, ico:'i-wallet', cor:'#34D399', tag:'cobrar', t:j.titulo, s:[c.nome,'falta '+BRL(saldo(j))].filter(x=>x&&x!=='—').join(' · '),
+      btn:B(`data-job="${esc(j.id)}"`,'Abrir',false)+(c.wa?B(`data-msg="cobranca" data-j="${esc(j.id)}"`,'Cobrar no Whats',true):'')}); }); }catch(e){}
+  try{ (S.shows||[]).forEach(x=>{ if(shPago(x)||!(x.cache>0)||dd(x.data)>=0) return; const c=cli(x.cliId);
+    L.push({ord:3, ico:'i-mic', cor:'#34D399', tag:'cobrar', t:x.titulo, s:[c.nome,'falta '+BRL(shSaldo(x))].filter(x=>x&&x!=='—').join(' · '), btn:B(`data-sh="${esc(x.id)}"`,'Abrir',true)}); }); }catch(e){}
+  try{ tarPendentes().filter(t=>t.data&&dd(t.data)<=0).forEach(t=>{ const n=dd(t.data);
+    L.push({ord:n<0?0:2, ico:'i-checkc', cor:n<0?'#FF5A5A':'#FBBF24', tag:n<0?'tarefa atrasada':'tarefa de hoje', t:t.texto, s:tarRotulo(t)+(t.nota?' · '+t.nota.replace(/\s+/g,' ').slice(0,60):''),
+      btn:B(`data-tar="${esc(t.id)}"`,'Abrir',false)+B(`data-tarck="${esc(t.id)}"`,'Feita',true)}); }); }catch(e){}
+  /* muitos jobs vencidos viram UMA linha com o "arrumar" — senão eles empurram o resto pra fora da tela */
+  const venc=L.filter(x=>x.venc);
+  if(venc.length>3){ const resto=L.filter(x=>!x.venc);
+    resto.push({ord:0, n:venc.length, ico:'i-alert', cor:'#FF5A5A', tag:venc.length+' prazos vencidos', t:venc.length+' jobs com a data de entrega já passada',
+      s:'Muitos já foram entregues e só ficaram no lugar errado. Um por um: entreguei, recebi ou nova data.',
+      btn:B('data-arrumar="1"','Arrumar em 1 minuto',true)});
+    return resto.sort((a,b)=>a.ord-b.ord); }
+  return L.sort((a,b)=>a.ord-b.ord);
+}
+function pintarBadgeHoje(){
+  let L=[]; try{ L=hojePendencias(); }catch(e){}
+  const n=L.reduce((t,x)=>t+(x.n||1),0), atr=L.some(x=>x.ord===0);
+  const b=$('#navHoje'); if(b){ b.textContent=n>99?'99+':n; b.style.display=n?'':'none'; b.classList.toggle('alerta',atr); }
+  const m=$('#mobHoje'); if(m){ m.textContent=n>99?'99+':n; m.style.display=n?'grid':'none'; }
+  return L;
+}
+function renderHoje(){
+  const L=pintarBadgeHoje(), hj=iso(HOJE), h=new Date().getHours();
+  const nome=String((S.cfg&&S.cfg.dono)||'Eugênio').split(' ')[0];
+  const MES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  const DIA=['domingo','segunda','terça','quarta','quinta','sexta','sábado'];
+  $('#hojeOla').textContent=(h<12?'Bom dia':h<18?'Boa tarde':'Boa noite')+', '+nome;
+  $('#hojeData').textContent=DIA[HOJE.getDay()]+', '+HOJE.getDate()+' de '+MES[HOJE.getMonth()];
+  let m={}; try{ m=metrics(); }catch(e){}
+  $('#hojeNums').innerHTML=`<button class="hoje-num" type="button" data-goto="dash"><small>Entrou no mês</small><b>${BRLc(m.entrouMes||0)}</b></button>
+    <button class="hoje-num" type="button" data-goto="fin"><small>A receber</small><b>${BRLc(m.aReceber||0)}</b></button>`;
+  /* precisa de você */
+  const item=x=>`<div class="hj-i"><div class="row-ico" style="background:${x.cor}1f;color:${x.cor};border-color:${x.cor}44">${svgI(x.ico,15,2)}</div>
+    <div class="hj-tx"><div class="hj-t">${esc(x.t)}</div><div class="hj-s"><span class="hj-tag" style="color:${corTxt(x.cor)}">${esc(x.tag)}</span>${esc(x.s||'')}</div></div>
+    <div class="hj-acts">${x.btn}</div></div>`;
+  const TOP=7;
+  $('#hojeN').textContent=L.reduce((t,x)=>t+(x.n||1),0)||'';
+  $('#hojePrecisa').innerHTML= !L.length
+    ? `<div class="empty" style="padding:26px 14px"><div class="empty-t">Tudo em dia</div><div class="empty-d">Nenhum recado, mensagem, cobrança ou prazo esperando você.</div></div>`
+    : L.slice(0,TOP).map(item).join('') + (L.length>TOP? `<details class="hj-mais"><summary>+ ${L.length-TOP} mais</summary><div class="stack-v">${L.slice(TOP).map(item).join('')}</div></details>`:'');
+  /* agenda de hoje + 7 dias */
+  const doDia=d=>{ const a=[];
+    (S.reunioes||[]).filter(r=>r&&r.data===d&&!r.feito).forEach(r=>a.push({h:r.hora||'',t:r.titulo||'Reunião',s:[typeof reuNome==='function'?reuNome(r):'',r.local||''].filter(Boolean).join(' · '),attr:`data-reu="${esc(r.id)}"`,ico:'i-bell',cor:'#2ED9C3'}));
+    (S.shows||[]).filter(x=>x&&x.data===d&&shAberto(x)).forEach(x=>a.push({h:x.hora||'',t:x.titulo,s:[cli(x.cliId).nome,x.local||''].filter(v=>v&&v!=='—').join(' · '),attr:`data-sh="${esc(x.id)}"`,ico:'i-mic',cor:'#F59E0B'}));
+    (S.jobs||[]).filter(j=>aberto(j)&&j.prazo===d).forEach(j=>a.push({h:'',t:'Entrega: '+j.titulo,s:cli(j.cliId).nome,attr:`data-job="${esc(j.id)}"`,ico:'i-flag',cor:'#FBBF24'}));
+    tarPendentes().filter(t=>t.data===d).forEach(t=>a.push({h:t.hora||'',t:t.texto,s:'tarefa',attr:`data-tar="${esc(t.id)}"`,ico:'i-checkc',cor:'#60A5FA'}));
+    return a.sort((x,y)=>(x.h?0:1)-(y.h?0:1)||String(x.h).localeCompare(String(y.h))); };
+  const A=doDia(hj);
+  $('#hojeAgD').textContent= A.length? A.length+(A.length>1?' compromissos':' compromisso') : 'Nada marcado hoje';
+  $('#hojeAgenda').innerHTML= A.length? A.map(x=>`<div class="hj-ag" ${x.attr}><div class="hj-ag-h">${x.h?esc(x.h):'o dia'}</div>
+      <div class="hj-tx"><div class="hj-t">${svgI(x.ico,12,2.2)} ${esc(x.t)}</div>${x.s?`<div class="hj-s">${esc(x.s)}</div>`:''}</div></div>`).join('')
+    : `<div class="hj-vazio">Dia livre. Bom pra adiantar o que está atrasado.</div>`;
+  const DC=['dom','seg','ter','qua','qui','sex','sáb'];
+  $('#hojeSem').innerHTML=Array.from({length:7},(_,i)=>{ const d=addD(HOJE,i), k=iso(d), n=doDia(k).length;
+    return `<button type="button" class="${i===0?'hj-hoje':''}" data-hojedia="${k}" aria-label="${i===0?'hoje':DC[d.getDay()]+' '+d.getDate()}: ${n} marcado${n===1?'':'s'}"><small>${i===0?'hoje':DC[d.getDay()]}</small><b>${d.getDate()}</b><i>${n||''}</i></button>`; }).join('');
+  /* pra fazer (sem dia) */
+  const soltas=tarPendentes().filter(t=>!t.data).slice(0,6), totS=tarPendentes().filter(t=>!t.data).length;
+  $('#hojeTar').innerHTML= soltas.length? soltas.map(t=>`<div class="row tar-i" data-tar="${esc(t.id)}">
+      <button class="tar-ck" data-tarck="${esc(t.id)}" type="button" aria-label="Marcar como feita"></button>
+      <div style="flex:1;min-width:0"><div class="row-t tar-t">${esc(t.texto)}</div></div></div>`).join('')
+      + (totS>6?`<button class="btn sm gh" data-goto="tarefas" type="button">+ ${totS-6} no Tarefas</button>`:'')
+    : `<div class="hj-vazio">Nada solto. Anote ali em cima o que vier na cabeça.</div>`;
+  /* anotar */
+  const inp=$('#hojeNova');
+  if(inp && !inp.dataset.ok){ inp.dataset.ok='1';
+    const add=()=>{ const v=inp.value.trim(); if(!v){ inp.focus(); return; }
+      tarefas().unshift({id:uid('t'),texto:v.slice(0,300),nota:'',data:'',hora:'',feita:false,criadoEm:iso(HOJE)});
+      inp.value=''; save(); render(); toast('Anotado','Está em "Pra fazer"','ok'); inp.focus(); };
+    inp.onkeydown=e=>{ if(e.key==='Enter'){ e.preventDefault(); add(); } };
+    $('#hojeAdd').onclick=add;
+    $('#hojeIdeia').onclick=()=>{ if(typeof abrirIdeias==='function') abrirIdeias(); };
+  }
+}
+document.addEventListener('click',e=>{ let b;
+  if(b=e.target.closest('[data-hojeconv]')){ if(typeof CONV_SEL!=='undefined'){ CONV_SEL=b.dataset.hojeconv; CONV_CANAL=null; } go('conv'); return; }
+  if(b=e.target.closest('[data-hojedia]')){ const k=b.dataset.hojedia; go('agenda');
+    setTimeout(()=>{ const el=document.getElementById('agd-'+k); if(el) el.scrollIntoView({block:'start',behavior:'smooth'}); },350); return; }
+  if(b=e.target.closest('[data-arrumar]')){ abrirArrumar(); return; }
+  if(b=e.target.closest('[data-hojenova]')){ const j=S.jobs.find(x=>x.id===b.dataset.hojenova); if(!j) return;
+    if(dias(j.prazo)<0) hojeNovaData(j); else hojeEntreguei(j); return; }
+});
+
+/* ---------- ARRUMAR OS PARADOS ----------
+   Um job por vez, o mais antigo primeiro. Um toque por job:
+   entreguei · recebi tudo · nova data · pular. Nada é apagado. */
+function arrumarLista(){ return (S.jobs||[]).filter(j=>aberto(j)&&dias(j.prazo)<0).sort((a,b)=>D(a.prazo)-D(b.prazo)); }
+function abrirArrumar(){
+  const fila=arrumarLista().map(j=>j.id); if(!fila.length){ toast('Nada vencido','Todos os prazos estão em dia','ok'); return; }
+  const R={ent:0,rec:0,data:0,pulo:0}; let i=0;
+  const stEnt=S.stages.find(x=>x.tipo==='entregue'), stPag=S.stages.find(x=>x.tipo==='pago');
+  const mover=(j,st)=>{ moverJob.quieto=true; try{ moverJob(j,st.id); } finally{ moverJob.quieto=false; } };
+  const passo=()=>{
+    while(i<fila.length && !S.jobs.some(j=>j.id===fila[i])) i++;
+    if(i>=fila.length){ fim(); return; }
+    const j=S.jobs.find(x=>x.id===fila[i]), c=cli(j.cliId), n=-dias(j.prazo);
+    modal({t:'Arrumar os atrasados',d:(i+1)+' de '+fila.length+' · o mais antigo primeiro',
+      body:`<div class="arr-job"><div class="arr-t">${esc(j.titulo)}</div>
+        <div class="arr-s">${[c.nome!=='—'?c.nome:'',BRL(j.valor),stage(j.stageId).nome,(j.prog||0)+'% pronto'].filter(Boolean).map(esc).join(' · ')}</div>
+        <div class="arr-p">${svgI('i-alert',13,2.2)} a entrega era ${esc(fmtD(j.prazo))} — ${n} dia${n>1?'s':''} atrás</div>
+        <div class="arr-bar"><i style="width:${Math.round(i/fila.length*100)}%"></i></div></div>
+        <div class="arr-ops">
+          ${stEnt?`<button class="arr-op" type="button" data-arr="ent">${svgI('i-check',18,2.4)}<b>Já entreguei</b><small>falta receber${saldo(j)>0?' '+esc(BRL(saldo(j))):''}</small></button>`:''}
+          ${stPag?`<button class="arr-op" type="button" data-arr="rec">${svgI('i-wallet',18,2)}<b>Já recebi tudo</b><small>vai pra Pago</small></button>`:''}
+          <div class="arr-op arr-data">${svgI('i-cal',18,2)}<b>Ainda vou entregar</b>
+            <div class="arr-dl"><input class="inp" type="date" id="arrData" value="${iso(addD(HOJE,7))}" aria-label="Nova data de entrega"><button class="btn sm pri" type="button" data-arr="data">Nova data</button></div></div>
+        </div>`,
+      foot:`<button class="btn gh" type="button" data-arr="abrir">Abrir o job</button><div class="spacer"></div><button class="btn" type="button" data-arr="parar">Parar</button><button class="btn" type="button" data-arr="pulo">Pular</button>`});
+    mClose=()=>{ $('#modal').onclick=null; render(); };
+    $('#modal').onclick=e=>{ const b=e.target.closest('[data-arr]'); if(!b) return; const a=b.dataset.arr;
+      if(a==='ent'){ mover(j,stEnt); R.ent++; }
+      else if(a==='rec'){ mover(j,stPag); R.rec++; }
+      else if(a==='data'){ const v=$('#arrData').value; if(!v) return; j.prazo=v; save(); R.data++; }
+      else if(a==='pulo'){ R.pulo++; }
+      else if(a==='abrir'){ $('#modal').onclick=null; closeM(); editJob(j); return; }
+      else if(a==='parar'){ fim(); return; }
+      i++; passo(); };
+  };
+  const fim=()=>{ $('#modal').onclick=null; render();
+    const feitos=R.ent+R.rec+R.data, falta=arrumarLista().length;
+    modal({t:feitos?'Pronto — ficou mais leve':'Tudo certo',d:'',
+      body:`<div class="arr-fim">${[[R.ent,'entregue','entregues'],[R.rec,'recebido','recebidos'],[R.data,'com data nova','com data nova'],[R.pulo,'pulado','pulados']].filter(x=>x[0]).map(x=>`<div><b>${x[0]}</b><span>${x[0]>1?x[2]:x[1]}</span></div>`).join('')||'<div><span>Nada mudou.</span></div>'}</div>
+        <div class="mini" style="margin-top:12px">${falta?falta+' ainda com prazo vencido — dá pra continuar depois pelo Hoje.':'Nenhum prazo vencido agora.'}</div>`,
+      foot:`<div class="spacer"></div><button class="btn pri" type="button" onclick="closeM()">Fechar</button>`}); };
+  passo();
+}
+/* "Entreguei": joga o job pra etapa de entregue (o mesmo que arrastar no Pipeline) */
+function hojeEntreguei(j){
+  const st=S.stages.find(x=>x.tipo==='entregue'); if(!st){ editJob(j); return; }
+  moverJob(j,st.id);
+}
+function hojeNovaData(j){
+  modal({t:'Nova data de entrega',d:j.titulo,
+    body:`<div class="fld"><label>Entrega em</label><input class="inp" type="date" id="hjData" value="${iso(addD(HOJE,2))}"></div>
+      <div class="mini" style="margin-top:10px">Ou, se já entregou, toque em "Já entreguei".</div>`,
+    foot:`<button class="btn gh" type="button" id="hjEnt">Já entreguei</button><div class="spacer"></div><button class="btn" type="button" onclick="closeM()">Cancelar</button><button class="btn pri" type="button" id="hjOk">Salvar data</button>`});
+  $('#hjOk').onclick=()=>{ const v=$('#hjData').value; if(!v) return; j.prazo=v; save(); closeM(); render(); toast('Nova data',fmtD(v)+' · '+j.titulo.slice(0,40),'ok'); };
+  $('#hjEnt').onclick=()=>{ closeM(); hojeEntreguei(j); };
+}
+
 function pintarBadgesNav(){
   $$('.side .nav-badge').forEach(b=>{ const n=parseInt(b.textContent,10)||0;
     if(!n){ b.style.display='none'; return; }
@@ -17416,6 +18728,7 @@ function render(){
     try{ maisBdg(); }catch(_){}
   }
   if(chatNaTela())   renderChat();
+  if(VIEW==='hoje')   renderHoje(); else try{ pintarBadgeHoje(); }catch(_){}
   if(VIEW==='dash')   renderDash();
   if(VIEW==='pipe')   renderPipe();
   if(VIEW==='cli' && typeof renderClientes==='function') renderClientes();
@@ -17434,8 +18747,9 @@ function render(){
   if(VIEW==='conv' && typeof renderConversas==='function') renderConversas();
   if(typeof pintarBadgeConv==='function') pintarBadgeConv();
   if(VIEW==='vitrine' && typeof renderVitrine==='function') renderVitrine();
+  if(VIEW==='portfolio' && typeof renderPortfolio==='function') renderPortfolio();
   { const lb=$('#btnNew .lbl');
-    if(lb) lb.textContent = VIEW==='prosp'? 'Novo contato' : VIEW==='shows'? 'Novo Show' : VIEW==='vitrine'? 'Novo trabalho' : VIEW==='agenda'? 'Nova reunião' : VIEW==='cli'? 'Novo cliente' : VIEW==='tarefas'? 'Nova tarefa' : VIEW==='mkt'? (MKT_SUB==='propostas'?'Nova proposta':'Criar um post') : 'Novo Job'; }
+    if(lb) lb.textContent = VIEW==='prosp'? 'Novo contato' : VIEW==='shows'? 'Novo Show' : (VIEW==='vitrine'||VIEW==='portfolio')? 'Novo trabalho' : VIEW==='agenda'? 'Nova reunião' : VIEW==='cli'? 'Novo cliente' : VIEW==='tarefas'? 'Nova tarefa' : VIEW==='mkt'? (MKT_SUB==='propostas'?'Nova proposta':'Criar um post') : 'Novo Job'; }
   if(VIEW==='agenda') renderAgenda();
   if(VIEW==='tarefas' && typeof renderTarefas==='function') renderTarefas();
   if(VIEW==='recados' && typeof renderRecados==='function') renderRecados();
@@ -17462,6 +18776,7 @@ function render(){
   if($('#navTar') && typeof tarPendentes==='function') $('#navTar').classList.toggle('alerta', tarPendentes().some(t=>t.data&&dias(t.data)<0));
   if($('#navPipe')) $('#navPipe').classList.toggle('alerta', S.jobs.some(j=>aberto(j)&&dias(j.prazo)<0));
   pintarBadgesNav();
+  try{ pintarGrupo(); }catch(_){}
 }
 
 /* No celular a tabela vira lista de cartões (CSS lá no fim da folha de
@@ -17487,7 +18802,7 @@ setTimeout(()=>{
     go('chat');
     toast('Bem-vindo ao Studio OS','Comece pelo chat — é só escrever o que você quer','info');
   }
-  else if(m.atrasados.length) toast(`${m.atrasados.length} job(s) atrasado(s)`,'Confira a aba Notificações','warn');
+  else if(m.atrasados.length) toast(`${m.atrasados.length} job(s) atrasado(s)`,'Está em Hoje › Precisa de você','warn');
   else toast('Studio OS pronto',`${S.jobs.filter(aberto).length} jobs ativos · ${BRLc(m.pipeline)} em pipeline`,'ok');
 },1200);
 
@@ -17789,7 +19104,7 @@ document.addEventListener('visibilitychange',()=>{ if(!document.hidden) setTimeo
 /* ---- BARRA DE BAIXO: 5 FIXOS + A FOLHA "MAIS" ----
    As telas que moram na folha. Quem estiver numa delas acende o "Mais",
    senao ele fica apagado e ele nao sabe onde esta. */
-const MAIS_V=['dash','conv','shows','fin','prosp','mkt','site','adm'];
+const MAIS_V=['agenda','tarefas','recados','conv','cli','cliente','prosp','shows','vitrine','site','dash','fin','notif','adm'];
 
 function maisAbrir(){
   $('#maisBack').classList.add('on');
@@ -17813,8 +19128,9 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape') maisFechar(); });
 const _go=go;
 go=function(v){ _go(v);
   const naFolha=MAIS_V.indexOf(v)>=0;
+  const gm=(typeof grupoDe==='function')? grupoDe(v).g : '';
   $$('.mob-i').forEach(n=>n.classList.toggle('on',
-    n.dataset.mais? naFolha : n.dataset.v===v));
+    n.dataset.mais? (naFolha && !['hoje','vendas','mkt'].includes(gm)) : (n.dataset.g? n.dataset.g===gm : n.dataset.v===v)));
   $$('.mais-i').forEach(n=>n.classList.toggle('on',n.dataset.v===v));
   if(v==='chat'){ const bk=$('#bkBar'); if(bk) bk.classList.remove('on'); }
   try{ history.replaceState(null,'','#'+v); }catch(_){}
@@ -17823,7 +19139,7 @@ go=function(v){ _go(v);
 /* O "Mais" carrega a soma dos avisos que ficaram escondidos dentro dele —
    senao ele perde de vista as 120 prospeccoes e as mensagens novas. */
 function maisBdg(){
-  const n=['#mobConv','#mobProsp','#mobTar','#mobRec'].reduce((t,s)=>{
+  const n=[].reduce((t,s)=>{   /* v131: o que pede ação já soma no "Hoje" — o Mais não repete o número */
     const e=$(s); if(!e||e.style.display==='none') return t;
     return t+(parseInt(e.textContent,10)||0);
   },0);
@@ -17834,7 +19150,7 @@ function maisBdg(){
 /* badge do mobile + faixa de modo offline */
 const _render=render;
 render=function(){ _render();
-  const n=S.jobs.filter(aberto).length+(S.shows||[]).filter(shAberto).length, b=$('#mobPipe');
+  const n=0, b=$('#mobPipe');   /* v131: atrasado já aparece no Hoje */
   if(b){ b.textContent=n; b.style.display=n?'grid':'none'; }
   try{ maisBdg(); }catch(_){}
   const st=$('#iaStrip');
@@ -18139,7 +19455,7 @@ function ocupadoAgora(){
     if(i) i.onclick=()=>{ localStorage.setItem(k,hoje); window.open(NOVO,'_blank','noopener'); closeM(); };
   }catch(e){} },1500);
 }catch(e){} })();
-const APP_VER = 'v129';
+const APP_VER = 'v135';
 
 function pintarSelo(){
   const e=$('#verSelo'); if(!e) return;
@@ -18257,7 +19573,7 @@ function ligarAtualizacao(){
    Agora o app percebe sozinho e diz o que fazer, sem perder nada.
    Ao clonar pra um cliente, troque CASA pelo endereço dele.
    ============================================================ */
-const CASA='https://studio-ti-artes.surge.sh/';
+const CASA='https://os.eugeniofim.com/';
 const ehCopiaSolta = ()=> location.protocol==='file:';
 
 function quantoTemPreso(){
