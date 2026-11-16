@@ -2454,6 +2454,62 @@ button.arr-op:hover{border-color:rgba(46,217,195,.5);background:rgba(46,217,195,
   .mn-qr{grid-template-columns:1fr;justify-items:center}
   .mn-qr-box canvas{width:240px;height:240px}
 }
+
+/* ===== AGENTES POR ASSINATURA (16/11): a cópia da aba Estúdio, com gráficos. Entrou = verde-água, custo = azul
+   (validados no claro e no escuro); texto sempre na cor do texto, nunca na cor da série ===== */
+#v-agentes{--asg1:#14A894;--asg2:#3B82F6}
+:root[data-tema="claro"] #v-agentes{--asg1:#0E8A7A;--asg2:#2563EB}
+.asg-topo{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.asg-meses-chips{display:flex;gap:6px;flex-wrap:wrap}
+.asg-chip{height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--glass-line);background:var(--glass);color:inherit;font:600 13px inherit;cursor:pointer}
+.asg-chip.on{background:var(--asg1);border-color:var(--asg1);color:#fff}
+.asg-acoes{display:flex;gap:8px;flex-wrap:wrap}
+.asg-grade{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:14px}
+.asg-grade .asg-larga{grid-column:1/-1}
+.asg-card{margin-bottom:14px}.asg-grade .asg-card{margin-bottom:0}
+.asg-c1{background:var(--asg1)}.asg-c2{background:var(--asg2)}
+.asg-leg{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:12.5px;color:var(--mut);margin:12px 0 8px}
+.asg-leg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.asg-leg .asg-teto{margin-left:auto}
+.asg-cols{display:flex;align-items:stretch;gap:10px;height:210px;border-bottom:1px solid var(--glass-line);padding:0 2px;overflow-x:auto}
+.asg-col{flex:1 0 54px;max-width:120px;display:grid;grid-template-rows:1fr auto auto;justify-items:center;gap:4px;padding-top:6px}
+.asg-par{display:flex;align-items:flex-end;gap:2px;height:100%;width:100%;justify-content:center}
+.asg-bar{width:min(28px,42%);min-height:2px;border-radius:4px 4px 0 0;cursor:default;outline-offset:2px}
+.asg-bar:focus-visible,.asg-hbar:focus-visible{outline:2px solid var(--tx,#fff)}
+.asg-mesbt{border:0;background:none;color:var(--mut);font:600 12px inherit;padding:6px 4px 0;cursor:pointer}
+.asg-col.on .asg-mesbt{color:inherit}
+.asg-col small{font-size:11px;color:var(--mut);white-space:nowrap;padding-bottom:6px}
+.asg-col small.neg,.asg-tab .neg{color:#FF7A7A}
+:root[data-tema="claro"] .asg-col small.neg,:root[data-tema="claro"] .asg-tab .neg{color:#C62828}
+.asg-graf .mini{margin-top:10px}
+.asg-hrow{display:grid;grid-template-columns:minmax(120px,38%) minmax(0,1fr) 64px;align-items:center;gap:10px;padding:7px 0}
+.asg-hl{font-size:13.5px;line-height:1.3}.asg-hl small{color:var(--mut);font-size:11.5px}
+.asg-htrack{height:12px;border-radius:999px;background:rgba(var(--tint),.06);overflow:hidden}
+.asg-hbar{height:100%;border-radius:0 4px 4px 0}
+.asg-hv{font-size:15px;text-align:right;font-variant-numeric:tabular-nums}.asg-hv small{display:block;font-size:11px;font-weight:500;color:var(--mut)}
+.asg-tab-wrap{overflow-x:auto;margin-top:10px}
+.asg-tab{width:100%;border-collapse:collapse;font-size:13.5px;min-width:760px}
+.asg-tab th{font:600 11px ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);text-align:left;padding:8px 10px;border-bottom:1px solid var(--glass-line)}
+.asg-tab td{padding:11px 10px;border-bottom:1px solid var(--glass-line);vertical-align:top}
+.asg-tab td small{display:block;color:var(--mut);font-size:12px;margin-top:2px}
+.asg-tab .n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.asg-tab tfoot td{border-bottom:0;font-weight:700}
+.asg-de-teste{opacity:.55}
+.asg-sit{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;background:rgba(var(--tint),.08)}
+.asg-sit-ok{background:rgba(52,211,153,.16);color:#5BE49B}.asg-sit-tst{background:rgba(251,191,36,.16);color:#FDD97A}.asg-sit-atr{background:rgba(255,90,90,.16);color:#FF9494}
+:root[data-tema="claro"] .asg-sit-ok{color:#0B7A4B}:root[data-tema="claro"] .asg-sit-tst{color:#8A5A00}:root[data-tema="claro"] .asg-sit-atr{color:#B42318}
+.asg-tab-pe{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:10px}
+.asg-relato p{margin:8px 0 0;line-height:1.55}
+.asg-ct{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.asg-leads{list-style:none;margin:10px 0 0;padding:0}
+.asg-leads li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--glass-line)}
+.asg-leads li:last-child{border-bottom:0}
+.asg-leads small{display:block;color:var(--mut);font-size:12px;margin-top:2px;overflow:hidden;text-overflow:ellipsis}
+.asg-dica{position:fixed;z-index:9999;pointer-events:none;padding:7px 11px;border-radius:10px;font-size:12.5px;background:#0F1115;color:#F2F5F4;border:1px solid rgba(255,255,255,.14);box-shadow:0 10px 26px rgba(0,0,0,.4);opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s;max-width:280px}
+.asg-dica.on{opacity:1;transform:none}
+@media (max-width:820px){.asg-grade{grid-template-columns:minmax(0,1fr)}.asg-hrow{grid-template-columns:minmax(0,1fr) 56px}.asg-hrow .asg-htrack{grid-column:1/-1;grid-row:2}.asg-cols{height:180px}}
+@media (prefers-reduced-motion:reduce){.asg-dica{transition:none}}
+
 </style>
 </head>
 <body>
@@ -2965,6 +3021,11 @@ button.arr-op:hover{border-color:rgba(46,217,195,.5);background:rgba(46,217,195,
     <div class="mn-kpis" id="mnKpis"></div>
     <div id="mnPix"></div>
     <div class="mn-lista" id="mnLista"></div>
+  </section>
+
+  <!-- ---------- AGENTES POR ASSINATURA (16/11) ---------- -->
+  <section class="view" id="v-agentes">
+    <div id="asgBox"></div>
   </section>
 
   <!-- ---------- RECADOS ---------- -->
@@ -3920,6 +3981,7 @@ const PG={chat:['Assistente','Fala do jeito que você fala — eu leio e mexo em
   vitrine:['Vitrine','Sites e apps que já estão no ar — mostre ou mande em um toque'],
   portfolio:['Portfólio','Produção musical — trilha, sound design e Dolby Atmos'],
   mensal:['Mensalidades','Quem paga todo mês — vencimento, Pix e cobrança no WhatsApp'],
+  agentes:['Agentes','Assinaturas dos agentes: quanto entra, quanto a IA custa, o que sobra e quem está no teste'],
   tarefas:['Tarefas','Anote o que tem que fazer — e decida o que vai pra agenda'],
   recados:['Recados','O que chegou pelo WhatsApp e pelo Instagram — o atendente anota, quem confirma é você'],
   agenda:['Agenda','Prazos, entregas, shows e tarefas em ordem'],
@@ -11352,7 +11414,7 @@ async function nuvFetch(caminho,opcoes,jaTentou){
    aparelhos, é o comportamento que ela espera.
    ============================================================ */
 
-const COLS      = ['jobs','clientes','shows','servicos','prospects','vitrine','mensal','areas','stages','regras','msgs','reunioes','aparelhos','campanhas','posts','marcas','criativos','instas','tarefas','recados','propostas','ideias'];
+const COLS      = ['jobs','clientes','shows','servicos','prospects','vitrine','mensal','areas','stages','regras','msgs','reunioes','aparelhos','campanhas','posts','marcas','criativos','instas','tarefas','recados','propostas','ideias','agentes'];
 const SOLTOS    = ['cfg','tpls','lidos'];        /* uma linha cada, sem id próprio */
 /* o que é TRABALHO de verdade (o resto é catálogo/padrão de fábrica) */
 const TRABALHO  = ['jobs','clientes','shows','prospects','vitrine','mensal','msgs','reunioes'];
@@ -16965,6 +17027,156 @@ function renderMensal(){
     </article>`; }).join('');
 }
 
+/* ============================================================
+   AGENTES POR ASSINATURA (16/11/2026, pedido dele: "o controle igual a esse [a aba Estúdio do painel dos agentes]
+   deveria estar lá também, uma cópia"; "os assinantes e os leads vão pra lá").
+   Os números NÃO são digitados aqui: o servidor dos agentes (robo/rotina.ts → estudioNoOS) grava uma ficha por mês na
+   coleção `agentes` (id ag-AAAA-MM), a mesma conta da aba Estúdio, e a sincronia traz. Esta aba só lê.
+   Os leads vêm da Prospecção (origem robo e robo-vendedor); quem assina também está nas Mensalidades.
+   Contas de teste (as do estúdio e as @example) aparecem na tabela, apagadinhas, e ficam fora das contas e dos gráficos.
+   Cores (validadas no validador do dataviz, claro e escuro): entrou = verde-água, custo = azul.
+   ============================================================ */
+let ASG_MES='', ASG_TESTES=false;
+const ASG_MESES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+const ASG_SIT={novo:'Conta nova',teste:'Teste no cartão',ativa:'Ativa',atrasada:'Atrasada',cancelada:'Cancelada',vencida:'Vencida'};
+const asgBRL=n=>'R$ '+Number(n||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+function asgFichas(){ return (Array.isArray(S.agentes)?S.agentes:[]).filter(f=>f&&/^ag-\d{4}-\d{2}$/.test(f.id)&&Array.isArray(f.assinantes)).sort((a,b)=>a.mes<b.mes?-1:a.mes>b.mes?1:0); }
+function asgNomeMes(m,curto){ const [y,mm]=String(m).split('-').map(Number); if(!y||!mm) return m;
+  return curto? MES[mm-1]+(y!==HOJE.getFullYear()?'/'+String(y).slice(2):'') : ASG_MESES[mm-1]+' de '+y; }
+const asgPaga=a=>(a.conta&&+a.conta.receita>0);
+function asgNoTeste(a){ if(asgPaga(a)) return false; if(a.status==='teste') return true; return !!(a.teste_ate&&Date.parse(a.teste_ate)>Date.now()); }
+/* a conta de um mês, só com as contas de verdade */
+function asgConta(f){
+  const L=(f.assinantes||[]).filter(a=>!a.de_teste);
+  const s=k=>Math.round(L.reduce((t,a)=>t+(+(a.conta&&a.conta[k])||0),0)*100)/100;
+  const t={receita:s('receita'),ia:s('ia'),taxa:s('taxa'),imposto:s('imposto'),casa:s('casa'),custo:s('custo'),lucro:s('lucro')};
+  const pagando=L.filter(asgPaga), teste=L.filter(asgNoTeste);
+  const novas=L.filter(a=>a.criado&&String(a.criado).slice(0,7)===f.mes);
+  return {L,t,pagando,teste,novas};
+}
+function asgSituacao(a){
+  if(a.de_teste) return ['teste','Conta de teste'];
+  if(asgPaga(a)) return a.status==='atrasada'?['atr','Atrasada']:a.status==='cancelada'?['atr','Cancela no fim']:['ok','Pagando'];
+  if(asgNoTeste(a)) return ['tst','No teste'];
+  return ['par',ASG_SIT[a.status]||'Parada'];
+}
+function asgTip(t){ return `data-asgtip="${esc(t)}" tabindex="0" aria-label="${esc(t)}"`; }
+
+function renderAgentes(){
+  const box=$('#asgBox'); if(!box) return;
+  const F=asgFichas();
+  if(!F.length){ box.innerHTML=`<div class="vt-vazio">Os números dos agentes chegam sozinhos do servidor, a cada 15 minutos, e ficam guardados mês a mês aqui.
+    Ainda não chegou nenhum mês. Se continuar vazio depois de meia hora, a ponte com o servidor dos agentes está desligada.</div>`; return; }
+  if(!F.some(f=>f.mes===ASG_MES)) ASG_MES=F[F.length-1].mes;
+  const f=F.find(x=>x.mes===ASG_MES), c=asgConta(f);
+  const margem=c.t.receita>0? Math.round(c.t.lucro/c.t.receita*100) : null;
+  const iaTx=Math.round((c.t.taxa+c.t.imposto)*100)/100;
+  const kpis=[
+    ['Entra por mês',asgBRL(c.t.receita),`${c.pagando.length} assinante${c.pagando.length===1?'':'s'} pagando`,'#2ED9C3'],
+    ['Custo do mês',asgBRL(c.t.custo),`IA ${asgBRL(c.t.ia)} · taxas e imposto ${asgBRL(iaTx)} · casa ${asgBRL(c.t.casa)}`,'#60A5FA'],
+    ['Sobra do mês',asgBRL(c.t.lucro),margem==null?'ninguém pagando ainda':`margem de ${margem}%`,c.t.lucro<0?'#FF5A5A':'#34D399'],
+    ['No teste agora',String(c.teste.length),`${c.novas.length} conta${c.novas.length===1?'':'s'} nova${c.novas.length===1?'':'s'} em ${asgNomeMes(f.mes,true)}`,'#FBBF24'],
+  ];
+  /* ---- mês a mês: entrou × custo (2 séries, uma escala só) ---- */
+  const ult=F.slice(-12).map(x=>({mes:x.mes,...asgConta(x).t}));
+  const teto=Math.max(1,...ult.map(x=>Math.max(x.receita,x.custo)));
+  const meses=`<div class="asg-graf asg-meses" role="group" aria-label="Entrou e custo, mês a mês">
+    <div class="asg-leg"><span><i class="asg-c1"></i>Entrou</span><span><i class="asg-c2"></i>Custo</span><span class="asg-teto">até ${esc(asgBRL(teto))}</span></div>
+    <div class="asg-cols">${ult.map(x=>`<div class="asg-col${x.mes===ASG_MES?' on':''}">
+      <div class="asg-par">
+        <div class="asg-bar asg-c1" style="height:${(x.receita/teto*100).toFixed(1)}%" ${asgTip(`${asgNomeMes(x.mes)}: entrou ${asgBRL(x.receita)}`)}></div>
+        <div class="asg-bar asg-c2" style="height:${(x.custo/teto*100).toFixed(1)}%" ${asgTip(`${asgNomeMes(x.mes)}: custou ${asgBRL(x.custo)} (IA ${asgBRL(x.ia)})`)}></div></div>
+      <button type="button" class="asg-mesbt" data-asgmes="${esc(x.mes)}">${esc(asgNomeMes(x.mes,true))}</button>
+      <small class="${x.lucro<0?'neg':''}">sobra ${esc(BRLc(x.lucro))}</small></div>`).join('')}</div>
+    ${ult.length<2?'<p class="mini">Cada mês novo entra aqui sozinho: o gráfico cresce com o tempo.</p>':''}</div>`;
+  /* ---- do teste à assinatura (um tom só: é quantidade) ---- */
+  const nIg=c.L.filter(a=>a.instagram||a.whatsapp).length, nResp=c.L.filter(a=>(+a.mensagens||0)>0).length;
+  const etapas=[['Contas abertas',c.L.length],['Ligaram o Instagram ou o WhatsApp',nIg],['O Sol respondeu alguém',nResp],['Assinaram',c.pagando.length]];
+  const base=Math.max(1,c.L.length);
+  const funil=`<div class="asg-graf" role="group" aria-label="Do teste à assinatura">${etapas.map(([n,v])=>`<div class="asg-hrow">
+    <span class="asg-hl">${esc(n)}</span><div class="asg-htrack"><div class="asg-hbar asg-c1" style="width:${(v/base*100).toFixed(1)}%" ${asgTip(`${n}: ${v} de ${c.L.length}`)}></div></div>
+    <b class="asg-hv">${v}<small>${c.L.length?Math.round(v/c.L.length*100)+'%':''}</small></b></div>`).join('')}
+    <p class="mini">Conta que não assina em 7 dias é apagada e sai daqui (o histórico dela fica na Prospecção).</p></div>`;
+  /* ---- quem paga, por plano ---- */
+  const P=f.planos||{}, ordem=['otto','instagram','whatsapp','completo'];
+  const porPlano=ordem.map(id=>{ const L=c.pagando.filter(a=>a.plano===id); return {id,nome:(P[id]&&P[id].nome)||id,n:L.length,r:L.reduce((t,a)=>t+(+a.conta.receita||0),0)}; });
+  const topoP=Math.max(1,...porPlano.map(x=>x.n));
+  const planos=`<div class="asg-graf" role="group" aria-label="Quem paga, por plano">${porPlano.map(x=>`<div class="asg-hrow">
+    <span class="asg-hl">${esc(x.nome)}${P[x.id]?` <small>${esc(BRL(P[x.id].valor))}</small>`:''}</span><div class="asg-htrack"><div class="asg-hbar asg-c1" style="width:${(x.n/topoP*100).toFixed(1)}%" ${asgTip(`${x.nome}: ${x.n} assinante(s), ${asgBRL(x.r)} por mês`)}></div></div>
+    <b class="asg-hv">${x.n}<small>${x.r?esc(BRLc(x.r)):''}</small></b></div>`).join('')}</div>`;
+  /* ---- a tabela (a mesma da aba Estúdio) ---- */
+  const linhas=(f.assinantes||[]).filter(a=>ASG_TESTES||!a.de_teste);
+  const nTeste=(f.assinantes||[]).filter(a=>a.de_teste).length;
+  const tabela=`<div class="asg-tab-wrap"><table class="asg-tab"><thead><tr><th>Negócio</th><th>Plano</th><th>Situação</th><th class="n">Mensagens</th><th class="n">IA (US$)</th><th class="n">Paga</th><th class="n">Custo</th><th class="n">Sobra</th><th class="n">Margem</th></tr></thead>
+    <tbody>${linhas.length?linhas.map(a=>{ const [k,t]=asgSituacao(a), r=+a.conta.receita||0, l=+a.conta.lucro||0;
+      return `<tr class="${a.de_teste?'asg-de-teste':''}"><td><b>${esc(a.negocio||'—')}</b><small>${esc(a.email||'')}${a.instagram?' · @'+esc(a.instagram):''}</small></td>
+        <td>${esc(a.plano_nome||'—')}</td><td><span class="asg-sit asg-sit-${k}">${esc(t)}</span></td>
+        <td class="n">${(+a.mensagens||0).toLocaleString('pt-BR')}</td><td class="n">${(+a.ia_usd||0).toFixed(4)}</td>
+        <td class="n">${asgBRL(r)}</td><td class="n">${asgBRL(a.conta.custo)}</td><td class="n${l<0?' neg':''}">${asgBRL(l)}</td><td class="n">${r>0?Math.round(l/r*100)+'%':'—'}</td></tr>`; }).join('')
+      :`<tr><td colspan="9" class="mini">Ninguém aqui ainda${nTeste?' (só as contas de teste)':''}.</td></tr>`}</tbody>
+    <tfoot><tr><td colspan="5"><b>Total</b> (${c.L.length} conta${c.L.length===1?'':'s'}${nTeste&&!ASG_TESTES?', sem as de teste':''})</td><td class="n">${asgBRL(c.t.receita)}</td><td class="n">${asgBRL(c.t.custo)}</td><td class="n${c.t.lucro<0?' neg':''}">${asgBRL(c.t.lucro)}</td><td class="n">${margem==null?'—':margem+'%'}</td></tr></tfoot></table></div>
+    <div class="asg-tab-pe">${nTeste?`<label class="mn-check"><input type="checkbox" id="asgTestes"${ASG_TESTES?' checked':''}> ${nTeste===1?'Mostrar a conta de teste':'Mostrar as '+nTeste+' contas de teste'}</label>`:'<span></span>'}
+      <span class="mini">Custo = IA + Stripe + imposto (6%, suposição) + R$ 5 de casa. Atualizado ${f.atualizado?esc(new Date(f.atualizado).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})):''}.</span></div>`;
+  /* ---- os leads dos agentes (da Prospecção) ---- */
+  const leads=(S.prospects||[]).filter(p=>p&&(p.origem==='robo'||p.origem==='robo-vendedor')).sort((a,b)=>String(b.criadoEm||'').localeCompare(String(a.criadoEm||'')));
+  const ultNota=p=>{ const r=String(p.resposta||'').split(' · '); return r[r.length-1]||''; };
+  const listaLeads=leads.length?`<ul class="asg-leads">${leads.slice(0,8).map(p=>`<li><div style="min-width:0"><b>${esc(p.empresa||'—')}</b>
+      <small>${esc(p.origem==='robo-vendedor'?'falou com o vendedor da página':'abriu conta no teste')}${ultNota(p)?' · '+esc(ultNota(p)):''}</small></div>
+      <span class="mini">${p.proximo?'falar '+esc(fmtD(p.proximo)):''}</span></li>`).join('')}</ul>
+      ${leads.length>8?`<p class="mini">E mais ${leads.length-8}.</p>`:''}`
+    :`<p class="mini">Ninguém ainda. Quem abre conta no teste ou deixa contato com o vendedor da página aparece aqui e na Prospecção.</p>`;
+  /* ---- o relatório do mês ---- */
+  const resumo=asgResumo(f,c,margem);
+  box.innerHTML=`<div class="asg-topo">
+      <div class="asg-meses-chips" role="group" aria-label="Escolher o mês">${F.slice(-12).map(x=>`<button type="button" class="asg-chip${x.mes===ASG_MES?' on':''}" data-asgmes="${esc(x.mes)}"${x.mes===ASG_MES?' aria-pressed="true"':' aria-pressed="false"'}>${esc(asgNomeMes(x.mes,true))}</button>`).join('')}</div>
+      <div class="asg-acoes"><button class="btn sm" type="button" id="asgCopiar">${svgI('i-copy',14,2)}Copiar o resumo</button><button class="btn sm" type="button" id="asgPlanilha">${svgI('i-down',14,2)}Baixar planilha</button></div></div>
+    <div class="mn-kpis">${kpis.map(([l,v,s,k])=>`<div class="mn-kpi" style="--kc:${k}"><span>${l}</span><b>${v}</b><small>${esc(s)}</small></div>`).join('')}</div>
+    <div class="asg-grade">
+      <div class="card asg-card asg-larga"><div class="card-b"><div class="card-t">Mês a mês</div><div class="card-d">O que entrou e o que custou. Embaixo de cada mês, a sobra.</div>${meses}</div></div>
+      <div class="card asg-card"><div class="card-b"><div class="card-t">Do teste à assinatura · ${esc(asgNomeMes(f.mes))}</div>${funil}</div></div>
+      <div class="card asg-card"><div class="card-b"><div class="card-t">Quem paga, por plano</div>${planos}</div></div>
+    </div>
+    <div class="card asg-card"><div class="card-b"><div class="card-t">Cada assinante · ${esc(asgNomeMes(f.mes))}</div>${tabela}</div></div>
+    <div class="asg-grade">
+      <div class="card asg-card"><div class="card-b"><div class="card-t">Relatório de ${esc(asgNomeMes(f.mes))}</div><div class="asg-relato">${resumo.map(t=>`<p>${esc(t)}</p>`).join('')}</div></div></div>
+      <div class="card asg-card"><div class="card-b"><div class="asg-ct"><div class="card-t">Leads dos agentes</div><button class="btn sm" type="button" data-goto="prosp">Abrir a Prospecção</button></div>${listaLeads}</div></div>
+    </div>`;
+  $$('[data-asgmes]',box).forEach(b=>b.onclick=()=>{ ASG_MES=b.dataset.asgmes; renderAgentes(); });
+  const ct=$('#asgTestes',box); if(ct) ct.onchange=()=>{ ASG_TESTES=ct.checked; renderAgentes(); };
+  $$('[data-goto]',box).forEach(b=>b.onclick=()=>go(b.dataset.goto));
+  $('#asgPlanilha',box).onclick=()=>baixar(`agentes-${f.mes}.csv`,asgPlanilha(f),'text/csv');
+  $('#asgCopiar',box).onclick=async()=>{ try{ await navigator.clipboard.writeText(resumo.join('\n')); toast('Copiado','O resumo do mês está na área de transferência'); }catch(_){ toast('Não deu para copiar','Selecione o texto do relatório e copie','err'); } };
+  asgLigaDica(box);
+}
+function asgResumo(f,c,margem){
+  const t=c.t, nm=asgNomeMes(f.mes), R=[];
+  R.push(c.pagando.length
+    ? `Em ${nm}, ${c.pagando.length} assinante${c.pagando.length===1?'':'s'} pagando: entram ${asgBRL(t.receita)} por mês.`
+    : `Em ${nm}, ninguém está pagando ainda.`);
+  R.push(`A IA custou ${asgBRL(t.ia)}; com Stripe, imposto e casa, o custo foi ${asgBRL(t.custo)}.`);
+  R.push(t.lucro>=0 ? `Sobrou ${asgBRL(t.lucro)}${margem==null?'':` (margem de ${margem}%)`}.` : `Ficou ${asgBRL(-t.lucro)} no vermelho: o custo das contas que ainda não pagam.`);
+  R.push(`${c.novas.length} conta${c.novas.length===1?'':'s'} aberta${c.novas.length===1?'':'s'} no mês; ${c.teste.length} no teste agora.`);
+  const atr=c.L.filter(a=>a.status==='atrasada').length; if(atr) R.push(`${atr} com o pagamento atrasado: veja nas Mensalidades.`);
+  return R;
+}
+function asgPlanilha(f){
+  const q=v=>{ const s=String(v??''); return /[;"\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s; };
+  const num=n=>(+n||0).toFixed(2).replace('.',',');
+  const cab=['Negócio','E-mail','Plano','Situação','Conta de teste','Mensagens','IA (US$)','Paga (R$)','IA (R$)','Taxa (R$)','Imposto (R$)','Casa (R$)','Custo (R$)','Sobra (R$)'];
+  const L=(f.assinantes||[]).map(a=>[a.negocio,a.email,a.plano_nome,asgSituacao(a)[1],a.de_teste?'sim':'',a.mensagens||0,(+a.ia_usd||0).toFixed(4).replace('.',','),
+    num(a.conta.receita),num(a.conta.ia),num(a.conta.taxa),num(a.conta.imposto),num(a.conta.casa),num(a.conta.custo),num(a.conta.lucro)]);
+  return '﻿'+[cab,...L].map(r=>r.map(q).join(';')).join('\n');
+}
+/* a dica que aparece em cima da barra (mouse, dedo ou teclado) */
+function asgLigaDica(box){
+  let d=$('#asgDica'); if(!d){ d=document.createElement('div'); d.id='asgDica'; d.className='asg-dica'; d.setAttribute('role','tooltip'); document.body.appendChild(d); }
+  const mostra=el=>{ const r=el.getBoundingClientRect(); d.textContent=el.dataset.asgtip; d.classList.add('on');
+    const w=d.offsetWidth; d.style.left=Math.max(8,Math.min(innerWidth-w-8,r.left+r.width/2-w/2))+'px'; d.style.top=Math.max(8,r.top-d.offsetHeight-8)+'px'; };
+  const some=()=>d.classList.remove('on');
+  $$('[data-asgtip]',box).forEach(el=>{ el.onmouseenter=()=>mostra(el); el.onmouseleave=some; el.onfocus=()=>mostra(el); el.onblur=some; el.onclick=()=>mostra(el); });
+  if(!window.__asgDicaScroll){ window.__asgDicaScroll=1; addEventListener('scroll',()=>{ const x=$('#asgDica'); if(x) x.classList.remove('on'); },{passive:true}); }
+}
+
 /* ---------- ficha ---------- */
 function editMensal(m){
   const novo=!m;
@@ -17347,7 +17559,7 @@ $('#btnNew').onclick=()=>{
   if(VIEW==='tarefas' && typeof editTarefa==='function') return editTarefa(null);
   if(VIEW==='vitrine' && typeof editVit==='function') return editVit(null);
   if(VIEW==='portfolio' && typeof editVit==='function') return editVit(null,'trilha');
-  if(VIEW==='mensal' && typeof editMensal==='function') return editMensal(null);
+  if((VIEW==='mensal'||VIEW==='agentes') && typeof editMensal==='function') return editMensal(null);
   if(VIEW==='prosp' && typeof editProsp==='function') return editProsp(null);
   if(VIEW==='mkt' && MKT_SUB==='propostas') return editProposta(null, marcaAtual()==='*'? nomeEstudio() : marcaAtual());
   if(VIEW==='mkt'){ MKT_SUB='criar'; renderMkt(); window.scrollTo({top:0,behavior:'smooth'}); return; }
@@ -18873,7 +19085,7 @@ const GRUPOS=[
   {g:'vitrine',n:'Vitrine',v:['vitrine']},
   {g:'portfolio',n:'Portfólio',v:['portfolio']},
   {g:'dinheiro',n:'Dinheiro',v:['dash','fin'],rot:{dash:'Resumo',fin:'Financeiro'}},
-  {g:'mensal',n:'Mensalidades',v:['mensal']},
+  {g:'mensal',n:'Mensalidades',v:['mensal','agentes'],rot:{mensal:'Mensalidades',agentes:'Agentes'}},
   {g:'ajustes',n:'Ajustes',v:['adm','notif'],rot:{adm:'ADM',notif:'Alertas'}}
 ];
 function grupoDe(v){ return GRUPOS.find(G=>G.v.includes(v)||(G.extra||[]).includes(v)) || GRUPOS[1]; }
@@ -19099,9 +19311,10 @@ function render(){
   if(VIEW==='vitrine' && typeof renderVitrine==='function') renderVitrine();
   if(VIEW==='portfolio' && typeof renderPortfolio==='function') renderPortfolio();
   if(VIEW==='mensal' && typeof renderMensal==='function') renderMensal();
+  if(VIEW==='agentes' && typeof renderAgentes==='function') renderAgentes();
   if(typeof pintarBadgeMensal==='function') pintarBadgeMensal();
   { const lb=$('#btnNew .lbl');
-    if(lb) lb.textContent = VIEW==='prosp'? 'Novo contato' : VIEW==='shows'? 'Novo Show' : (VIEW==='vitrine'||VIEW==='portfolio')? 'Novo trabalho' : VIEW==='mensal'? 'Novo mensalista' : VIEW==='agenda'? 'Nova reunião' : VIEW==='cli'? 'Novo cliente' : VIEW==='tarefas'? 'Nova tarefa' : VIEW==='mkt'? (MKT_SUB==='propostas'?'Nova proposta':'Criar um post') : 'Novo Job'; }
+    if(lb) lb.textContent = VIEW==='prosp'? 'Novo contato' : VIEW==='shows'? 'Novo Show' : (VIEW==='vitrine'||VIEW==='portfolio')? 'Novo trabalho' : (VIEW==='mensal'||VIEW==='agentes')? 'Novo mensalista' : VIEW==='agenda'? 'Nova reunião' : VIEW==='cli'? 'Novo cliente' : VIEW==='tarefas'? 'Nova tarefa' : VIEW==='mkt'? (MKT_SUB==='propostas'?'Nova proposta':'Criar um post') : 'Novo Job'; }
   if(VIEW==='agenda') renderAgenda();
   if(VIEW==='tarefas' && typeof renderTarefas==='function') renderTarefas();
   if(VIEW==='recados' && typeof renderRecados==='function') renderRecados();
@@ -19807,7 +20020,7 @@ function ocupadoAgora(){
     if(i) i.onclick=()=>{ localStorage.setItem(k,hoje); window.open(NOVO,'_blank','noopener'); closeM(); };
   }catch(e){} },1500);
 }catch(e){} })();
-const APP_VER = 'v136';
+const APP_VER = 'v136a';
 
 function pintarSelo(){
   const e=$('#verSelo'); if(!e) return;
